@@ -1,23 +1,15 @@
 /*
  ============================================================================
- Name        : Clase4Menu.c
- Author      : 
-A- Hacer el menú de un programa con las siguientes opciones:
-1. Loguearse, 2. Comprar, 3. Ver mis compras, 4. Vender, 5. Salir
-B- Al menú anterior chequear que no pueda ingresar a ninguna opción si no se logueó
-C- Al menú anterior chequear que no pueda ver sus compras,
-si no ingresó primero a comprar al menos una vez
-D- Cuando se ingresa a la opción vender del menú, debe abrirse otro menú que contenga:
-1. Vender 2. Hacer factura 3. Volver atrás
-E- A lo anterior sumarle que haya compras para poder vender.
-(Si compré una vez y vendí una vez no puedo ingresar a vender).
-F- Pasar las acciones de menú a funciones y llevarlas a una biblioteca
+ Name        : Prueba.c
+ Author      : Juan Sueldo
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
  ============================================================================
  */
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "utn_menu.h"
+#include "utn_prueba.h"
 
 int main ()
 {
@@ -38,7 +30,7 @@ int main ()
 	int facturar;
 
 	do{
-	menu = utn_menu (&eleccion, "\nMenu: \n1.Login\n2.Comprar\n3.Ver mis Compras\n4.Vender\n5.Salir\n", "\nError. Vuelva a ingresar", 1, 5, 5);
+	menu = utn_menu (&eleccion, "\nIngrese: \n1.Loguearse\n2.Comprar\n3.Ver mis Compras\n4.Vender\n5.Salir\n", "\nError. Vuelva a ingresar", 1, 5, 5);
 	if(menu == 0)
 	{
 	switch(eleccion)
@@ -70,7 +62,7 @@ int main ()
 			{
 			do
 			{
-				menuVenta  = utn_menu (&eleccionVenta, "\nMenu venta: \n1.Vender\n2.Facturar\n3.Volver atras\n", "\nError. Vuelva a ingresar", 1, 3, 3);
+				menuVenta  = utn_menu (&eleccionVenta, "\nIngrese: \n1.Vender\n2.Facturar\n3.Volver atras\n", "\nError. Vuelva a ingresar", 1, 3, 3);
 
 				if(menuVenta == 0)
 				{
@@ -94,17 +86,21 @@ int main ()
 							acumVenta --;
 						}
 						break;
+					case 3:
+						printf("\nRegreso atras");
+						break;
 				}
 				}
-				}while(eleccionVenta != 3);
+				}while(menuVenta < 3);
 			}
 			break;
 		case 5:
-			printf("\nLogout");
+			printf("\nAdios");
 			break;
 		}
 	}
-	}while(eleccion != 5);
+	}while(menu < 5);
 
 	return EXIT_SUCCESS;
 }
+
