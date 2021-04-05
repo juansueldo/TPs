@@ -65,12 +65,12 @@ int main ()
 			}
 			break;
 		case 4:
-			vender = utn_getVender (flagLogueo,flagCompras, "\nEsta por vender","\nDebe loguearse primero para continuar", "\nDebe comprar para vender");
+			vender = utn_getVender (flagLogueo,flagCompras, "\nMenu venta","\nDebe loguearse primero para continuar", "\nDebe comprar para vender");
 			if(vender == 0)
 			{
 			do
 			{
-				menuVenta  = utn_menu (&eleccionVenta, "\nMenu venta: \n1.Vender\n2.Facturar\n3.Volver atras\n", "\nError. Vuelva a ingresar", 1, 3, 3);
+				menuVenta  = utn_menu (&eleccionVenta, "\n1.Vender\n2.Facturar\n3.Volver atras\n", "\nError. Vuelva a ingresar", 1, 3, 3);
 
 				if(menuVenta == 0)
 				{

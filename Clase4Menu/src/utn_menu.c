@@ -39,7 +39,7 @@ int utn_getComprar (int menu, char* mensaje, char* mensajeError)
 
 	if(mensaje != NULL && mensajeError != NULL)
 	{
-		if(menu == 1)
+		if(menu >= 1)
 			{
 				printf("%s",mensaje);
 				retorno = 0;
@@ -59,16 +59,16 @@ int utn_getVerComprar (int menu,int comprar, char* mensaje, char* mensajeError, 
 
 	if(mensaje != NULL && mensajeError != NULL)
 	{
-		if(menu == 1 && comprar != 0)
+		if(menu >= 1 && comprar != 0)
 			{
 				printf("%s",mensaje);
 				retorno = 0;
 		}
-		if(menu != 1)
+		if(menu == 0)
 		{
 			printf("%s",mensajeError);
 		}
-		if(menu == 1 && comprar == 0)
+		if(menu != 0 && comprar == 0)
 		{
 			printf("%s",mensajeError2);
 		}

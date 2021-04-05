@@ -1,12 +1,11 @@
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
 float pasaje (float centigrado)
 {
     float resulFarenheit;
-    resulFarenheit = centigrado*1.8+32;
+    resulFarenheit = (centigrado * 1.8) + 32;
 
     return resulFarenheit;
 }
