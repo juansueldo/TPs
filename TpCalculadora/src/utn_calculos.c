@@ -8,6 +8,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int utn_menu (int* opcion, char* mensaje,char* mensajeError, int min, int max, int salir)
+{
+
+	int retorno = -1;
+	int bufferMenu;
+	if(mensaje != NULL && mensajeError != NULL && min <= max && salir != 0)
+	{
+		printf("%s",mensaje);
+		scanf("%d",&bufferMenu);
+
+		if(bufferMenu >= min && bufferMenu <= max)
+		{
+		  *opcion = bufferMenu;
+		  retorno = 0;
+		}
+		else
+		{
+		  printf("%s",mensajeError);
+	    }
+
+	}
+	return retorno;
+}
 int utn_getSuma (int operador1, int operador2)
 {
 	int resul;
@@ -34,7 +57,7 @@ float utn_getDividir (int operador1, int operador2, float* retorno)
 	if(operador2 != 0)
 	{
 		resul = (float)operador1 / operador2;
-		(*retorno) = resul;
+		*retorno = resul;
 		error = 1;
 	}
 	else

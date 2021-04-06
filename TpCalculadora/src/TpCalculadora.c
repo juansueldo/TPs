@@ -33,37 +33,107 @@ que contenga las funciones para realizar las cinco operaciones.
 
 int main(void) {
 	setbuf(stdout, NULL);
-	int a;
-	int b;
-	int suma;
-	int resta;
-	int producto;
-	int division;
-	int resultado;
+	//int eleccion;
+	int menu;
+	float operador1 =0;
+	float operador2 =0;
+	int menuOperaciones;
+	int opcion;
+	float operacion;
+	float resultado;
+	/*int menuResultado;
+	int opcionResultado;*/
 
-	printf("Ingresar 1er operando:\n");
-	scanf("%d",&a);
 
-	printf("Ingresar 2do operando:\n");
-	scanf("%d",&b);
-
-	suma = utn_getSuma (a, b);
-	resta = utn_getResta (a, b);
-	producto = utn_getMultiplicar (a, b);
-	division = utn_getDividir (a, b, &resultado);
-
-	printf("El resultado de la suma es: %d\n",suma);
-	printf("El resultado de la resta es: %d\n",resta);
-	printf("El resultado de la multiplicacion es: %d\n",producto);
-	if(division != 0)
+	do
 	{
-		printf("El resultado de la division es: %.2f\n", resultado);
-	}
-	else
-	{
-		printf("No se puede dividir por cero\n");
-	}
+		printf("Menu:\n");
+		printf("1.Ingresar 1er operando (A=%.2f)\n", operador1);
+		printf("2.Ingresar 2do operando (B=%.2f)\n", operador2);
+		printf("3.Calcular las operaciones\n");
+		printf("4.Mostrar los resultados\n");
+		printf("5.Salir\n");
+		scanf("%d",&menu);
 
+		switch(menu)
+		{
+		case 1:
+		    printf("Ingrese el primer operando:\n");
+		    scanf("%f",&operador1);
+		    printf("Primer operando ingresado: %.2f\n",operador1);
+			break;
+
+		case 2:
+			printf("Ingrese el segundo operando:\n");
+			scanf("%f",&operador2);
+			printf("Segundo operando ingresado: %.2f\n",operador2);
+			break;
+
+		case 3:
+			if(operador1 == 0 && operador2 == 0)
+			{
+				printf("Debe ingresar al menos un valor para continuar\n");
+			}
+			else
+			{
+			menuOperaciones = utn_menu (&opcion, "\n1.Calcular la suma (A+B)\n2.Calcular la resta (A-B)\n3.Calcular la division (A/B)\n4.Calcular la multiplicacion (A*B)\n5.Calcular el factorial (A!)\n","Opcion no valida", 1, 6, 6);
+			if(menuOperaciones == 0)
+			{
+				switch(opcion)
+				{
+				case 1:
+					operacion = utn_getSuma(operador1, operador2);
+					break;
+				case 2:
+					operacion = utn_getResta(operador1, operador2);
+					break;
+				case 3:
+					operacion = utn_getDividir(operador1, operador2, &resultado);
+					break;
+				case 4:
+					operacion = utn_getMultiplicar(operador1, operador2);
+					break;
+				case 5:
+
+					break;
+				}
+			}
+			}
+			break;
+		case 4:
+			/*menuResultado = utn_menu (&opcionResultado, "\nEl resultado:\n1.Suma\n2.Resta\n3.Division\n4.Producto\n","Opcion no valida", 1, 6, 6);
+			if(menuResultado == 0)
+			{*/
+				switch(opcion)
+				{
+				case 1:
+					printf("El resultado de A+B es: %.2f\n",operacion);
+					break;
+				case 2:
+					printf("El resultado de A-B es: %.2f\n",operacion);
+					break;
+				case 3:
+					if(operacion != 0)
+					{
+						printf("El resultado de A/B es: %.2f\n", resultado);
+					}
+						else
+					{
+						printf("No es posible dividir por cero\n");
+					}
+					break;
+				case 4:
+					printf("El resultado de A*B es: %.2f\n",operacion);
+					break;
+				case 5:
+					break;
+				}
+			//}
+			break;
+		case 5:
+			break;
+	}
+	}while(menu != 5);
 
 	return EXIT_SUCCESS;
 }
