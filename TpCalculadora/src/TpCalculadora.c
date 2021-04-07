@@ -35,11 +35,12 @@ int main(void) {
 	setbuf(stdout, NULL);
 	//int eleccion;
 	int menu;
-	float operador1 =0;
-	float operador2 =0;
+	int operador1 =0;
+	int operador2 =0;
 	int menuOperaciones;
 	int opcion;
 	float operacion;
+	int result;
 	float resultado;
 	/*int menuResultado;
 	int opcionResultado;*/
@@ -48,8 +49,8 @@ int main(void) {
 	do
 	{
 		printf("Menu:\n");
-		printf("1.Ingresar 1er operando (A=%.2f)\n", operador1);
-		printf("2.Ingresar 2do operando (B=%.2f)\n", operador2);
+		printf("1.Ingresar 1er operando (A=%d)\n", operador1);
+		printf("2.Ingresar 2do operando (B=%d)\n", operador2);
 		printf("3.Calcular las operaciones\n");
 		printf("4.Mostrar los resultados\n");
 		printf("5.Salir\n");
@@ -59,14 +60,14 @@ int main(void) {
 		{
 		case 1:
 		    printf("Ingrese el primer operando:\n");
-		    scanf("%f",&operador1);
-		    printf("Primer operando ingresado: %.2f\n",operador1);
+		    scanf("%d",&operador1);
+		    printf("Primer operando ingresado: %d\n",operador1);
 			break;
 
 		case 2:
 			printf("Ingrese el segundo operando:\n");
-			scanf("%f",&operador2);
-			printf("Segundo operando ingresado: %.2f\n",operador2);
+			scanf("%d",&operador2);
+			printf("Segundo operando ingresado: %d\n",operador2);
 			break;
 
 		case 3:
@@ -82,19 +83,19 @@ int main(void) {
 				switch(opcion)
 				{
 				case 1:
-					operacion = utn_getSuma(operador1, operador2);
+					operacion = utn_getSuma(operador1, operador2, &result,"\nLos operadores tienen que ser distintos a cero");
 					break;
 				case 2:
-					operacion = utn_getResta(operador1, operador2);
+					operacion = utn_getResta(operador1, operador2, &result,"\nLos operadores tienen que ser distintos a cero");
 					break;
 				case 3:
 					operacion = utn_getDividir(operador1, operador2, &resultado);
 					break;
 				case 4:
-					operacion = utn_getMultiplicar(operador1, operador2);
+					operacion = utn_getMultiplicar(operador1, operador2, &result,"\nLos operadores tienen que ser distintos a cero");
 					break;
 				case 5:
-
+					operacion = utn_getFactorial(operador1, operador2,"\nNo se puede sacar el factorial de un numero menor o igual a cero");
 					break;
 				}
 			}
@@ -107,10 +108,16 @@ int main(void) {
 				switch(opcion)
 				{
 				case 1:
-					printf("El resultado de A+B es: %.2f\n",operacion);
+					if(operacion == 0)
+					{
+						printf("El resultado de A+B es: %d\n",result);
+					}
 					break;
 				case 2:
-					printf("El resultado de A-B es: %.2f\n",operacion);
+					if(operacion == 0)
+					{
+						printf("El resultado de A-B es: %d\n",result);
+					}
 					break;
 				case 3:
 					if(operacion != 0)
@@ -123,10 +130,14 @@ int main(void) {
 					}
 					break;
 				case 4:
-					printf("El resultado de A*B es: %.2f\n",operacion);
+					if(operacion == 0)
+					{
+						printf("El resultado de A*B es: %d\n",result);
+					}
+
 					break;
-				case 5:
-					break;
+
+
 				}
 			//}
 			break;
