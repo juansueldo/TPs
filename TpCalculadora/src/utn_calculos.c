@@ -8,29 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int utn_menu (int* opcion, char* mensaje,char* mensajeError, int min, int max, int salir)
-{
 
-	int retorno = -1;
-	int bufferMenu;
-	if(mensaje != NULL && mensajeError != NULL && min <= max && salir != 0)
-	{
-		printf("%s",mensaje);
-		scanf("%d",&bufferMenu);
-
-		if(bufferMenu >= min && bufferMenu <= max)
-		{
-		  *opcion = bufferMenu;
-		  retorno = 0;
-		}
-		else
-		{
-		  printf("%s",mensajeError);
-	    }
-
-	}
-	return retorno;
-}
 int utn_getSuma (int operador1, int operador2, int*resultado,char*mensaje)
 {
 	int retorno = -1;
@@ -71,22 +49,25 @@ int utn_getResta (int operador1, int operador2, int*resultado,char*mensaje)
 	return retorno;
 
 }
-float utn_getDividir (int operador1, int operador2, float* retorno)
+float utn_getDividir (int operador1, int operador2,char*mensaje, float* resultado)
 {
 	float resul;
-	int error;
-
+	int retorno = -1;
+	if(mensaje != NULL && resultado != NULL)
+	{
 	if(operador2 != 0)
 	{
 		resul = (float)operador1 / operador2;
-		*retorno = resul;
-		error = 1;
+		*resultado = resul;
+		retorno = 0;
 	}
 	else
 	{
-		error = 0;
+		printf("%s",mensaje);
+		retorno = 1;
 	}
-	return error;
+	}
+	return retorno;
 }
 int utn_getMultiplicar (int operador1, int operador2, int*resultado,char*mensaje)
 {
@@ -107,29 +88,27 @@ int utn_getMultiplicar (int operador1, int operador2, int*resultado,char*mensaje
 		}
 		return retorno;
 }
-int utn_getFactorial (int operador1, int operador2, int* resultado1, int* resultado2, char*mensaje)
+int utn_getFactorial (int operador, int* resultado , char*mensaje)
 {
 	int retorno = -1;
-	if(mensaje != NULL && resultado1 != NULL && resultado2 != NULL )
+	int bufferResultado = 1;
+
+	if(mensaje != NULL && resultado != NULL )
 	{
-		if(operador1 <= 0)
+		if(operador <= 0)
 		{
 			printf("%s",mensaje);
 		}
 		else
 		{
-			operador1 *= (operador1 - 1);
-			retorno = 0;
-		}
-		if(operador2 <= 0)
-		{
-			printf("%s",mensaje);
-		}
-		else
-		{
-			operador2 *= (operador2 - 1);
-			return operador2;
+			while(operador > 1)
+			{
+				bufferResultado *= operador;
+				operador --;
+				*resultado = bufferResultado;
+				retorno = 0;
+			}
 		}
 	}
-
+	return retorno;
 }
