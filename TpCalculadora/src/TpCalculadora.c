@@ -35,161 +35,133 @@ que contenga las funciones para realizar las cinco operaciones.
 int main(void) {
 	setbuf(stdout, NULL);
 	int menu;
-	//int menu1;
+	int opcion;
 	int operador1 =0;
 	int operador2 =0;
-	int menuOperaciones;
-	int opcion;
-	float operacion;
-	int result;
-	int operacion2;
-	float resultado;
-	int resultado2;
+	int suma;
+	int resta;
+	int multiplicacion;
+	int division;
+	int factorial1;
+	int factorial2;
+	int resultadoSuma;
+	int resultadoResta;
+	int resultadoMultiplicacion;
+	float resultadoDivision;
+	long unsigned int resultadoFactorial1;
+	long unsigned int resultadoFactorial2;
+
 
 
 	do
 	{
-		//menu1 = utn_menu1 (&menu, "Menu:\n1.Ingresar 1er operando (A=%d)\n",operador1,"2.Ingresar 2do operando (B=%d)\n",operador2,"3.Calcular las operaciones\n4.Mostrar los resultados\n5.Salir\n","Ingrese una opcion válida\n", 1, 5, 5);
-
-		printf("Menu:\n");
-		printf("1.Ingresar 1er operando (A=%d)\n", operador1);
-		printf("2.Ingresar 2do operando (B=%d)\n", operador2);
-		printf("3.Calcular las operaciones\n");
-		printf("4.Mostrar los resultados\n");
-		printf("5.Salir\n");
-		scanf("%d",&menu);
-		//if(menu1 == 0){
-
-		switch(menu)
+		menu = utn_mostrarMenu (&opcion, operador1, operador2,"La opcion no es valida\n",1,5,5);
+		if(menu == 0)
+		{
+		switch(opcion)
 		{
 		case 1:
-		    printf("Ingrese el primer operando:\n");
+		    printf("\nIngrese el primer operando:\n");
 		    scanf("%d",&operador1);
-		    printf("Primer operando ingresado: %d\n",operador1);
+		    printf("\nPrimer operando ingresado: %d\n",operador1);
 			break;
 
 		case 2:
-			printf("Ingrese el segundo operando:\n");
+			printf("\nIngrese el segundo operando:\n");
 			scanf("%d",&operador2);
-			printf("Segundo operando ingresado: %d\n",operador2);
+			printf("\nSegundo operando ingresado: %d\n",operador2);
 			break;
 
 		case 3:
 			if(operador1 == 0 && operador2 == 0)
 			{
-				printf("Debe ingresar al menos un valor para continuar\n");
+				printf("\nDebe ingresar al menos un valor para continuar\n");
 			}
 			else
 			{
-			menuOperaciones = utn_menu (&opcion, "\n1.Calcular la suma (A+B)\n2.Calcular la resta (A-B)\n3.Calcular la division (A/B)\n4.Calcular la multiplicacion (A*B)\n5.Calcular el factorial (A!)\n","Opcion no valida", 1, 6, 6);
-			if(menuOperaciones == 0)
-			{
-				switch(opcion)
-				{
-				case 1:
-					operacion = utn_getSuma(operador1, operador2, &result,"\nLos operadores tienen que ser distintos a cero");
-					if(operacion == 0)
+					suma = utn_getSuma(operador1, operador2, &resultadoSuma,"\nLos operadores tienen que ser distintos a cero");
+					if(suma == 0)
 					{
-						printf("Se realizo la suma\n");
+						printf("A.Se realizo la suma\n");
 					}
-					break;
-				case 2:
-					operacion = utn_getResta(operador1, operador2, &result,"\nLos operadores tienen que ser distintos a cero");
-					if(operacion == 0)
+
+					resta = utn_getResta(operador1, operador2, &resultadoResta,"\nLos operadores tienen que ser distintos a cero");
+					if(resta == 0)
 					{
-						printf("Se realizo la resta\n");
+						printf("B.Se realizo la resta\n");
 					}
-					break;
-				case 3:
-					operacion = utn_getDividir(operador1, operador2,"No es posible dividir por cero\n", &resultado);
-					if(operacion == 0)
+
+					division = utn_getDividir(operador1, operador2,"C.No es posible dividir por cero\n", &resultadoDivision);
+					if(division == 0)
 					{
-						printf("Se realizo la division\n");
+						printf("C.Se realizo la division\n");
 					}
-					break;
-				case 4:
-					operacion = utn_getMultiplicar(operador1, operador2,&result,"\nNo se puede sacar el factorial de un numero menor o igual a cero");
-					if(operacion == 0)
+
+					multiplicacion = utn_getMultiplicar(operador1, operador2,&resultadoMultiplicacion);
+					if(multiplicacion == 0)
 					{
-						printf("Se realizo la multiplicacion\n");
+						printf("D.Se realizo la multiplicacion\n");
 					}
-					break;
-				case 5:
-					operacion = utn_getFactorial(operador1, &result,"\nEl operador A tiene que ser mayor a cero\n");
-					if(operacion == 0)
+
+					factorial1 = utn_getFactorial(operador1, &resultadoFactorial1,"\nE.El operador A tiene que ser mayor a cero\n");
+					if(factorial1 == 0)
 					{
-						printf("Se realizo el factoreo de A\n");
+						printf("E.Se realizo el factoreo de A\n");
 					}
-					operacion2 = utn_getFactorial(operador2, &resultado2,"\nEl operador B tiene que ser mayor a cero\n");
-					if(operacion2 == 0)
+					factorial2 = utn_getFactorial(operador2, &resultadoFactorial2,"\nF.El operador B tiene que ser mayor a cero\n");
+					if(factorial2 == 0)
 					{
-						printf("Se realizo el factoreo de B\n");
+						printf("F.Se realizo el factoreo de B\n");
 					}
-					break;
 				}
-			}
-			}
 			break;
 		case 4:
 			if(operador1 == 0 && operador2 == 0)
 			{
 			printf("Debe ingresar al menos un valor para continuar\n");
 			}
-			else if(operacion != 0)
-			{
-				printf("Debe realizar una operacion para mostrar los resultados\n");
-			}
-			else
-			{
-				switch(opcion)
-				{
-				case 1:
-					if(operacion == 0)
+
+					if(suma == 0)
 					{
-						printf("El resultado de A+B es: %d\n",result);
+						printf("A.El resultado de A+B es: %d\n",resultadoSuma);
 					}
-					break;
-				case 2:
-					if(operacion == 0)
+
+					if(resta == 0)
 					{
-						printf("El resultado de A-B es: %d\n",result);
+						printf("B.El resultado de A-B es: %d\n",resultadoResta);
 					}
-					break;
-				case 3:
-					if(operacion == 0)
+
+					if(division == 0)
 					{
-						printf("El resultado de A/B es: %.2f\n", resultado);
+						printf("C.El resultado de A/B es: %.2f\n", resultadoDivision);
 					}
 						else
 					{
-						printf("No es posible dividir por cero\n");
+						printf("C.No es posible dividir por cero\n");
 					}
-					break;
-				case 4:
-					if(operacion == 0)
+
+					if(multiplicacion == 0)
 					{
-						printf("El resultado de A*B es: %d\n",result);
+						printf("D.El resultado de A*B es: %d\n",resultadoMultiplicacion);
 					}
-					break;
-				case 5:
-					if(operacion == 0)
+
+					if(factorial1 == 0)
 					{
-						printf("El resultado del factorial de A es: %d\n",result);
+						printf("E.El resultado del factorial de A es: %d\n",resultadoFactorial1);
 					}
-					if(operacion2 == 0)
+					if(factorial2 == 0)
 					{
-						printf("El resultado del factorial de B es: %d\n",resultado2);
+						printf("F.El resultado del factorial de B es: %d\n",resultadoFactorial2);
 					}
-					break;
-				}
-			}
+
 			break;
 		case 5:
 			printf("Adios");
 			break;
 
 	}
-	}while(menu != 5);
+	}
+	}while(opcion != 5);
 
 	return EXIT_SUCCESS;
 }

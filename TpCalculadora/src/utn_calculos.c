@@ -69,29 +69,26 @@ float utn_getDividir (int operador1, int operador2,char*mensaje, float* resultad
 	}
 	return retorno;
 }
-int utn_getMultiplicar (int operador1, int operador2, int*resultado,char*mensaje)
+int utn_getMultiplicar (int operador1, int operador2, int*resultado)
 {
 	int retorno = -1;
 
-	if(resultado != NULL && mensaje != NULL)
+	if(resultado != NULL)
 		{
 			if(operador1 > 0 || operador2 >0)
 			{
 				*resultado = operador1 * operador2;
 				retorno = 0;
 			}
-			else
-			{
-				printf("%s",mensaje);
-			}
+
 
 		}
 		return retorno;
 }
-int utn_getFactorial (int operador, int* resultado , char*mensaje)
+int utn_getFactorial (int operador, long unsigned int * resultado , char*mensaje)
 {
 	int retorno = -1;
-	int bufferResultado = 1;
+	long unsigned int bufferResultado = 1;
 
 	if(mensaje != NULL && resultado != NULL )
 	{
