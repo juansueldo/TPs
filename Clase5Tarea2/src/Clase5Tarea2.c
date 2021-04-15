@@ -11,42 +11,92 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#define CANTIDAD 4
+
+int ingresoNumero (int num[], int size, char*mensaje, char* mensajeError, int min, int max);
+void contSigno (int num[],int size, int*pPositivos, int*pNegativos);
+void sumaPares (int num[], int size, int* acumPares);
 
 int main(void) {
 	    setbuf(stdout, NULL);
-		int numero[10];
+		int numero[CANTIDAD];
+		int validar;
 		int i;
 		int contPositivos = 0;
 		int contNegativos = 0;
 		int acumPares = 0;
 
 
-		for(i=0;i<10;i++)
+		for(i = 0; i < CANTIDAD; i++)
 		{
-			printf("Ingrese un numero:\n");
-			scanf("%d",&numero[i]);
-
-			if(numero[i] % 2 == 0)
+			validar = ingresoNumero (numero,i,"Ingrese un numero:\n", "Error. Ingrese un numero:\n", -1000, 1000);
+			if(validar == 0)
 			{
-				acumPares += numero[i];
+				contSigno (numero,i, &contPositivos, &contNegativos);
+				sumaPares (numero, i,&acumPares);
 			}
-			if(numero[i] >= 0)
-			{
-				contPositivos ++;
-			}
-			else
-			{
-				contNegativos ++;
-			}
-
 		}
-		printf("La cantidad de positivos es: %d",contPositivos);
-		printf("La cantidad de negativos es: %d",contNegativos);
-		printf("La suma de los pares es: %d",acumPares);
-		/*for(i=0;i<5;i++)
+
+
+			printf("\nLa cantidad de positivos es: %d",contPositivos);
+			printf("\nLa cantidad de negativos es: %d",contNegativos);
+			printf("\nLa suma de los pares es: %d",acumPares);
+
+
+
+		/*printf("\nLa suma de los pares es: %d",acumPares);
+		for(i=0;i<5;i++)
 		{
 	    printf("Se ingreso en la posicion %d: %d\n",i, numero[i]);
 		}
 		printf("\nLa suma es: %d\n",suma);*/
 	return EXIT_SUCCESS;
 }
+int ingresoNumero (int num[], int size, char*mensaje, char* mensajeError, int min, int max)
+{
+	int retorno = -1;
+	if(mensaje != NULL && mensajeError != NULL && min <= max)
+	{
+		printf("%s",mensaje);
+		scanf("%d",&num[size]);
+		while(num[size] > 1000 || num[size] < -1000)
+		{
+			printf("%s",mensajeError);
+			scanf("%d",&num[size]);
+			retorno = 0;
+		}
+
+	}
+	return retorno;
+}
+void contSigno (int num[],int size, int*pPositivos, int*pNegativos)
+{
+	int contPositivos = 0;
+	int contNegativos = 0;
+
+	if(pPositivos != NULL && pNegativos != NULL)
+	{
+	if(num[size] > 0)
+	{
+		contPositivos ++;
+		*pPositivos = contPositivos;
+	}
+	else
+	{
+		contNegativos ++;
+		*pNegativos = contNegativos;
+	}
+	}
+
+}
+void sumaPares (int num[], int size, int* acumPares)
+{
+	int i = size;
+	*acumPares = 0;
+	if(num[i] % 2 == 0)
+	{
+		*acumPares += num [i];
+	}
+
+}
+
