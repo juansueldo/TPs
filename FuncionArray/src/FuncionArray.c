@@ -1,56 +1,74 @@
 /*
  ============================================================================
- Name        : FuncionArray.c
+ Name        : Clase6Tarea2.c
  Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Ejercicio 6-2:Realizar un programa que permita el ingreso de 10 números enteros
+ (positivos y negativos). Necesito generar un listado de los números positivos de manera creciente y negativos de manera decreciente.
+ (Como máximo 4 for)
+ Ejemplo: Listado 1 : 4, 5, 6, 10, 18, 29 Listado 2 : -1,-5,-9,-12
  ============================================================================
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#define CANTIDAD 4
 
-int getNumero (int num[],char*mensaje, char* mensajeError, int min, int max);
-void sumaPares (int num[], int size);
+#define MAX 5
+void mostrar(int numero[],int cantidad);
 
 int main(void) {
+	system("cls");
 	setbuf(stdout, NULL);
-	int numero[CANTIDAD];
-	int validar;
+	int numero[MAX];
 	int i;
 
-	for(i = 0; i < CANTIDAD; i++)
+
+	mostrar(numero,MAX);
+	for(i = 0; i < MAX; i++)
 	{
-	validar = getNumero (numero,"Ingrese un numero:\n", "Error. Ingrese un numero:\n", -1000, 1000);
-	sumaPares (numero,i);
+		printf("Ingrese un numero: \n");
+		scanf("%d",&numero[i]);
+
 	}
-	return EXIT_SUCCESS;
-}
-int getNumero (int num[],char*mensaje, char* mensajeError, int min, int max)
-{
-	int retorno = -1;
-	if(mensaje != NULL && mensajeError != NULL && min <= max)
+	for(i = 0; i < MAX; i++)
 	{
-		printf("%s",mensaje);
-		scanf("%d",&num);
-		while(num > 1000 || num < -1000)
+		if(numero[i] >= 0)
 		{
-			printf("%s",mensajeError);
-			scanf("%d",&num);
-			retorno = 0;
+			printf("\nLista 1: %d,",numero[i]);
+		}
+		else
+		{
+			printf("\nLista 2: %d,",numero[i]);
 		}
 	}
-	return retorno;
+
+
+	return EXIT_SUCCESS;
 }
-void sumaPares (int num[], int size)
+void mostrar(int numero[],int cantidad)
 {
-	int i = size;
-	int acumPares = 0;
-	if(num[i] % 2 == 0)
-	{
-		acumPares += num [i];
-	}
-	printf("La suma de pares es %d",acumPares);
+
+    int i;
+    int j;
+    int aux;
+
+    for(i=0;i<cantidad-1;i++)
+    {
+        for(j=i+1;j<cantidad;j++)
+        {
+            if(numero[i] < numero[j])
+                {
+                    aux=numero[i];
+                    numero[i]=numero[j];
+                    numero[j]=aux;
+                }
+           /* else if(numero[i] > numero[j])
+               {
+                    aux=numero[i];
+                    numero[i]=numero[j];
+                    numero[j]=aux;
+               }*/
+        }
+
+    }
+
 }

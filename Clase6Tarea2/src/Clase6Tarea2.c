@@ -12,36 +12,78 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 3
+#define MAX 4
+void ordenar (int numPos[], int numNeg[], int cantidad);
+void mostrar (int num[], int cantidad, char*mensaje);
 
 int main(void) {
+	system("cls");
+	setbuf(stdout, NULL);
 	int numero[MAX];
+	int numeroPos[MAX];
+	int numeroNeg[MAX];
+	int contPositivos = 0;
+	int contNegativos = 0;
 	int i;
-	int j;
-	int aux;
+
 
 	for(i = 0; i < MAX; i++)
 	{
 		printf("Ingrese un numero: \n");
 		scanf("%d",&numero[i]);
-	}
-		if(numero[i] > 0)
+		if(numero[i] >= 0)
 		{
-			for(i = 0; i < 2; i++)
-			{
-				printf("\nPosicion %d, elemento %d",i,numero[i]);
-				for(j=i+1; j< MAX;j++)
-				{
-					if(numero[i]<numero[j])
-					{
-						aux = numero[i];
-						numero[i] = numero[j];
-						numero[j]= aux;
-					}
-				}
-			}
-
+			numeroPos[i] = numero[i];
+			contPositivos ++;
 
 		}
+		else
+		{
+			numeroNeg[i] = numero[i];
+			contNegativos ++;
+		}
+	}
+	ordenar (numeroPos, numeroNeg, MAX);
+	mostrar (numeroPos, contPositivos, "El orden creciente de los positivos es:\n");
+	mostrar (numeroNeg, contNegativos, "\nEl orden decreciente de los negativos es:\n");
+
 	return EXIT_SUCCESS;
+}
+void ordenar (int numPos[], int numNeg[], int cantidad)
+{
+	int i;
+	int j;
+	int aux;
+	int aux2;
+
+	for(i = 0; i < cantidad-1; i++)
+	{
+		for(j = i+1; j < cantidad ;j++)
+		{
+		   if(numPos[i] > numPos[j])
+		   {
+			   aux = numPos[i];
+			   numPos[i] = numPos[j];
+			   numPos[j] = aux;
+		    }
+		   	if(numNeg[i] < numNeg[j])
+		    {
+		    	aux2 = numNeg[i];
+		    	numNeg[i] = numNeg[j];
+		    	numNeg[j] = aux2;
+		    }
+		   }
+	}
+}
+void mostrar (int num[], int cantidad, char*mensaje)
+{
+	int i;
+	if(cantidad)
+		{
+		printf("%s", mensaje);
+		for(i = 0; i < cantidad; i++)
+		{
+				printf("%d,",num[i]);
+		}
+	}
 }
