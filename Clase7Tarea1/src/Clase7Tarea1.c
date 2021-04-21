@@ -15,6 +15,7 @@ la salida debería ser:Gomez, Juan Ignacio
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #define MAX 30
 
 int main(void) {
@@ -34,10 +35,11 @@ int main(void) {
 	printf("Ingrese el apellido: \n");
 	gets(apellido);
 
-	for(i = 0; i < MAX; i++)
+	/*for(i = 0; i < MAX; i++)
 	{
 		strcpy(segundo,nombre[i]);
-	}
+	}*/
+
 	strlwr(nombre);
 	strlwr(segundo);
 	strlwr(apellido);

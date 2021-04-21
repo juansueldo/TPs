@@ -1,7 +1,7 @@
 /*
  ============================================================================
- Name        : Juan Sueldo
- Author      :
+ Name        : Re.c
+ Author      : 
  Ejercicio 5-2:Pedir el ingreso de 10 números enteros entre -1000 y 1000.
  Determinar:Cantidad de positivos y negativos.Sumatoria de los pares.El mayor de los impares.
  Listado de los números ingresados.Listado de los números pares.
@@ -18,12 +18,10 @@ void sumaPares (int num[], int size, int* acumPares);
 void contPos (int num[],int size,int*pContador );
 void contNeg (int num[],int size,int*pContador);
 void mayorImpar (int num[], int size, int*mayor);
-void utn_getOrdenar(int num[], int size);
-
+void ordenarPar (int num[], int size, char*mensaje,char*mensajeError);
+void ordenarImp (int num[], int size, char*mensaje,char*mensajeError);
 
 int main(void) {
-	system("cls");
-    setbuf(stdout, NULL);
 	int numero[MAX];
 	int i;
 	int validar;
@@ -47,31 +45,13 @@ int main(void) {
     printf("\nLa cantidad de negativos es: %d", contNegativos);
     printf("\nLa suma de los pares es: %d",acumPares);
     printf("\nLa el mayor de los impares: %d",imparMayor);
-
     printf("\nEl orden de los numero ingresados es: ");
     for(i = 0; i < MAX; i++)
     {
         printf("%d,",numero[i]);
     }
-
-    printf("\nEl orden de los pares ingresados es: ");
-    for(i = 0; i < MAX; i++)
-    {
-        if(numero[i] % 2 == 0)
-        {
-        	utn_getOrdenar(numero,i);
-            printf("%d,",numero[i]);
-        }
-    }
-    printf("\nEl orden de los numeros ingresados en la posicion impar es: ");
-    for(i = 0; i < MAX; i++)
-        {
-            if(i % 2 != 0)
-            {
-            	utn_getOrdenar(numero,i);
-                printf("%d,",numero[i]);
-            }
-        }
+    ordenarImp (numero, MAX,"\nEl orden de los numeros ingresados en la posicion impar es: ","\nNo se ingresaron numeros");
+    ordenarPar (numero,MAX, "\nEl orden de los pares ingresados es: ","\nNo se ingresaron numeros pares.");
 
 	return EXIT_SUCCESS;
 }
@@ -162,26 +142,65 @@ void mayorImpar (int num[], int size, int*mayor)
 	}
 
 }
-void utn_getOrdenar(int num[], int size)
+void ordenarPar (int num[], int size, char*mensaje,char*mensajeError)
 {
 	int i;
 	int j;
-	int aux = 0;
-
-	 for(i = 0; i < MAX-1; i++)
-	 {
+	int aux;
+	printf("%s",mensaje);
+    for(i = 0; i < MAX; i++)
+	{
+	if(num[i] % 2 == 0)
+	{
+	for(i = 0; i < MAX-1; i++)
+	{
 		for(j = i+1; j < MAX ;j++)
 		{
-			if(num[i] > num[j])
-		    {
-			aux = num[i];
-			num[i] = num[j];
-			num[j] = aux;
-		     }
+		   if(num[i] > num[j])
+		   {
+			   aux = num[i];
+			   num[i] = num[j];
+			   num[j] = aux;
+		    }
 
-		 }
+		   }
+		   printf("%d,",num[i]);
 	}
-
+	}
+	else
+	{
+	printf("%s",mensajeError);
+	}
+	}
 }
+void ordenarImp (int num[], int size, char*mensaje,char*mensajeError)
+{
+	int i;
+	int j;
+	int aux;
+	printf("%s",mensaje);
+    for(i = 0; i < MAX; i++)
+	{
+	if(i % 2 == 0)
+	{
+	for(i = 0; i < MAX-1; i++)
+	{
+		for(j = i+1; j < MAX ;j++)
+		{
+		   if(num[i] > num[j])
+		   {
+			   aux = num[i];
+			   num[i] = num[j];
+			   num[j] = aux;
+		    }
 
-
+		   }
+		   printf("%d,",num[i]);
+	}
+	}
+	else
+	{
+	printf("%s",mensajeError);
+	}
+	}
+}
