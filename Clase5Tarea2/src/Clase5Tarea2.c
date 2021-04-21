@@ -14,10 +14,10 @@
 #define MAX 4
 
 int utn_getNumero (int num[], int cantidad, char*mensaje, char*mensajeError, int min, int max);
-void sumaPares (int num[], int size, int* acumPares);
-void contPos (int num[],int size,int*pContador );
-void contNeg (int num[],int size,int*pContador);
-void mayorImpar (int num[], int size, int*mayor);
+void utn_getSuma (int num[], int size, int* acumPares);
+void utn_getPositivos (int num[],int size,int*pContador );
+void utn_getNegativos (int num[],int size,int*pContador);
+void utn_getMayor (int num[], int size, int*mayor);
 void utn_getOrdenar(int num[], int size);
 
 
@@ -35,14 +35,14 @@ int main(void) {
 	for(i = 0; i < MAX; i++)
 	{
 		validar = utn_getNumero (numero, i, "Ingrese un numero:\n", "Error. Ingrese un numero:\n", -1000, 1000);
-		if(validar == 0)
-		{
-		    sumaPares (numero,MAX,&acumPares);
-		    contPos (numero,MAX,&contPositivos);
-		    contNeg (numero,MAX,&contNegativos);
-		    mayorImpar (numero, MAX,&imparMayor);
-		}
+		utn_getSuma (numero,MAX,&acumPares);
+		utn_getPositivos (numero,MAX,&contPositivos);
+		utn_getNegativos (numero,MAX,&contNegativos);
+		utn_getMayor (numero, MAX,&imparMayor);
 	}
+
+	if(validar == 0)
+	{
     printf("\nLa cantidad de positivos es: %d", contPositivos);
     printf("\nLa cantidad de negativos es: %d", contNegativos);
     printf("\nLa suma de los pares es: %d",acumPares);
@@ -57,21 +57,22 @@ int main(void) {
     printf("\nEl orden de los pares ingresados es: ");
     for(i = 0; i < MAX; i++)
     {
+    	utn_getOrdenar(numero,MAX);
         if(numero[i] % 2 == 0)
         {
-        	utn_getOrdenar(numero,i);
             printf("%d,",numero[i]);
         }
     }
     printf("\nEl orden de los numeros ingresados en la posicion impar es: ");
     for(i = 0; i < MAX; i++)
         {
-            if(i % 2 != 0)
+    		utn_getOrdenar(numero,MAX);
+            if(!(i % 2 == 0))
             {
-            	utn_getOrdenar(numero,i);
                 printf("%d,",numero[i]);
             }
         }
+	}
 
 	return EXIT_SUCCESS;
 }
@@ -92,7 +93,7 @@ int utn_getNumero (int num[], int cantidad, char*mensaje, char*mensajeError, int
 	}
 	return retorno;
 }
-void contPos (int num[],int size,int*pContador )
+void utn_getPositivos (int num[],int size,int*pContador )
 {
 	int contNum = 0;
 	int i;
@@ -108,7 +109,7 @@ void contPos (int num[],int size,int*pContador )
 		}
 	}
 }
-void contNeg (int num[],int size,int*pContador)
+void utn_getNegativos (int num[],int size,int*pContador)
 {
 	int contNum = 0;
 	int i;
@@ -124,7 +125,7 @@ void contNeg (int num[],int size,int*pContador)
 		}
 	}
 }
-void sumaPares (int num[], int size, int* acumPares)
+void utn_getSuma (int num[], int size, int* acumPares)
 {
 	int i;
 	if(acumPares != NULL)
@@ -140,7 +141,7 @@ void sumaPares (int num[], int size, int* acumPares)
 	}
 
 }
-void mayorImpar (int num[], int size, int*mayor)
+void utn_getMayor (int num[], int size, int*mayor)
 {
 	int i;
 	int max;
@@ -166,7 +167,7 @@ void utn_getOrdenar(int num[], int size)
 {
 	int i;
 	int j;
-	int aux = 0;
+	int aux;
 
 	 for(i = 0; i < MAX-1; i++)
 	 {
@@ -178,7 +179,6 @@ void utn_getOrdenar(int num[], int size)
 			num[i] = num[j];
 			num[j] = aux;
 		     }
-
 		 }
 	}
 
