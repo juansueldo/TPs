@@ -53,7 +53,14 @@ int main(void) {
     {
         printf("%d,",numero[i]);
     }
-
+    for(i = 0; i < MAX; i++)
+            {
+        		utn_getOrdenar(numero,MAX);
+                if(!(i % 2 == 0))
+                {
+                    printf("\nEl numero %d ingresado en la posicion %d",numero[i], i);
+                }
+            }
     printf("\nEl orden de los pares ingresados es: ");
     for(i = 0; i < MAX; i++)
     {
@@ -63,15 +70,7 @@ int main(void) {
             printf("%d,",numero[i]);
         }
     }
-    printf("\nEl orden de los numeros ingresados en la posicion impar es: ");
-    for(i = 0; i < MAX; i++)
-        {
-    		utn_getOrdenar(numero,MAX);
-            if(!(i % 2 == 0))
-            {
-                printf("%d,",numero[i]);
-            }
-        }
+
 	}
 
 	return EXIT_SUCCESS;
