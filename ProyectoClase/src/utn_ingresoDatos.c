@@ -28,7 +28,7 @@ void utn_getNumero (int numero[], int tamanio, char*mensaje, char*mensajeError,i
 	}
 
 }
-void utn_getChar (char letra[], int tamanio, char*mensaje)
+void utn_getChar (char letra[], int tamanio, char*mensaje,char*mensajeError)
 {
 	int i;
 		if(mensaje != NULL)
@@ -38,6 +38,12 @@ void utn_getChar (char letra[], int tamanio, char*mensaje)
 			printf("%s",mensaje);
 			fflush(stdin);
 			scanf("%c",&letra[i]);
+			while(letra[i] != 'f' && letra[i] != 'm')
+			{
+				printf("%s",mensajeError);
+				fflush(stdin);
+				scanf("%c",&letra[i]);
+			}
 			}
 		}
 }

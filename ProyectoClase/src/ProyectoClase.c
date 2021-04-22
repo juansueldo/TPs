@@ -37,7 +37,7 @@ int main(void) {
 
 
 	utn_getNumero (legajo, MAX, "\nIngrese el numero de legajo:\n","\nError numero ingresado no válido. Ingrese el numero de legajo:\n",0,1000);
-	utn_getChar (sexo, MAX, "\nIngrese el sexo:\n");
+	utn_getChar (sexo, MAX, "\nIngrese el sexo(f o m):\n","\nError dato no valido. Ingrese el sexo(f o m):\n");
 	utn_getNumero (edad, MAX, "\nIngrese la edad:\n","\nError la edad no es válida. Ingrese la edad:\n",0,150);
 	utn_getNumero (nota1, MAX, "\nIngrese la nota primer nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
 	utn_getNumero (nota2, MAX, "\nIngrese la segunda nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
