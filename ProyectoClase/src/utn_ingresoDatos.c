@@ -3,54 +3,285 @@
 #include <string.h>
 #include <ctype.h>
 
-void utn_getNumero (int numero[], int tamanio, char*mensaje, char*mensajeError,int min, int max)
+
+void utn_getNumber(int* pNumero,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
 {
-	int i;
-	if(mensaje != NULL && mensajeError != NULL && min <= max)
+	int bufferInt;
+	if(pNumero != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos>0)
 	{
 
-		printf("%s",mensaje);
-		scanf("%d",&numero[i]);
-		while(numero[i] < min || numero[i] > max)
+		do
 		{
-			printf("%s",mensajeError);
-			scanf("%d",&numero[i]);
+			printf("%s", mensaje);
+			scanf("%d", &bufferInt);
+			if(bufferInt >= minimo && bufferInt <= maximo)
+			{
+				*pNumero=bufferInt;
 
-		}
+				break;
+			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
 	}
 
 }
-void utn_getChar (char letra[], int tamanio, char*mensaje,char*mensajeError)
+void utn_getChar (char* pCaracter,char* mensaje,char* mensajeError, int reintentos)
 {
-	int i;
-		if(mensaje != NULL)
-		{
 
-			printf("%s",mensaje);
+	char bufferChar;
+	if(pCaracter != NULL && mensaje != NULL && mensajeError != NULL && reintentos>0)
+	{
+
+		do
+		{
+			printf("%s", mensaje);
 			fflush(stdin);
-			scanf("%c",&letra[i]);
-			while(letra[i] != 'f' && letra[i] != 'm')
+			scanf("%c", &bufferChar);
+			if(bufferChar=='f'|| bufferChar=='m')
 			{
-				printf("%s",mensajeError);
-				fflush(stdin);
-				scanf("%c",&letra[i]);
+				*pCaracter = bufferChar;
+				break;
 			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
+	}
 
-		}
 }
-void utn_getString (char string[][30], int tamanio, char*mensaje)
+void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos)
+{
+	char bufferString[30];
+
+	if(aux != NULL && mensaje != NULL && mensajeError != NULL && reintentos>0)
+	{
+		do
+		{
+			printf("%s", mensaje);
+			fflush(stdin);
+			scanf("%s", bufferString);
+
+			if(strlen(bufferString) < 30)
+			{
+				strcpy(aux, bufferString);
+
+				break;
+			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
+	}
+
+}
+void utn_getMostar(int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
 {
 	int i;
-		if(mensaje != NULL)
-		{
-
-			printf("%s",mensaje);
-			fflush(stdin);
-			gets(string[i][30]);
-
-		}
+	strlwr(apellido);
+	for(i = 0; i < tamanio; i++)
+	{
+	printf("\nAlumno %d:",i+1);
+	printf("\nLegajo: %d",legajo[i]);
+	printf(" Sexo: %c", sexo[i]);
+	printf(" Edad: %d", edad[i]);
+	printf(" Nota 1: %d", nota1[i]);
+	printf(" Nota 2: %d", nota2[i]);
+	printf(" Promedio: %.2f", promedio[i]);
+	printf(" Apellido: %s\n",apellido[i]);
+	}
 }
-void utn_getMostar(int legajo[], char sexo[],int edad[],int nota1[],int nota2[], char apellido[][30],int tamanio)
+void utn_getMostarSoloUno (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
 {
-	printf("\nEl legajo ingresado es: %d\nEl sexo del alumno: %c \nLa edad: %d \nLa primer nota: %d \nLa primer nota: %d \nEl apellido es: %s" ,legajo[tamanio],sexo[tamanio],edad[tamanio],nota1[tamanio],nota2[tamanio],apellido[tamanio][30]);
+	int i;
+	//int aux;
+	printf("\nIngrese el numero de orden del almno que desea mostrar:");
+	scanf("%d",&i);
+
+	/*if(i)
+	{*/
+	printf("\nAlumno %d:",i);
+	printf("\nLegajo: %d",legajo[i]);
+	printf(" Sexo: %c", sexo[i]);
+	printf(" Edad: %d", edad[i]);
+	printf(" Nota 1: %d", nota1[i]);
+	printf(" Nota 2: %d", nota2[i]);
+	printf(" Promedio: %.2f", promedio[i]);
+	printf(" Apellido: %s\n",apellido[i]);
+	//}
+}
+void utn_getOrdenarLeg (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
+{
+	int i;
+	int j;
+	int auxNum;
+	float auxFloat;
+	char auxSexo;
+	char auxChar[30];
+	for(i = 0; i < tamanio -1;i++)
+	{
+		for(j = i+1; j < tamanio; j++)
+		{
+			if(legajo[i] > legajo[j])
+			{
+				auxNum = legajo[i];
+				legajo[i] = legajo[j];
+				legajo[j] = auxNum;
+
+				auxSexo = sexo[i];
+				sexo[i] = sexo[j];
+				sexo[j] = auxSexo;
+
+				auxNum = edad[i];
+				edad[i] = edad[j];
+				edad[j] = auxNum;
+
+				auxNum = nota1[i];
+				nota1[i] = nota1[j];
+				nota1[j] = auxNum;
+
+				auxNum = nota2[i];
+				nota2[i] = nota2[j];
+				nota2[j] = auxNum;
+
+				auxFloat = promedio[i];
+				promedio[i] = promedio[j];
+				promedio[j] = auxFloat;
+
+				strcpy(auxChar,apellido[i]);
+				strcpy(apellido[i],apellido[j]);
+				strcpy(apellido[j],auxChar);
+			}
+		}
+	}
+}
+void utn_getOrdenarApellido (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
+{
+	int i;
+	int j;
+	int auxNum;
+	float auxFloat;
+	char auxSexo;
+	char auxChar[30];
+	for(i = 0; i < tamanio -1;i++)
+		{
+			for(j = i+1; j < tamanio; j++)
+			{
+				if(strcmp(apellido[i],apellido[j])>0)
+				{
+					auxNum = legajo[i];
+					legajo[i] = legajo[j];
+					legajo[j] = auxNum;
+
+					auxSexo = sexo[i];
+					sexo[i] = sexo[j];
+					sexo[j] = auxSexo;
+
+					auxNum = edad[i];
+					edad[i] = edad[j];
+					edad[j] = auxNum;
+
+					auxNum = nota1[i];
+					nota1[i] = nota1[j];
+					nota1[j] = auxNum;
+
+					auxNum = nota2[i];
+					nota2[i] = nota2[j];
+					nota2[j] = auxNum;
+
+					auxFloat = promedio[i];
+					promedio[i] = promedio[j];
+					promedio[j] = auxFloat;
+
+					strcpy(auxChar,apellido[i]);
+					strcpy(apellido[i],apellido[j]);
+					strcpy(apellido[j],auxChar);
+				}
+				}
+			}
+}
+void utn_getOrdenarProm (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
+{
+	int i;
+	int j;
+	int auxNum;
+	float auxFloat;
+	char auxSexo;
+	char auxChar[30];
+	for(i = 0; i < tamanio -1;i++)
+	{
+		for(j = i+1; j < tamanio; j++)
+		{
+			if(promedio[i] > promedio[j])
+			{
+				auxNum = legajo[i];
+				legajo[i] = legajo[j];
+				legajo[j] = auxNum;
+
+				auxSexo = sexo[i];
+				sexo[i] = sexo[j];
+				sexo[j] = auxSexo;
+
+				auxNum = edad[i];
+				edad[i] = edad[j];
+				edad[j] = auxNum;
+
+				auxNum = nota1[i];
+				nota1[i] = nota1[j];
+				nota1[j] = auxNum;
+
+				auxNum = nota2[i];
+				nota2[i] = nota2[j];
+				nota2[j] = auxNum;
+
+				auxFloat = promedio[i];
+				promedio[i] = promedio[j];
+				promedio[j] = auxFloat;
+
+				strcpy(auxChar,apellido[i]);
+				strcpy(apellido[i],apellido[j]);
+				strcpy(apellido[j],auxChar);
+			}
+			else if(promedio[i] == promedio[j])
+			{
+				if(legajo[i] > legajo[j])
+					{
+						auxNum = legajo[i];
+						legajo[i] = legajo[j];
+						legajo[j] = auxNum;
+
+						auxSexo = sexo[i];
+						sexo[i] = sexo[j];
+						sexo[j] = auxSexo;
+
+						auxNum = edad[i];
+						edad[i] = edad[j];
+						edad[j] = auxNum;
+
+						auxNum = nota1[i];
+						nota1[i] = nota1[j];
+						nota1[j] = auxNum;
+
+						auxNum = nota2[i];
+						nota2[i] = nota2[j];
+						nota2[j] = auxNum;
+
+						auxFloat = promedio[i];
+						promedio[i] = promedio[j];
+						promedio[j] = auxFloat;
+
+						strcpy(auxChar,apellido[i]);
+						strcpy(apellido[i],apellido[j]);
+						strcpy(apellido[j],auxChar);
+				}
+			}
+		}
+	}
 }

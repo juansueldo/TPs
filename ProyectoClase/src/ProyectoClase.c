@@ -4,6 +4,13 @@
  Author      :
 Desarrollar un programa que permita guardar los datos de 5 alumnos.
 Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio, apellido.
+1-Inicializar
+2-cargar datos
+3-Mostrar1Estudiante
+4-mostrarEstudiantes
+5-Ordenar por legajo
+6-Ordenar por Apellido
+7-Ordenar por Promedio, si se repite ordenar por legajo
  ============================================================================
  */
 
@@ -14,7 +21,7 @@ Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio
 #include "utn.h"
 #include "utn_ingresoDatos.h"
 
-#define MAX 3
+#define MAX 5
 
 int main(void) {
 	setbuf(stdout,NULL);
@@ -27,6 +34,8 @@ int main(void) {
 	char apellido [MAX][30];
 	int i;
 	int auxNum;
+	char auxChar;
+	char auxString[30];
 
 	inicializarNumEntero (legajo, MAX);
 	inicializarChar (sexo, MAX);
@@ -38,16 +47,57 @@ int main(void) {
 
 	for(i = 0; i < MAX; i++)
 	{
-	utn_getNumero (legajo, MAX, "\nIngrese el numero de legajo:\n","\nError numero ingresado no válido. Ingrese el numero de legajo:\n",0,1000);
-	utn_getChar (sexo, MAX, "\nIngrese el sexo(f o m):\n","\nError dato no valido. Ingrese el sexo(f o m):\n");
-	utn_getNumero (edad, MAX, "\nIngrese la edad:\n","\nError la edad no es válida. Ingrese la edad:\n",0,150);
-	utn_getNumero (nota1, MAX, "\nIngrese la nota primer nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
-	utn_getNumero (nota2, MAX, "\nIngrese la segunda nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
-	utn_getString (apellido,MAX,"\nIngrese el apellido:\n");
+	utn_getNumber (&auxNum,"\nIngrese el legajo(entre 0 y 1000):\n","\nError legajo. Ingrese el numero de legajo(entre 0 y 1000):\n",0,1000,3);
+	if(auxNum != 0)
+	{
+		legajo[i] = auxNum;
+	}
+	utn_getChar (&auxChar, "\nIngrese el sexo(f o m):\n","\nError dato no valido. Ingrese el sexo(f o m):\n",3);
+
+	{
+		sexo[i] = auxChar;
+	}
+	utn_getNumber (&auxNum, "\nIngrese la edad(18 a 99):\n","\nError edad. Ingrese la edad(18 a 99):\n",18,99,3);
+	if(auxNum != 0)
+	{
+		edad[i] = auxNum;
+	}
+	utn_getNumber (&auxNum,"\nIngrese la primer nota(1 a 10):\n","\nError nota. Ingrese la primer nota(1 a 10):\n",1,10,3);
+	if(auxNum != 0)
+	{
+		nota1[i] = auxNum;
+	}
+	utn_getNumber (&auxNum,"\nIngrese la segunda nota(1 a 10):\n","\nError nota. Ingrese la segunda nota(1 a 10):\n",1,10,3);
+	if(auxNum != 0)
+	{
+		nota2[i] = auxNum;
+	}
+	utn_getString (auxString,"\nIngrese el apellido(hasta 30 caracteres):\n","\nError apellido. Ingrese el apellido (hasta 30 caracteres):",3);
+	{
+		strcpy(apellido[i],auxString);
+	}
+
 	}
 	for(i = 0; i < MAX; i++)
 	{
-		utn_getMostar(legajo,sexo,edad,nota1,nota2,apellido,MAX);
+		promedio[i] = ((float)nota1[i] + nota2[2])/2;
 	}
+
+
+	utn_getMostarSoloUno (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+
+	utn_getOrdenarLeg (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	printf("\nOrdenados por legajo:\n");
+	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+
+	utn_getOrdenarApellido (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	printf("\nOrdenados por apellido:\n");
+	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+
+	utn_getOrdenarProm (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	printf("\nOrdenados por promedio:\n");
+	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+
 	return EXIT_SUCCESS;
 }
