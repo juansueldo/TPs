@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : ProyectoClase.c
- Author      : 
+ Author      :
 Desarrollar un programa que permita guardar los datos de 5 alumnos.
 Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio, apellido.
  ============================================================================
@@ -25,7 +25,8 @@ int main(void) {
 	int nota2[MAX];
 	float promedio[MAX];
 	char apellido [MAX][30];
-
+	int i;
+	int auxNum;
 
 	inicializarNumEntero (legajo, MAX);
 	inicializarChar (sexo, MAX);
@@ -35,13 +36,18 @@ int main(void) {
 	inicializarNumFloat (promedio, MAX);
 	inicializarString (apellido, MAX);
 
-
+	for(i = 0; i < MAX; i++)
+	{
 	utn_getNumero (legajo, MAX, "\nIngrese el numero de legajo:\n","\nError numero ingresado no válido. Ingrese el numero de legajo:\n",0,1000);
 	utn_getChar (sexo, MAX, "\nIngrese el sexo(f o m):\n","\nError dato no valido. Ingrese el sexo(f o m):\n");
 	utn_getNumero (edad, MAX, "\nIngrese la edad:\n","\nError la edad no es válida. Ingrese la edad:\n",0,150);
 	utn_getNumero (nota1, MAX, "\nIngrese la nota primer nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
 	utn_getNumero (nota2, MAX, "\nIngrese la segunda nota:\n","\nError la nota no es válida. Ingrese la nota:\n",0,11);
 	utn_getString (apellido,MAX,"\nIngrese el apellido:\n");
-
+	}
+	for(i = 0; i < MAX; i++)
+	{
+		utn_getMostar(legajo,sexo,edad,nota1,nota2,apellido,MAX);
+	}
 	return EXIT_SUCCESS;
 }

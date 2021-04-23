@@ -1,206 +1,321 @@
 /*
  ============================================================================
- Name        : Re.c
- Author      : 
- Ejercicio 5-2:Pedir el ingreso de 10 números enteros entre -1000 y 1000.
- Determinar:Cantidad de positivos y negativos.Sumatoria de los pares.El mayor de los impares.
- Listado de los números ingresados.Listado de los números pares.
- Listado de los números de las posiciones impares.  Se deberán utilizar funciones y vectores
+ Name        : Matriz-Ejercicio.c
+ Author      : Ornela Curcio
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
  ============================================================================
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 4
+#include <string.h>
+#include <ctype.h>
 
-int utn_getNumero (int num[], int cantidad, char*mensaje, char*mensajeError, int min, int max);
-void sumaPares (int num[], int size, int* acumPares);
-void contPos (int num[],int size,int*pContador );
-void contNeg (int num[],int size,int*pContador);
-void mayorImpar (int num[], int size, int*mayor);
-void ordenarPar (int num[], int size, char*mensaje,char*mensajeError);
-void ordenarImp (int num[], int size, char*mensaje,char*mensajeError);
+#define MAX 2
+
+void inicializarNumEntero(int pArray[], int cantArray);
+void inicializarChar(char pArray[], int cantArray);
+void inicializarNumFloat(float pArray[], int cantArray);
+void getString(char mensaje[], char imput[]);
+void inicializarString(char pArray[][20], int cantidadDeArray);
+int utn_getNumero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos);
+int utn_getCaracterSexo(char* pResultado,char* mensaje,char* mensajeError,int reintentos);
+int utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos);
+int utn_getMostrar(char pArray[][20], int limite, char sex[], int leg[], int not1[], int not2[], float prom[]);
+int utn_getOrdenarLegajo(int legajo[],int cantArray);
+int utn_getOrdenarApellido(char apellido[][20], int cantArray);
+int utn_getOrdenarPromedio(float promedio[], int cantArray,int legajo);
 
 int main(void) {
-	int numero[MAX];
-	int i;
-	int validar;
-	int acumPares = 0;
-	int contPositivos = 0;
-	int contNegativos = 0;
-	int imparMayor;
+	setbuf(stdout, NULL);
 
-	for(i = 0; i < MAX; i++)
+	int legajo[MAX];
+	int auxInt;
+	int edad[MAX];
+	char sexo[MAX];
+	char auxChar;
+	int nota1[MAX];
+	int nota2[MAX];
+	float promedio[MAX];
+	char apellido[MAX][20];
+	char auxApellido[20];
+	int i;
+
+	inicializarNumEntero (legajo, MAX);
+	inicializarChar (sexo, MAX);
+	inicializarNumEntero (edad, MAX);
+	inicializarNumEntero (nota1, MAX);
+	inicializarNumEntero (nota2, MAX);
+	inicializarNumFloat (promedio, MAX);
+	inicializarString (apellido, MAX);;
+
+	for(i=0; i<MAX; i++)
 	{
-		validar = utn_getNumero (numero, i, "Ingrese un numero:\n", "Error. Ingrese un numero:\n", -1000, 1000);
-		if(validar == 0)
+		if(utn_getNumero(&auxInt, "Ingrese el numero de legajo:\n", "Error. Reingrese entre 0000 y 9999\n:", 0000, 9999, 3)==0)
 		{
-		    sumaPares (numero,MAX,&acumPares);
-		    contPos (numero,MAX,&contPositivos);
-		    contNeg (numero,MAX,&contNegativos);
-		    mayorImpar (numero, MAX,&imparMayor);
+			legajo[i]=auxInt;
+		}
+		if(utn_getCaracterSexo(&auxChar, "Ingrese el sexo: femenino(f), masculino(m), otre(o)", "Error. Reingrese el sexo: femenino(f), masculino(m), otre(o)", 3)==0)
+		{
+			sexo[i]=auxChar;
+		}
+		if(utn_getNumero(&auxInt, "Ingrese la edad:\n","Error. Reingrese la edad (entre 18 y 99)\n:" ,18, 99, 3)==0)
+		{
+					edad[i]=auxInt;
+		}
+		if(utn_getNumero(&auxInt, "Ingrese la primer nota:\n","Error. Reingrese la primer nota (entre 1 y 10)\n:" ,1, 10, 3)==0)
+		{
+			nota1[i]=auxInt;
+		}
+		if(utn_getNumero(&auxInt, "Ingrese la segunda nota:\n","Error, Reingrese la segunda nota (entre 1 y 10)\n:" ,1, 10, 3)==0)
+		{
+			nota2[i]=auxInt;
+		}
+
+		if(utn_getString(auxApellido, "Ingrese Apellido: ", "Error. Reingrese apellido ", 3)==0)
+		{
+			strcpy(apellido[i], auxApellido);
 		}
 	}
-    printf("\nLa cantidad de positivos es: %d", contPositivos);
-    printf("\nLa cantidad de negativos es: %d", contNegativos);
-    printf("\nLa suma de los pares es: %d",acumPares);
-    printf("\nLa el mayor de los impares: %d",imparMayor);
-    printf("\nEl orden de los numero ingresados es: ");
-    for(i = 0; i < MAX; i++)
-    {
-        printf("%d,",numero[i]);
-    }
-    ordenarImp (numero, MAX,"\nEl orden de los numeros ingresados en la posicion impar es: ","\nNo se ingresaron numeros");
-    ordenarPar (numero,MAX, "\nEl orden de los pares ingresados es: ","\nNo se ingresaron numeros pares.");
+
+	for(i=0; i<MAX; i++)
+	{
+		promedio[i]=((float)nota1[i]+nota2[i])/2;
+	}
+
+	utn_getMostrar(apellido, MAX, sexo, legajo, nota1, nota2, promedio);
+
+	utn_getOrdenarLegajo(legajo, MAX);
+
+	utn_getMostrar(apellido, MAX, sexo, legajo, nota1, nota2, promedio);
+
+	utn_getOrdenarApellido(apellido, MAX);
+
+	utn_getMostrar(apellido, MAX, sexo, legajo, nota1, nota2, promedio);
+
+	utn_getOrdenarPromedio(promedio,MAX,legajo);
+
+	utn_getMostrar(apellido, MAX, sexo, legajo, nota1, nota2, promedio);
 
 	return EXIT_SUCCESS;
 }
-int utn_getNumero (int num[], int cantidad, char*mensaje, char*mensajeError, int min, int max)
+void inicializarNumEntero(int pArray[], int cantArray)
+{
+	int i;
+
+	for(i=0; i<cantArray; i++)
+	{
+		pArray[i]=0;
+	}
+}
+void inicializarChar(char pArray[], int cantArray)
+{
+	int i;
+
+	for(i=0; i<cantArray; i++)
+	{
+		pArray[i]=' ';
+	}
+}
+void inicializarNumFloat(float pArray[], int cantArray)
+{
+	int i;
+
+	for(i=0; i<cantArray; i++)
+	{
+		pArray[i]=0;
+	}
+}
+void getString(char mensaje[], char imput[])
+{
+	printf("%s", mensaje);
+	gets(imput);
+}
+void inicializarString(char pArray[][20], int cantArray)
+{
+	int i;
+
+	for(i=0; i<cantArray; i++)
+	{
+		strcpy(pArray[i],"");
+	}
+}
+int utn_getNumero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
 {
 	int retorno = -1;
-	int i = cantidad;
-	if(mensaje != NULL && mensajeError != NULL && min <= max)
+	int bufferInterno;
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos>0)
 	{
-		printf("%s",mensaje);
-		scanf("%d",&num[i]);
-		while(num[i] < min || num[i] > max)
+
+		do
 		{
-			printf("%s",mensajeError);
-			scanf("%d",&num[i]);
+			printf("%s", mensaje);
+			scanf("%d", &bufferInterno);
+			if(bufferInterno>=minimo && bufferInterno<=maximo)
+			{
+				*pResultado=bufferInterno;
+				retorno=0;
+				break;
+			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
+	}
+	return retorno;
+}
+int utn_getCaracterSexo(char* pResultado,char* mensaje,char* mensajeError, int reintentos)
+{
+	int retorno = -1;
+	char bufferChar;
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && reintentos>0)
+	{
+
+		do
+		{
+			printf("%s", mensaje);
+			fflush(stdin);
+			scanf("%c", &bufferChar);
+			if(bufferChar=='f'|| bufferChar=='m' || bufferChar=='o')
+			{
+				*pResultado=bufferChar;
+				retorno=0;
+				break;
+			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
+	}
+	return retorno;
+}
+int utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos)
+{
+	int retorno = -1;
+	char bufferString[40];
+
+
+	if(aux != NULL && mensaje != NULL && mensajeError != NULL && reintentos>0)
+	{
+
+		do
+		{
+			printf("%s", mensaje);
+			fflush(stdin);
+			scanf("%s", bufferString);
+
+			if(strlen(bufferString)<20)
+			{
+				strcpy(aux, bufferString);
+				retorno=0;
+				break;
+			}
+			else
+			{
+				printf("%s", mensajeError);
+				reintentos--;
+			}
+		}while(reintentos>=0);
+	}
+	return retorno;
+}
+int utn_getMostrar(char pArray[][20], int limite, char sex[], int leg[], int not1[], int not2[], float prom[])
+{
+	int retorno = -1;
+	int i;
+
+	if(pArray != NULL && sex != NULL && leg != NULL && not1 != NULL && not2 != NULL && prom != NULL  && limite>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			printf("Datos ingresados: %s %c %d %d %d %.2f ", pArray[i], sex[i], leg[i], not1[i], not2[i], prom[i]);
+			printf("\n");
 		}
 		retorno = 0;
 	}
 	return retorno;
 }
-void contPos (int num[],int size,int*pContador )
-{
-	int contNum = 0;
-	int i;
-	if(pContador != NULL)
-	{
-		for(i = 0; i < MAX; i++)
-		{
-		if(num[i] > 0)
-		{
-		contNum ++;
-		*pContador = contNum;
-		}
-		}
-	}
-}
-void contNeg (int num[],int size,int*pContador)
-{
-	int contNum = 0;
-	int i;
-	if(pContador != NULL)
-	{
-		for(i = 0; i < MAX; i++)
-		{
-		if(num[i] < 0)
-		{
-		contNum ++;
-		*pContador = contNum;
-		}
-		}
-	}
-}
-void sumaPares (int num[], int size, int* acumPares)
-{
-	int i;
-	if(acumPares != NULL)
-	{
-	*acumPares = 0;
-	for(i = 0; i < MAX; i++)
-	{
-	if(num[i] % 2 == 0)
-	{
-		*acumPares += num [i];
-	}
-	}
-	}
-
-}
-void mayorImpar (int num[], int size, int*mayor)
-{
-	int i;
-	int max;
-	int flag = 1;
-	if(mayor != NULL)
-	{
-	for(i = 0; i < MAX; i++)
-	{
-	if(num[i] % 2 != 0)
-	{
-		if(flag == 1 || num[i] > max)
-		{
-		    max = num[i];
-		    *mayor = max;
-		    flag = 0;
-		}
-	}
-	}
-	}
-
-}
-void ordenarPar (int num[], int size, char*mensaje,char*mensajeError)
+int utn_getOrdenarLegajo(int legajo[],int cantArray)
 {
 	int i;
 	int j;
 	int aux;
-	printf("%s",mensaje);
-    for(i = 0; i < MAX; i++)
+	int retorno = -1;
+	for(i=0; i<cantArray-1; i++)
 	{
-	if(num[i] % 2 == 0)
-	{
-	for(i = 0; i < MAX-1; i++)
-	{
-		for(j = i+1; j < MAX ;j++)
+		for(j=i+1; j<cantArray; j++)
 		{
-		   if(num[i] > num[j])
-		   {
-			   aux = num[i];
-			   num[i] = num[j];
-			   num[j] = aux;
-		    }
+			if(legajo[i]>legajo[j])
+			{
+				aux=legajo[i];
+				legajo[i]=legajo[j];
+				legajo[j]=aux;
+			}
 
-		   }
-		   printf("%d,",num[i]);
+		}
+		retorno=0;
 	}
-	}
-	else
-	{
-	printf("%s",mensajeError);
-	}
-	}
+	return retorno;
 }
-void ordenarImp (int num[], int size, char*mensaje,char*mensajeError)
+int utn_getOrdenarApellido(char apellido[][20], int cantArray)
+{
+	int flagDesordenado = -1;
+	int i;
+	char auxApellido[20];
+
+	while(flagDesordenado==-1)
+	{
+		flagDesordenado=0;
+		for(i=0; i<cantArray-1; i++)
+		{
+			if(strcmp(apellido[i],apellido[i+1])>0)// compara los array.
+			{
+				strcpy(auxApellido,apellido[i]);
+				strcpy(apellido[i],apellido[i+1]);
+				strcpy(apellido[i+1],auxApellido);
+
+				flagDesordenado = -1;
+			}
+		}
+	}
+	return 0;
+}
+//Ordenar por Promedio, si se repite ordenar por legajo
+int utn_getOrdenarPromedio(float promedio[], int cantArray,int legajo)
 {
 	int i;
 	int j;
-	int aux;
-	printf("%s",mensaje);
-    for(i = 0; i < MAX; i++)
+	float aux;
+	int auxLegajo;
+	int retorno = -1;
+	for(i=0; i<cantArray-1; i++)
 	{
-	if(i % 2 == 0)
-	{
-	for(i = 0; i < MAX-1; i++)
-	{
-		for(j = i+1; j < MAX ;j++)
+		for(j=i+1; j<cantArray; j++)
 		{
-		   if(num[i] > num[j])
-		   {
-			   aux = num[i];
-			   num[i] = num[j];
-			   num[j] = aux;
-		    }
+			if(promedio[i]>promedio[j])
+			{
+				aux=promedio[i];
+				promedio[i]=promedio[j];
+				promedio[j]=aux;
+			}
+			else if(promedio[i] == promedio[j])
+			{
+				if(legajo[i]>legajo[j])
+				{
+				auxLegajo = legajo[i];
+				legajo[i]=legajo[j];
+				legajo[j]=aux;
+			}
+			}
 
-		   }
-		   printf("%d,",num[i]);
+		}
+		retorno=0;
 	}
-	}
-	else
-	{
-	printf("%s",mensajeError);
-	}
-	}
+	return retorno;
 }
