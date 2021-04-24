@@ -85,7 +85,8 @@ void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos)
 void utn_getMostar(int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
 {
 	int i;
-	strlwr(apellido);
+
+
 	for(i = 0; i < tamanio; i++)
 	{
 	printf("\nAlumno %d:",i+1);
@@ -100,14 +101,16 @@ void utn_getMostar(int legajo[], char sexo[],int edad[],int nota1[],int nota2[],
 }
 void utn_getMostarSoloUno (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
 {
+	int flag = 0;
 	int i;
-	//int aux;
-	printf("\nIngrese el numero de orden del almno que desea mostrar:");
-	scanf("%d",&i);
-
-	/*if(i)
-	{*/
-	printf("\nAlumno %d:",i);
+	int aux;
+	printf("\nIngrese el numero de legajo del alumno a mostrar:");
+	scanf("%d",&aux);
+	for(i = 0; i < tamanio; i++)
+	{
+	if(aux==legajo[i])
+	{
+	printf("\nAlumno %d:",i+1);
 	printf("\nLegajo: %d",legajo[i]);
 	printf(" Sexo: %c", sexo[i]);
 	printf(" Edad: %d", edad[i]);
@@ -115,7 +118,13 @@ void utn_getMostarSoloUno (int legajo[], char sexo[],int edad[],int nota1[],int 
 	printf(" Nota 2: %d", nota2[i]);
 	printf(" Promedio: %.2f", promedio[i]);
 	printf(" Apellido: %s\n",apellido[i]);
-	//}
+	flag = 1;
+	}
+	}
+	if(flag == 0)
+	{
+		printf("\nNo es un numero de legajo.");
+	}
 }
 void utn_getOrdenarLeg (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio)
 {

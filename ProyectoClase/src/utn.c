@@ -35,6 +35,6 @@ void inicializarString(char array[][30], int tamanio)
 			strcpy(array[i]," ");
 		}
 }
-//void validar(int legajo)
+
 
 

@@ -16,4 +16,6 @@ void utn_getMostarSoloUno (int legajo[], char sexo[],int edad[],int nota1[],int 
 void utn_getOrdenarLeg (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio);
 void utn_getOrdenarApellido (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio);
 void utn_getOrdenarProm (int legajo[], char sexo[],int edad[],int nota1[],int nota2[],float promedio[], char apellido[][30],int tamanio);
-#endif /* UTN_INGRESODATOS_H_ */
+
+#endif
+/* UTN_INGRESODATOS_H_ */

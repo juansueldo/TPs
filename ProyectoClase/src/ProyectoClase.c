@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : ProyectoClase.c
- Author      :
+ Author      : Juan Sueldo
 Desarrollar un programa que permita guardar los datos de 5 alumnos.
 Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio, apellido.
 1-Inicializar
