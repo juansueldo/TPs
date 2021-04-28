@@ -36,6 +36,7 @@ int main(void) {
 	int auxNum;
 	char auxChar;
 	char auxString[30];
+	int aux;
 
 	inicializarNumEntero (legajo, MAX);
 	inicializarChar (sexo, MAX);
@@ -83,21 +84,44 @@ int main(void) {
 		promedio[i] = ((float)nota1[i] + nota2[2])/2;
 	}
 
+	printf("\nIngrese el numero de legajo del alumno a mostrar:");// Se muestra un solo alumno
+	fflush(stdin);
+	scanf("%d",&aux);
+	printf("\nEl alumno solicitado es:\n");
+	for(i = 0; i < MAX; i++)
+	{
+	if(aux==legajo[i])
+	{
+		utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX,i);
+	}
+	}
+	printf("\nTodos los alumnos ingresados:\n");//Se muestra todos los alumnos ingresados
+	for(i = 0; i < MAX; i++)
+	{
+		utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX,i);
+	}
 
-	utn_getMostarSoloUno (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
-	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
 
-	utn_getOrdenarLeg (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
-	printf("\nOrdenados por legajo:\n");
-	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	utn_getOrdenarLeg (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);//Se ordenan por legajo
+	printf("\nOrdenados por legajo:\n"); //Se muestran ordenados
+	for(i = 0; i < MAX; i++)
+	{
+		utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX,i);
+	}
 
-	utn_getOrdenarApellido (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
-	printf("\nOrdenados por apellido:\n");
-	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	utn_getOrdenarApellido (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);//Se ordenan por apellido
+	printf("\nOrdenados por apellido:\n");//Se muestran ordenados
+	for(i = 0; i < MAX; i++)
+	{
+		utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX,i);
+	}
 
-	utn_getOrdenarProm (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
-	printf("\nOrdenados por promedio:\n");
-	utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);
+	utn_getOrdenarProm (legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX);//Se ordenan por promedio, en caso que el promedio sea igual, se ordena por legajo
+	printf("\nOrdenados por promedio:\n");//Se muestran ordenados
+	for(i = 0; i < MAX; i++)
+	{
+		utn_getMostar(legajo, sexo,edad,nota1,nota2,promedio,apellido,MAX,i);
+	}
 
 	return EXIT_SUCCESS;
 }

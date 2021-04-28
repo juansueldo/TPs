@@ -1,10 +1,3 @@
-/*
- * utn.h
- *
- *  Created on: 24 abr. 2021
- *      Author: operador
- */
-
 #ifndef UTN_H_
 #define UTN_H_
 
@@ -23,9 +16,10 @@ void inicializarStruct (datosAlumnos alumno[], int tamanio);
 void utn_getNumber(int* pNumero,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos);
 void utn_getChar (char* pCaracter,char* mensaje,char* mensajeError, int reintentos);
 void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos);
-void utn_getMostar(datosAlumnos alumno[], int tamanio);
-void utn_getMostarSoloUno(datosAlumnos alumno[], int tamanio);
+void utn_getMostar(datosAlumnos alumno[], int tamanio, int i);
 void utn_getOrdenarLeg (datosAlumnos alumno[], int tamanio);
 void utn_getOrdenarApellido (datosAlumnos alumno[], int tamanio);
 void utn_getOrdenarProm (datosAlumnos alumno[], int tamanio);
+
 #endif /* UTN_H_ */
+

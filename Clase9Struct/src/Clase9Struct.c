@@ -31,6 +31,7 @@ int main(void) {
 	int auxNum;
 	char auxChar;
 	char auxString[30];
+	int aux;
 
 	inicializarStruct (alumno, MAX);
 
@@ -78,10 +79,24 @@ int main(void) {
 			}
 			break;
 		case 2:
-			utn_getMostarSoloUno(alumno, MAX);
+			printf("\nIngrese el numero de legajo del alumno a mostrar:");
+			fflush(stdin);
+			scanf("%d",&aux);
+			printf("\nEl alumno solicitado es:\n");
+			for(i = 0; i < MAX; i++)
+			{
+				if(aux==alumno[i].legajo )
+				{
+				utn_getMostar(alumno, MAX,i);
+				}
+			}
 			break;
 		case 3:
-			utn_getMostar(alumno, MAX);
+			printf("\nTodos los alumnos ingresados:\n");//Se muestra todos los alumnos ingresados
+			for(i = 0; i < MAX; i++)
+			{
+				utn_getMostar(alumno, MAX,i);
+			}
 			break;
 		case 4:
 			utn_getOrdenarLeg (alumno, MAX);

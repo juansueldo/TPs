@@ -1,9 +1,3 @@
-/*
- * utn.c
- *
- *  Created on: 24 abr. 2021
- *      Author: operador
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -63,6 +57,7 @@ void utn_getNumber(int* pNumero,char* mensaje,char* mensajeError,int minimo,int 
 		do
 		{
 			printf("%s", mensaje);
+			fflush(stdin);
 			scanf("%d", &bufferInt);
 			if(bufferInt >= minimo && bufferInt <= maximo)
 			{
@@ -132,13 +127,9 @@ void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos)
 	}
 
 }
-void utn_getMostar(datosAlumnos alumno[], int tamanio)
+void utn_getMostar(datosAlumnos alumno[], int tamanio, int i)
 {
-	int i;
 
-
-	for(i = 0; i < tamanio; i++)
-	{
 	printf("\nAlumno %d:",i+1);
 	printf("\nLegajo: %d",alumno[i].legajo);
 	printf(" Sexo: %c", alumno[i].sexo);
@@ -147,34 +138,7 @@ void utn_getMostar(datosAlumnos alumno[], int tamanio)
 	printf(" Nota 2: %d", alumno[i].nota2);
 	printf(" Promedio: %.2f", alumno[i].promedio);
 	printf(" Apellido: %s\n",alumno[i].apellido);
-	}
-}
-void utn_getMostarSoloUno(datosAlumnos alumno[], int tamanio)
-{
-	int flag = 0;
-	int i;
-	int aux;
-	printf("\nIngrese el numero de legajo del alumno a mostrar:");
-	scanf("%d",&aux);
-	for(i = 0; i < tamanio; i++)
-	{
-	if(aux==alumno[i].legajo)
-	{
-	printf("\nAlumno %d:",i+1);
-	printf("\nLegajo: %d",alumno[i].legajo);
-	printf(" Sexo: %c", alumno[i].sexo);
-	printf(" Edad: %d", alumno[i].edad);
-	printf(" Nota 1: %d", alumno[i].nota1);
-	printf(" Nota 2: %d", alumno[i].nota2);
-	printf(" Promedio: %.2f", alumno[i].promedio);
-	printf(" Apellido: %s\n",alumno[i].apellido);
-	flag = 1;
-	}
-	}
-	if(flag == 0)
-	{
-		printf("\nNo es un numero de legajo.");
-	}
+
 }
 void utn_getOrdenarLeg (datosAlumnos alumno[], int tamanio)
 {
