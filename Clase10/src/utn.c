@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-typedef struct{
+typedef struct {
 	int legajo;
 	char sexo;
 	int edad;
@@ -10,27 +10,54 @@ typedef struct{
 	int nota2;
 	float promedio;
 	char apellido[30];
-}datosAlumnos;
+	int isEmpty;
+} datosAlumnos;
 
-int utn_menu (int* opcion, char* mensaje,char* mensajeError, int min, int max, int salir)
-{
+int utn_menu(int *opcion, char *mensaje, char *mensajeError, int min, int max,
+		int salir) {
 
 	int retorno = -1;
 	int bufferMenu;
-	if(mensaje != NULL && mensajeError != NULL && min <= max && salir != 0)
-	{
-		printf("%s",mensaje);
-		scanf("%d",&bufferMenu);
+	if (mensaje != NULL && mensajeError != NULL && min <= max && salir != 0) {
+		printf("%s", mensaje);
+		scanf("%d", &bufferMenu);
 
-		if(bufferMenu >= min && bufferMenu <= max)
-		{
-		  *opcion = bufferMenu;
-		  retorno = 0;
+		if (bufferMenu >= min && bufferMenu <= max) {
+			*opcion = bufferMenu;
+			retorno = 0;
+		} else {
+			printf("%s", mensajeError);
 		}
-		else
+	}
+	return retorno;
+}
+int inicializarIsEmpty (datosAlumnos alumno[], int tamanio)
+{
+	int i;
+	int retorno = -1;
+	if (alumno != NULL && tamanio != 0)
+	{
+	for (i = 0; i < tamanio; i++)
+	{
+		alumno[i].isEmpty = 1;
+	}
+	retorno = 0;
+	}
+	return retorno;
+}
+int buscarLibre (datosAlumnos alumno[], int tamanio)
+{
+	int retorno = -1;
+	int i;
+	if(alumno != NULL && tamanio != 0)
+	{
+	for(i = 0; i < tamanio; i++)
+	{
+		if(alumno[i].isEmpty == 1)
 		{
-		  printf("%s",mensajeError);
-	    }
+			retorno = i;
+		}
+	}
 	}
 	return retorno;
 }
@@ -47,6 +74,19 @@ void inicializarStruct (datosAlumnos alumno[], int tamanio)
 		alumno[i].sexo = ' ';
 		strcpy(alumno[i].apellido," ");
 	}
+}
+void utn_getMostar(datosAlumnos alumno[], int tamanio, int i)
+{
+
+	printf("\nAlumno %d:",i+1);
+	printf("\nLegajo: %d",alumno[i].legajo);
+	printf(" Sexo: %c", alumno[i].sexo);
+	printf(" Edad: %d", alumno[i].edad);
+	printf(" Nota 1: %d", alumno[i].nota1);
+	printf(" Nota 2: %d", alumno[i].nota2);
+	printf(" Promedio: %.2f", alumno[i].promedio);
+	printf(" Apellido: %s\n",alumno[i].apellido);
+	printf("\nIs Empty %d", alumno[i].isEmpty);
 }
 void utn_getNumber(int* pNumero,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
 {
@@ -127,19 +167,6 @@ void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos)
 	}
 
 }
-void utn_mostar(datosAlumnos alumno[], int tamanio, int i)
-{
-
-	printf("\nAlumno %d:",i+1);
-	printf("\nLegajo: %d",alumno[i].legajo);
-	printf(" Sexo: %c", alumno[i].sexo);
-	printf(" Edad: %d", alumno[i].edad);
-	printf(" Nota 1: %d", alumno[i].nota1);
-	printf(" Nota 2: %d", alumno[i].nota2);
-	printf(" Promedio: %.2f", alumno[i].promedio);
-	printf(" Apellido: %s\n",alumno[i].apellido);
-
-}
 void utn_ordenarLeg (datosAlumnos alumno[], int tamanio)
 {
 	int i;
@@ -206,3 +233,6 @@ void utn_ordenarProm (datosAlumnos alumno[], int tamanio)
 		}
 	}
 }
+
+
+

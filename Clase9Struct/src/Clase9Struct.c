@@ -20,7 +20,7 @@ Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio
 #include <ctype.h>
 #include "utn.h"
 
-#define MAX 5
+#define MAX 3
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -87,7 +87,7 @@ int main(void) {
 			{
 				if(aux==alumno[i].legajo )
 				{
-				utn_getMostar(alumno, MAX,i);
+				utn_mostar(alumno, MAX,i);
 				}
 			}
 			break;
@@ -95,19 +95,19 @@ int main(void) {
 			printf("\nTodos los alumnos ingresados:\n");//Se muestra todos los alumnos ingresados
 			for(i = 0; i < MAX; i++)
 			{
-				utn_getMostar(alumno, MAX,i);
+				utn_mostar(alumno, MAX,i);
 			}
 			break;
 		case 4:
-			utn_getOrdenarLeg (alumno, MAX);
+			utn_ordenarLeg (alumno, MAX);
 			printf("\nSe ordeno por legajo");
 			break;
 		case 5:
-			utn_getOrdenarApellido (alumno, MAX);
+			utn_ordenarApellido (alumno, MAX);
 			printf("\nSe ordeno por apellido");
 			break;
 		case 6:
-			utn_getOrdenarProm (alumno, MAX);
+			utn_ordenarProm (alumno, MAX);
 			printf("\nSe ordeno por promedio");
 			break;
 		case 7:
