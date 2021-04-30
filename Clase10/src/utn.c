@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+//#include "utn.h"
+
 typedef struct {
 	int legajo;
 	char sexo;
@@ -233,6 +235,59 @@ void utn_ordenarProm (datosAlumnos alumno[], int tamanio)
 		}
 	}
 }
+int buscarLegajo (datosAlumnos alumno[], int tamanio)
+{
+	int retorno = -1;
+	int legajo;
+	int i;
+	char respuesta;
+	if(alumno != NULL && tamanio != 0)
+	{
+	printf("\nQue legajo desea borrar:");
+	scanf("%d",&legajo);
+	for(i = 0; i < tamanio; i++)
+	{
 
+		if(alumno[i].legajo == legajo)
+		{
+			utn_getMostar(alumno,tamanio,i);
 
+				printf("Desea dar la baja? s/n");
+				fflush(stdin);
+				scanf("%c",&respuesta);
+				while(respuesta == 's' && respuesta == 'n')
+				{
+					printf("Desea dar la baja? s/n");
+					fflush(stdin);
+					scanf("%c",&respuesta);
+				}
+				if(respuesta == 's')
+				{
+					retorno = i;
+					alumno[i].isEmpty =1;
+				}
 
+			break;
+		}
+	}
+	}
+	return retorno;
+}
+/*void mostrarEstudiantes (datosAlumnos alumno[], int tamanio)
+{
+	int i;
+	printf("\nLegajo  Sexo   Edad  Nota 1  Nota 2  Promedio  Apellido");
+	for(i = 0; i < tamanio; i++)
+	{
+		if(alumno[i].isEmpty == 1)
+			continue;
+		else
+		{
+			mostrarEstudiante (alumno);
+		}
+	}
+}
+void mostrarEstudiante (datosAlumnos estudiante)
+{
+	printf("%d  %c %d %d %d %f %s",estudiante.legajo,estudiante.sexo,estudiante.edad,estudiante.nota1,estudiante.nota2,estudiante.promedio,estudiante.apellido);
+}*/

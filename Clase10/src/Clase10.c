@@ -6,6 +6,12 @@
  Los datos a guardar para cada alumno: legajo, sexo, edad, nota1, nota2, promedio, apellido.
  Se debe utilizar estructuras, permitiendo al usuario trabajar con los datos a través de un ABM.
 Hacer con estructuras - Crear un menú
+1-Menú e Inicialización
+2-Alta
+3-Listar
+4-Baja
+5-Modificar
+6-Ordenar
  ============================================================================
  */
 
@@ -37,10 +43,6 @@ int main(void) {
 	else
 	{
 		printf("No hay espacio");
-	}
-	for(i = 0; i < MAX; i++)
-	{
-		utn_getMostar(alumno, MAX, i);
 	}
 	do
 	{
@@ -93,26 +95,68 @@ int main(void) {
 					}
 					break;
 				case 2:
+
+					for(i = 0; i < MAX; i++)
+					{
+						if(alumno[i].isEmpty == 0)
+						{
+							utn_getMostar(alumno, MAX,i);
+
+						}
+					}
+					break;
+				case 3:
+					if(buscarLegajo (alumno, MAX) != -1)
+					{
+						printf("\nSe dio la baja");
+					}
+
+					break;
+				case 4:
+					for(i = 0; i < MAX; i++)
+					{
+						if(alumno[i].isEmpty == 0)
+					{
+
+					utn_getChar (&auxChar, "\nIngrese el sexo(f o m):\n","\nError dato no valido. Ingrese el sexo(f o m):\n",3);
+					{
+						alumno[i].sexo = auxChar;
+					}
+					utn_getNumber (&auxNum, "\nIngrese la edad(18 a 99):\n","\nError edad. Ingrese la edad(18 a 99):\n",18,99,3);
+						if(auxNum != 0)
+						{
+						alumno[i].edad = auxNum;
+						}
+						alumno[i].isEmpty = 0;
+						}
+						else
+						{
+							printf("\nNo hay espacio libre");
+						}
+						}
+						break;
+					break;
+				case 5:
 					if(utn_menu (&opcionSub,"\n1. Ordenar por legajo. \n2. Odenar por apellido. \n3. Ordenar por promedio \n4. Voler al menu anterior","\n No es una opción válida.", 1, 4,4) == 0)
 					switch(opcionSub)
 					{
 					case 1:
 						utn_ordenarLeg (alumno, MAX);
-						printf("\nSe ordeno por legajo");
 						break;
 					case 2:
 						utn_ordenarApellido (alumno, MAX);
-						printf("\nSe ordeno por apellido");
 						break;
 					case 3:
 						utn_ordenarProm (alumno, MAX);
-						printf("\nSe ordeno por promedio");
 						break;
 					}
 					break;
 					}
 
 			}
+				/*case 6:
+					printf("\nFin.");
+					break;*/
 
 	} while(opcion != 7);
 	return EXIT_SUCCESS;

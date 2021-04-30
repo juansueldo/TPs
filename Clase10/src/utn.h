@@ -21,7 +21,7 @@ typedef struct{
 
 int utn_menu (int* opcion, char* mensaje,char* mensajeError, int min, int max, int salir);
 int inicializarIsEmpty (datosAlumnos alumno[], int tamanio);
-void utn_getMostar(datosAlumnos alumno[], int tamanio, int i);
+void utn_getMostar(datosAlumnos alumno[], int tamanio,int i);
 void inicializarStruct (datosAlumnos alumno[], int tamanio);
 void utn_getChar (char* pCaracter,char* mensaje,char* mensajeError, int reintentos);
 void utn_getString(char aux[],char* mensaje,char* mensajeError, int reintentos);
@@ -30,5 +30,8 @@ int buscarLibre (datosAlumnos alumno[], int tamanio);
 void utn_ordenarLeg (datosAlumnos alumno[], int tamanio);
 void utn_ordenarApellido (datosAlumnos alumno[], int tamanio);
 void utn_ordenarProm (datosAlumnos alumno[], int tamanio);
-#endif /* UTN_H_ */
+void mostrarEstudiante (datosAlumnos estudiante);
+int buscarLegajo (datosAlumnos alumno[], int tamanio);
+void mostrarEstudiantes (datosAlumnos alumno[], int tamanio);
 
+#endif /* UTN_H_ */
