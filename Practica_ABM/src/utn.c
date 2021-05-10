@@ -181,7 +181,7 @@ datosAlumnos utn_CargarDatos(void)
 datosAlumnos utn_ModificarUno(datosAlumnos alumno)
 {
 	datosAlumnos auxiliar;
-	if(alumno.isEmpty == 1)
+	if(alumno.isEmpty == 0)
 	{
 		printf("Ingrese el sexo:\n");
 		fflush(stdin);
