@@ -1,6 +1,3 @@
-#ifndef ORQUESTA_C_
-#define ORQUESTA_C_
-
 #include "Orquesta.h"
 
 /**IMPORTANTE - SETEAR VALOR INICIAL CON EL PREFERIDO PARA COMENZAR IDs*/
@@ -125,26 +122,16 @@ int eOrquesta_MostrarDadosDeBaja(eOrquesta array[], int TAM) {
 eOrquesta eOrquesta_CargarDatos(void) {
 	eOrquesta auxiliar;
 	int opcion;
-	/** CARGAR DATOS NECESARIOS PARA EL ALTA*/
-	/** IMPORTANTE - NO CARGAR ID NI ESTADO - SE HACE EN EL eOrquesta_Alta() */
+
 	if((utn_getString(auxiliar.nombre,MAX_CHARS_CADENAS,"INGRESE NOMBRE: ","ERROR. REINGRESE: ",3,3)) != 0)
 	{
 		printf("\n Error al ingresar el nombre");
 	}
-	/*Get_OnlyAlphabetStringWithSpaces("INGRESE NOMBRE: ", "ERROR. REINGRESE: ",
-			auxiliar.nombre, MAX_CHARS_CADENAS);*/
+
 	if((utn_getString(auxiliar.lugar,MAX_CHARS_CADENAS,"INGRESE LUGAR: ","ERROR. REINGRESE: ",3,3)) != 0)
 	{
 		printf("\n Error al ingresar el nombre");
-	}/*
-	Get_String("INGRESE LUGAR: ", "ERROR. REINGRESE: ", auxiliar.lugar,
-	MAX_CHARS_CADENAS);*/
-	if(utn_getNumero(&auxiliar.fecha.dia,"INGRESE DIA: ", "ERROR. REINGRESE: ",1,31,3) != 0)
-	{
-				printf("\n Error al ingresar el ID");
-	}/*
-	utn_getNumber(auxiliar.fecha.dia,"INGRESE DIA: ", "ERROR. REINGRESE: ", 1,
-			31,3);*/
+	}
 	if(utn_getNumero(&auxiliar.fecha.dia,"INGRESE DIA: ", "ERROR. REINGRESE: ",1,31,3) != 0)
 	{
 		printf("\n Error al ingresar el ID");
@@ -156,11 +143,7 @@ eOrquesta eOrquesta_CargarDatos(void) {
 	if(utn_getNumero(&auxiliar.fecha.anio,"INGRESE MES: ", "ERROR. REINGRESE: ",1900,2022,3) != 0)
 	{
 		printf("\n Error al ingresar el ID");
-	}/*
-	utn_getNumber(auxiliar.fecha.mes,"INGRESE MES: ", "ERROR. REINGRESE: ", 1,
-			12,3);
-	utn_getNumber(auxiliar.fecha.anio,"INGRESE DIA: ", "ERROR. REINGRESE: ",
-			1900, 2022,3);*/
+	}
 
 	printf("\nSELECCIONE TIPO\n\t1- SINFONICA\n\t2- FILARMONICA\n\t3-CAMARA\n");
 
@@ -184,6 +167,27 @@ eOrquesta eOrquesta_CargarDatos(void) {
 
 eOrquesta eOrquesta_ModificarUno(eOrquesta Orquesta) {
 	eOrquesta auxiliar = Orquesta;
+	if((utn_getString(auxiliar.nombre,MAX_CHARS_CADENAS,"INGRESE NOMBRE: ","ERROR. REINGRESE: ",3,3)) != 0)
+	{
+		printf("\n Error al ingresar el nombre");
+	}
+
+	if((utn_getString(auxiliar.lugar,MAX_CHARS_CADENAS,"INGRESE LUGAR: ","ERROR. REINGRESE: ",3,3)) != 0)
+	{
+		printf("\n Error al ingresar el nombre");
+	}
+	if(utn_getNumero(&auxiliar.fecha.dia,"INGRESE DIA: ", "ERROR. REINGRESE: ",1,31,3) != 0)
+	{
+		printf("\n Error al ingresar el ID");
+	}
+	if(utn_getNumero(&auxiliar.fecha.mes,"INGRESE MES: ", "ERROR. REINGRESE: ",1,12,3) != 0)
+	{
+		printf("\n Error al ingresar el ID");
+	}
+	if(utn_getNumero(&auxiliar.fecha.anio,"INGRESE MES: ", "ERROR. REINGRESE: ",1900,2022,3) != 0)
+	{
+		printf("\n Error al ingresar el ID");
+	}
 	/** MODIFICAR DATOS NECESARIOS PARA EL "MODIFICAR" */
 	/** IMPORTANTE - MODIFICAR EL AUXILIAR QUE ES LA COPIA DEL ORIGINAL */
 	return auxiliar;
@@ -219,57 +223,43 @@ int eOrquesta_Alta(eOrquesta array[], int TAM) {
 
 	return rtn;
 }
-
-int eOrquesta_Baja(eOrquesta array[], int TAM) {
-	int rtn = 0;
+int eOrquesta_Baja (eOrquesta array[], int TAM)
+{
+	int rtn = -1;
 	int idOrquesta;
 	int index;
 	int flag = 0;
 
-	//LISTO TODOS LOS Orquesta
-	if (eOrquesta_MostrarTodos(array, TAM)) {
-		//BANDERA EN 1 SI HAY Orquesta DADOS DE ALTA PARA LISTAR
+	if (eOrquesta_MostrarTodos(array, TAM))
+	{
 		flag = 1;
 	}
 
-	//SI HAY Orquesta PARA DAR DE BAJA
 	if (flag) {
-		//PIDO ID A DAR DE BAJA
+		printf("\n*****************************************************************\n");
+		printf("\nINGRESE ID A DAR DE BAJA: ");
+		scanf("%d",&idOrquesta);
 
-		idOrquesta = printf("INGRESE ID A DAR DE BAJA: ",
-				"ERROR. REINGRESE: ");
-		/**USAR FUNCION GET_INT DE LIBRERIA DE INPUTS*/
-
-		//BUSCO INDEX POR ID EN ARRAY
-		while (eOrquesta_BuscarPorID(array, TAM, idOrquesta) == -1) {
-			puts("NO EXISTE ID.");
-			idOrquesta = Get_IntPositive("INGRESE ID A DAR DE BAJA: ",
-					"ERROR. REINGRESE: ");
+		while (eOrquesta_BuscarPorID(array, TAM, idOrquesta) == -1)
+		{
+			printf("NO EXISTE ID. Reingrese el id a dar de baja:");
+			scanf("%d",&idOrquesta);
 		}
-
-		//OBTENGO INDEX DEL ARRAY DE Orquesta A DAR DE BAJA
 		index = eOrquesta_BuscarPorID(array, TAM, idOrquesta);
-
-		if (Validate_Exit_SN("DESEA CONTINUAR SI[S] - NO[N]: ", "ERROR. REINGRESE.")) {
-			/**PREGUNTAR SI DESEA CONTINUAR*/
-
-			/**for(int i = 0; i<T_MUSICOS; i++){
-				if(idOrquesta == musico.idOrquesta){
-					musico.isEmpty = BAJA;
-				}
-			}*/
-
-			//BAJA ACEPTADA - CAMBIO ESTADO A "BAJA"
-			array[index].isEmpty = BAJA;
-
-			//RETORNO 1 SI SE DIO DE BAJA CORRECTAMENTE
-			rtn = 1;
+		if(utn_getRespuesta ("\nDesea dar la baja el empleado? (si 's' o NO 'no'): ","\nError. Ingrese (SI 's' o NO 'n')", 3)==0)
+		{
+			array[index].isEmpty = 1;
+			rtn = 0;
 		}
+		else
+		{
+			rtn = -1;
+		}
+
 	}
 
 	return rtn;
 }
-
 int eOrquesta_Modificacion(eOrquesta array[], int TAM) {
 	int rtn = 0;
 	int idOrquesta;
@@ -367,8 +357,4 @@ int eOrquesta_Sort(eOrquesta array[], int TAM, int criterio) {
 	}
 	return rtn;
 }
-
-#endif
-
-
 
