@@ -28,6 +28,8 @@ int utn_getTexto (char *pData);
 int utn_getMayusMin (char name[], int tam);
 int utn_getTextoEspacios (char *pData);
 int utn_getLower(char* letra);
+int esCuit(char* cadena);
+int utn_getCuit(char input[],char mensaje[],char eMensaje[],int reintentos);
 
 
 #endif /* BIBLIOTECA_H_ */

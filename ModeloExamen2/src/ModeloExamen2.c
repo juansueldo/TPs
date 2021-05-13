@@ -7,34 +7,46 @@
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
-#include "led.h"
+#include <stdio.h>
+#include "Pantallas.h"
+#include "Publicidad.h"
 
-int main(void) {
-
-	setbuf(stdout, NULL);
+int main()
+{
+    setbuf(stdout, NULL);
 
 	int opcion;
 	int flagAlta = 0;
+	int contador = 0;
+	int contPublicidad = 0;
+	int flagAltaPublicidad = 0;
 	//int criterioDeOrdenamiento;
 
 	//CREO ARRAY DE ESTRUCTURA
 	ePantalla arrayPantalla[MAX];
+    eTipo arrayTipo[CANT];
+    ePublicidad arrayPublicidad[MAX];
 
 
 	//INICIALIAZO ARRAY DE ESTRUCTURA
-	ePantalla_Inicializar(arrayPantalla, MAX);
+    ePantalla_inicializar(arrayPantalla, MAX);
 
+    strcpy(arrayTipo[0].descripcion,"LCD");
+	arrayTipo[0].codigo = 1;
+
+	strcpy(arrayTipo[1].descripcion,"LED");
+	arrayTipo[1].codigo = 2;
 
 	//BUCLE DE MENU
 	do {
-		utn_menu(&opcion, "\nMenu\n1. ALTA \n2. MODIFICAR \n3. BAJA \n4. \n10. Salir \n Ingrese:", "\nNO ES VALIDO\n", 1, 10,10);
+		utn_menu(&opcion, "\nMenu\n1. ALTA \n2. MODIFICAR \n3. BAJA \n4. CONTRATAR PULICIDAD \n10. Salir \n Ingrese:", "\nNO ES VALIDO\n", 1, 10,10);
 
 		switch (opcion)
 		{
 
 		case 1:
 			//ALTA arrayPantalla
-			if (ePantalla_Alta(arrayPantalla, MAX))
+			if (ePantalla_alta(arrayPantalla, MAX, &contador))
 			{
 				printf("\nALTA EXITOSA\n");
 				flagAlta = 1;
@@ -49,7 +61,7 @@ int main(void) {
 			//BAJA
 			if(flagAlta == 1)
 			{
-			if(ePantalla_Modificacion  (arrayPantalla, MAX) == 0)
+			if(ePantalla_modificarPantallas (arrayPantalla, MAX,arrayTipo,CANT) == 0)
 			{
 				printf("\nSE MODIFICO\n");
 			}
@@ -64,7 +76,7 @@ int main(void) {
 			//BAJA
 			if(flagAlta == 1)
 			{
-			if(ePantalla_Baja(arrayPantalla, MAX) == 0)
+			if(ePantalla_baja (arrayPantalla, MAX, arrayTipo, CANT) == 0)
 			{
 				printf("\nSE DIO LA BAJA\n");
 			}
@@ -76,10 +88,23 @@ int main(void) {
 			system("pause");
 			break;
 		case 4:
-			//ALTA MUSICO
-
+			//CONTRATAR PUBLICIDAD
+			if(flagAlta == 1)
+			{
+			if(ePublicidad_alta (arrayPantalla,MAX,arrayPublicidad,arrayTipo,CANT, &contPublicidad)==0)
+			{
+				printf("\nALTA EXITOSA\n");
+				flagAltaPublicidad = 1;
+			}
+			else
+			{
+				printf("\nNO SE DIO DE ALTA\n");
+			}
+			}
+			system("pause");
 			break;
 		case 5:
+			ePublicidad_modificarPantallas (arrayPublicidad, MAX, arrayPantalla, MAX);
 			//MODIFICAR MUSICO
 			 break;
 		case 6:
@@ -101,3 +126,4 @@ int main(void) {
 
 	return 0;
 }
+

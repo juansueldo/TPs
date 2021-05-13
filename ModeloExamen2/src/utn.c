@@ -386,3 +386,75 @@ int utn_getMayusMin (char name[], int tam)
 
    return 0;
 }
+int esCuit(char* cadena)
+{
+	int ret;
+	int i;
+	int contadorDigito=0;
+	int contadorGuion=0;
+
+	if(cadena!=NULL)
+	{
+		for(i=0;cadena[i]!='\0';i++)
+		{
+			if(isdigit(cadena[i])!=0)
+			{
+				contadorDigito++;
+			}
+			else
+			{
+				if(cadena[i]=='-')
+				{
+					contadorGuion++;
+				}
+				else
+				{
+					ret=-1;
+					break;
+				}
+			}
+		}
+		if(contadorDigito==11 && contadorGuion==2)
+		{
+			ret=0;
+		}
+	}
+	return ret;
+}
+
+int utn_getCuit(char input[],char mensaje[],char eMensaje[],int reintentos)
+{
+	int ret;
+	char buffer[14];
+	int i;
+	int aux;
+
+		if(input!=NULL && mensaje!= NULL && eMensaje!= NULL && reintentos>0)
+		{
+			for(i=reintentos;i>0;i--)
+			{
+				printf("\n %s",mensaje); //Se le pide el tipo de dato a ingresar al usuario
+				fflush(stdin);
+				fgets(buffer,14,stdin);
+				aux=esCuit(buffer);
+				if(aux==0)
+				{
+					if(buffer[2]=='-' && buffer[11]=='-')
+					{
+						strcpy(input,buffer);
+						ret=0;
+						break;
+					}
+				}
+				else
+				{
+					printf("\n %s\n",eMensaje);
+				}
+			}
+		}
+		if(reintentos==0)
+		{
+			ret=-1;
+		}
+	return ret;
+}
