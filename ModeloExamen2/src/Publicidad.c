@@ -93,20 +93,15 @@ int ePublicidad_obtenerPublicidad (ePantalla arrayPantalla[],int cant,int codigo
 	}
 	return ret;
 }
-void ePublicidad_mostrarUno (ePublicidad arrayPublicidad[] ,int tam, ePantalla arrayPantalla[], int cant)
+void ePublicidad_mostrarUno (ePublicidad arrayPublicidad[] ,int tam)
 {
-	ePantalla auxPantalla[MAX];
-	ePublicidad_obtenerPublicidad(arrayPantalla,tam,arrayPublicidad[cant].idPublicidad,auxPantalla);
 
-
-	printf("\n %s     %5d         %5s   %15s   %.2f"
+	printf("\n %s     %5d         %5s "
 			, arrayPublicidad[tam].cuit
 			, arrayPublicidad[tam].dias
-			, arrayPublicidad[tam].video
-			, auxPantalla[tam].nombre
-			, auxPantalla[tam].precio);
+			, arrayPublicidad[tam].video);
 }
-int ePublicidad_mostrarTodos (ePantalla arrayPublicidad[],int tam, ePantalla arrayPantalla[], int cant)
+int ePublicidad_mostrarTodos (ePantalla arrayPublicidad[],int tam, ePantalla arrayPantalla[], int cant, eTipo arrayTipo[])
 {
 	int i;
 	int ret;
@@ -118,9 +113,10 @@ int ePublicidad_mostrarTodos (ePantalla arrayPublicidad[],int tam, ePantalla arr
 		printf("\n*****************************************************************************\n");
 		for (i = 0; i < tam; i++)
 		{
-			if(arrayPublicidad[i].isEmpty == 0)
+			if(arrayPublicidad[i].isEmpty == 0 && arrayPublicidad[i].idPantalla == arrayPantalla[i].idPantalla)
 			{
-				ePublicidad_mostrarUno (arrayPublicidad , i , arrayPantalla, i);
+				ePublicidad_mostrarUno (arrayPublicidad ,i);
+				ePantalla_mostrarTodos(arrayPantalla, tam, arrayTipo, cant);
 			}
 		}
 		ret = 0;
@@ -157,7 +153,7 @@ ePublicidad ePublicidad_modificarUno (ePublicidad arrayPublicidad, int campoModi
 
 	return auxiliar;
 }
-int ePublicidad_modificarPantallas (ePublicidad arrayPublicidad[], int tam, ePantalla arrayPantalla[], int cant)
+int ePublicidad_modificarPantallas (ePublicidad arrayPublicidad[], int tam, ePantalla arrayPantalla[], int cant,eTipo arrayTipo[])
 {
 		int rtn = -1;
 		char auxCuit[14];
@@ -166,7 +162,7 @@ int ePublicidad_modificarPantallas (ePublicidad arrayPublicidad[], int tam, ePan
 		int auxMod;
 		ePublicidad auxiliar;
 
-		if (ePantalla_mostrarTodos(arrayPublicidad, tam, arrayPantalla, cant) == 0)
+		if (ePublicidad_mostrarTodos(arrayPublicidad, tam, arrayPantalla, cant, arrayTipo) == 0)
 		{
 			flag = 1;
 		}

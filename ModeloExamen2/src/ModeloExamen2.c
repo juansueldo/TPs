@@ -104,7 +104,7 @@ int main()
 			system("pause");
 			break;
 		case 5:
-			ePublicidad_modificarPantallas (arrayPublicidad, MAX, arrayPantalla, MAX);
+			ePublicidad_modificarPantallas (arrayPublicidad, MAX, arrayPantalla, CANT, arrayTipo);
 			//MODIFICAR MUSICO
 			 break;
 		case 6:
