@@ -33,56 +33,64 @@ int main(void) {
 
 	//BUCLE DE MENU
 	do {
-		utn_menu(&opcion, "\nMenu\n1. Dar alta orquesta \n2. Dar de baja orquesta \n3. Listar \n4. Dar alta musico  \n6. Salir\n Ingrese:", "\nNO ES VALIDO\n", 1, 5,5);
+		utn_menu(&opcion, "\nMenu\n1. Dar alta orquesta \n2. Dar de baja orquesta \n3. Listar orquesta \n4. Dar alta musico  \n5. Modificar musico \n6. Eliminar musico \n7. Listar musicos \n8. Agregar instrumentos \n9. Listar instrumentos \n10. Salir \n Ingrese:", "\nNO ES VALIDO\n", 1, 10,10);
 
-		//MENU SWITCH
 		switch (opcion)
 		{
 
 		case 1:
-			//ALTA
+			//ALTA ORQUESTA
 			if (eOrquesta_Alta(Orquesta, TAM_ESTRUCTURA)) {
-				puts(" * Orquesta DADO DE ALTA EXITOSAMENTE");
+				printf(" * Orquesta DADO DE ALTA EXITOSAMENTE");
 			} else {
-				puts(" * ERROR. SIN ESPACIO PARA ALMACENAR MAS Orquesta");
+				printf(" * ERROR. SIN ESPACIO PARA ALMACENAR MAS Orquesta");
 			}
 			system("pause");
 			break;
 		case 2:
-			//BAJA
+			//BAJA ORQUESTA
 			if (eOrquesta_Baja(Orquesta, TAM_ESTRUCTURA)) {
-				puts("\n * BAJA DE Orquesta EXITOSA");
+				printf("\n * BAJA DE Orquesta EXITOSA");
 				eOrquesta_MostrarTodos(Orquesta, TAM_ESTRUCTURA);
 			} else {
-				puts("\n * BAJA DE Orquesta CANCELADA");
+				printf("\n * BAJA DE Orquesta CANCELADA");
 			}
 			system("pause");
 			break;
 		case 3:
-			//LISTADO Orquesta
+			//LISTADO ORQUESTA
 			if (eOrquesta_MostrarTodos(Orquesta, TAM_ESTRUCTURA)) {
-				system("pause");
+
 			} else {
-				puts("No hay nada para mostrar pa");
+				printf("No hay nada para mostrar");
 			}
 			break;
 
 		case 4:
+			//ALTA MUSICO
 			if(eMusicoOrquesta_Alta(Musicos, TAM_MUSICOS, Orquesta, TAM_ESTRUCTURA, Instrumentos, TAM_INSTRUMENTOS)){
 				puts("ALTA DE MUSICO EXITOSA");
 			}else{
 				puts("ERROR EN ALTA DE MUSICO");
 			}
 			break;
-
-			/*case 5:
-			 //ORDENAR Orquesta
-			 criterioDeOrdenamiento = -1; //PEDIR CRITERIO DE ORDENAMIENTO
-			 eOrquesta_Sort(Orquesta, TAM_ESTRUCTURA, criterioDeOrdenamiento);
-			 system("pause");
-			 break;*/
+		case 5:
+			//MODIFICAR MUSICO
+			 break;
+		case 6:
+			//ELIMINAR MUSICO
+			break;
+		case 7:
+			//LISTAR MUSICOS
+			break;
+		case 8:
+			//ALTA INSTRUMENTO
+			break;
+		case 9:
+			//LISTAR INSTRUMENTOS
+			break;
 		}
-	} while (opcion != 6);
+	} while (opcion != 10);
 
 	puts("\n... FIN PROGRAMA");
 
