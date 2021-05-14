@@ -19,7 +19,7 @@ int main()
 
 	int opcion;
 	int flagAlta = 0;
-
+	int flagRecaudacion = 0;
 	int contIdContribuyente = 1000;
 	int contIdRecaudaciones = 100;
 
@@ -43,7 +43,7 @@ int main()
 
 	do
 	{
-		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES\n10. Salir \n Ingrese:", "\nNO ES VALIDO\n", 1, 10,10);
+		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n10. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 10,10);
 
 		switch (opcion)
 		{
@@ -96,7 +96,7 @@ int main()
 			{
 				printf("\nALTA EXITOSA\n");
 				eRecaudacion_mostrarTodos (arrayRecaudadores,CANT, arrayTipo, CANT_TIPO);
-				flagAlta = 1;
+				flagRecaudacion = 1;
 			}
 			else
 			{
@@ -106,7 +106,18 @@ int main()
 			system("pause");
 			break;
 		case 5:
-
+			if(flagAlta == 1 && flagRecaudacion == 1)
+			{
+			if(eRecaudacion_cambiarEstado (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
+			{
+				printf("\nSE REFINANCIO.");
+			}
+			else
+			{
+				printf("\nNO SE REFINANCIO.");
+			}
+			}
+			system("pause");
 			 break;
 		case 6:
 

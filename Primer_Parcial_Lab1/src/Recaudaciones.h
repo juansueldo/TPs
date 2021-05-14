@@ -9,12 +9,19 @@
 
 #define CANT 50
 #define CANT_TIPO 3
+
+typedef struct {
+	int idEstado;
+	int idRecaudacion;
+	char detalleEstado[MAX_CHARS_CADENAS];
+} eEstado;
+
 typedef struct {
 	int idContribuyente;
-	char mes [MAX_CHARS_CADENAS];
+	int mes;
 	int idTipo;
 	int idRecaudacion;
-	int idEstado;
+	eEstado arrayEstado;
 	float importe;
 	int isEmpty;
 } eRecaudacion;
@@ -24,22 +31,24 @@ typedef struct {
 	char descripcion[MAX_CHARS_CADENAS];
 } eTipo;
 
-typedef struct {
+/*typedef struct {
 	int idEstado;
 	char detalle[MAX_CHARS_CADENAS];
-} eEstado;
+} eEstado;*/
 
 int eRecaudacion_inicializar (eRecaudacion arrayRecaudacion[],int tam);
 int eTipo_inicializar (eTipo arrayTipo[],int cant);
 int eRecaudacion_obtenerNombre (eTipo arrayTipo[],int cant,int tipo,char detalle[20]);
 int eRecaudacion_buscarLibre (eRecaudacion arrayRecaudacion[],int tam);
 int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id);
-eRecaudacion eRecaudacion_cargarPantalla (void);
+eRecaudacion eRecaudacion_cargarPantalla (eContribuyente arrayContribuyente[], int cant);
 int eRecaudacion_alta (eRecaudacion arrayRecaudacion[], int tam, int *pIdContador, eContribuyente arrayContribuyente[], int cant)         ;
 int eRecaudacion_modificar (eRecaudacion arrayRecaudacion[], int tamanio);
 int eRecaudacion_modificar (eRecaudacion arrayRecaudacion[], int tamanio);
 void eRecaudacion_mostrarUno (eRecaudacion arrayRecaudacion[],int tamanio, eTipo arrayTipo[], int cant);
 int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTipo arrayTipo[], int cant);
+int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id);
+int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo);
 /*Se pedirán los siguientes datos: ID
 de contribuyente, mes, tipo (1-ARBA, 2-IIBB, 3-GANANCIAS) e importe. Se generará
 automáticamente un identificador numérico (comenzando en 100) para la recaudación y se

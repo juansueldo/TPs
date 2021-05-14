@@ -59,15 +59,15 @@ eContribuyente eContribuyente_cargarPantalla (void)
 
 		if((utn_getString(auxContribuyente.nombre,30,"\nINGRESE EL NOMBRE DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL NOMBRE DEL CONTRIUBUYENTE: ",1,3)) != 0)
 		{
-			printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE");
+			printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE.");
 		}
 		if((utn_getString(auxContribuyente.apellido,30,"\nINGRESE EL APELLIDO DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL APELLIDO DEL CONTRIUBUYENTE: ",1,3)) != 0)
 		{
-			printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE");
+			printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE.");
 		}
-		if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE",3) != 0)
+		if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE: ","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE: ",3) != 0)
 		{
-			printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE");
+			printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE.");
 		}
 
 	return auxContribuyente;
@@ -135,21 +135,21 @@ eContribuyente eContribuyente_modificarUno (eContribuyente arrayContribuyentes, 
 				case 1:
 					if((utn_getString(auxContribuyente.nombre,30,"\nINGRESE EL NOMBRE DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL NOMBRE DEL CONTRIUBUYENTE: ",1,3)) != 0)
 					{
-						printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE");
+						printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE.");
 					}
 					fflush(stdin);
 					break;
 				case 2:
 					if((utn_getString(auxContribuyente.apellido,30,"\nINGRESE EL APELLIDO DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL APELLIDO DEL CONTRIUBUYENTE: ",1,3)) != 0)
 					{
-						printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE");
+						printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE.");
 					}
 					fflush(stdin);
 					break;
 				case 3:
-					if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE",3) != 0)
+					if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE: ","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE: ",3) != 0)
 					{
-						printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE");
+						printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE.");
 					}
 					break;
 				default:
@@ -190,7 +190,7 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 			printf("\n*****************************************************************\n");
 			printf("Ingrese:");
 			scanf("%d",&auxMod);
-			if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO ", 3)==0)
+			if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
 			{
 			auxContribuyente = eContribuyente_modificarUno(arrayContribuyentes[index],auxMod);
 			arrayContribuyentes[index] = auxContribuyente;
@@ -224,7 +224,7 @@ int eContribuyente_baja (eContribuyente arrayContribuyentes[], int tamanio)
 			scanf("%d",&idContribuyente);
 		}
 		index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
-		if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:", 3)==0)
+		if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
 		{
 			arrayContribuyentes[index].isEmpty = 1;
 			rtn = 0;
