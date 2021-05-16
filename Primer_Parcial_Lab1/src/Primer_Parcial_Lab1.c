@@ -121,7 +121,18 @@ int main()
 			system("pause");
 			 break;
 		case 6:
-			eRecaudacion_cambiarEstadoSaldar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO);
+			if(flagAlta == 1 && flagRecaudacion == 1)
+			{
+				if(eRecaudacion_cambiarEstadoSaldar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
+				{
+					printf("\nSE REFINANCIO.");
+				}
+				else
+				{
+					printf("\nNO SE REFINANCIO.");
+				}
+				}
+			system("pause");
 			break;
 		case 7:
 			informe_ContribuyentesRecaudaciones (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO);
