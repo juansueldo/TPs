@@ -12,7 +12,7 @@ int eRecaudacion_inicializar (eRecaudacion arrayRecaudacion[],int tam)
 			arrayRecaudacion[i].mes = 0;
 			arrayRecaudacion[i].idTipo = 0;
 			arrayRecaudacion[i].idRecaudacion = 0;
-			//arrayRecaudacion[i].idEstado = 0;
+			arrayRecaudacion[i].idEstado = 0;
 			arrayRecaudacion[i].importe = 0;
 			arrayRecaudacion[i].isEmpty=1;
 		}

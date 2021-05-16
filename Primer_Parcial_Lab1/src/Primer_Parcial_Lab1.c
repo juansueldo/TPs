@@ -28,6 +28,7 @@ int main()
 	eContribuyente arrayContribuyentes[MAX];
 	eRecaudacion arrayRecaudadores [CANT];
 	eTipo arrayTipo[CANT_TIPO];
+	eEstado arrayEstado[2];
 
     eContribuyente_inicializar(arrayContribuyentes, MAX);
     eRecaudacion_inicializar(arrayRecaudadores, CANT);
@@ -41,10 +42,16 @@ int main()
    	strcpy(arrayTipo[2].descripcion,"GANANCIAS");
    	arrayTipo[2].idTipo = GANANCIAS;
 
+   	strcpy(arrayEstado[0].detalleEstado,"REFINANCIADO");
+   	arrayEstado[0].idEstado = 1;
+
+   	strcpy(arrayEstado[1].detalleEstado,"SALDADO");
+   	arrayEstado[1].idEstado = 2;
+
 
 	do
 	{
-		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n10. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 10);
+		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n9. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 9);
 
 		switch (opcion)
 		{
@@ -52,12 +59,12 @@ int main()
 		case 1:
 			if (eContribuyente_alta(arrayContribuyentes, MAX, &contIdContribuyente)==0)
 			{
-				printf("\nALTA EXITOSA\n");
+				printf("\nALTA EXITOSA.\n\n");
 				flagAlta = 1;
 			}
 			else
 			{
-				printf("\nERROR. SIN ESPACIO PARA ALMACENAR");
+				printf("\nERROR. SIN ESPACIO PARA ALMACENAR.\n\n");
 			}
 			system("pause");
 			break;
@@ -66,11 +73,11 @@ int main()
 			{
 				if(eContribuyente_modificar(arrayContribuyentes, MAX) ==0)
 				{
-					printf("\nSE MODIFICO EL CONTRIBUYENTE");
+					printf("\nSE MODIFICO EL CONTRIBUYENTE.\n\n");
 				}
 				else
 				{
-					printf("\nNO SE MODIFICO EL CONTRIBUYENTE");
+					printf("\nNO SE MODIFICO EL CONTRIBUYENTE.\n\n");
 				}
 			}
 			system("pause");
@@ -80,11 +87,11 @@ int main()
 			{
 			if(eContribuyente_baja(arrayContribuyentes, MAX) ==0)
 			{
-				printf("\nSE DIO LA BAJA DEL CONTRIBUYENTE");
+				printf("\nSE DIO LA BAJA DEL CONTRIBUYENTE.\n\n");
 			}
 			else
 			{
-				printf("\nNO SE DIO LA BAJA");
+				printf("\nNO SE DIO LA BAJA.\n\n");
 			}
 		}
 
@@ -95,13 +102,13 @@ int main()
 			{
 			if (eRecaudacion_alta(arrayRecaudadores, CANT, &contIdRecaudaciones,arrayContribuyentes,MAX)==0)
 			{
-				printf("\nALTA EXITOSA\n");
+				printf("\nALTA EXITOSA.\n\n");
 				eRecaudacion_mostrarTodos (arrayRecaudadores,CANT, arrayTipo, CANT_TIPO);
 				flagRecaudacion = 1;
 			}
 			else
 			{
-				printf("\nERROR. SIN ESPACIO PARA ALMACENAR");
+				printf("\nERROR. SIN ESPACIO PARA ALMACENAR.\n\n");
 			}
 			}
 			system("pause");
@@ -109,13 +116,13 @@ int main()
 		case 5:
 			if(flagAlta == 1 && flagRecaudacion == 1)
 			{
-			if(eRecaudacion_cambiarEstado (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
+			if(eRecaudacion_estadoRefinanciar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
 			{
 				printf("\nSE REFINANCIO.");
 			}
 			else
 			{
-				printf("\nNO SE REFINANCIO.");
+				printf("\nNO SE REFINANCIO.\n\n");
 			}
 			}
 			system("pause");
@@ -123,19 +130,19 @@ int main()
 		case 6:
 			if(flagAlta == 1 && flagRecaudacion == 1)
 			{
-				if(eRecaudacion_cambiarEstadoSaldar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
+				if(eRecaudacion_estadoSaldado (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
 				{
-					printf("\nSE REFINANCIO.");
+					printf("\nSE REFINANCIO.\n\n");
 				}
 				else
 				{
-					printf("\nNO SE REFINANCIO.");
+					printf("\nNO SE REFINANCIO.\n\n");
 				}
 				}
 			system("pause");
 			break;
 		case 7:
-			informe_ContribuyentesRecaudaciones (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO);
+			mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
 			break;
 		case 8:
 
@@ -144,7 +151,7 @@ int main()
 
 			break;
 		}
-	} while (opcion != 10);
+	} while (opcion != 9);
 
 	puts("\nFIN.");
 

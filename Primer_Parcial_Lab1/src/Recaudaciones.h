@@ -10,18 +10,13 @@
 #define CANT 50
 #define CANT_TIPO 3
 
-typedef struct {
-	int idEstado;
-	int idRecaudacion;
-	char detalleEstado[MAX_CHARS_CADENAS];
-} eEstado;
 
 typedef struct {
 	int idContribuyente;
 	int mes;
 	int idTipo;
 	int idRecaudacion;
-	eEstado arrayEstado;
+	int idEstado;
 	float importe;
 	int isEmpty;
 } eRecaudacion;
@@ -31,10 +26,10 @@ typedef struct {
 	char descripcion[MAX_CHARS_CADENAS];
 } eTipo;
 
-/*typedef struct {
+typedef struct {
 	int idEstado;
-	char detalle[MAX_CHARS_CADENAS];
-} eEstado;*/
+	char detalleEstado[MAX_CHARS_CADENAS];
+} eEstado;
 
 /*
  * @brief recibe una estructura y la inicializa
