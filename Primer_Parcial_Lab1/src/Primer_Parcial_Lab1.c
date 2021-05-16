@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "Contribuyente.h"
 #include "Recaudaciones.h"
+#include "Informes.h"
 
 int main()
 {
@@ -43,7 +44,7 @@ int main()
 
 	do
 	{
-		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n10. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 10,10);
+		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n10. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 10);
 
 		switch (opcion)
 		{
@@ -120,10 +121,10 @@ int main()
 			system("pause");
 			 break;
 		case 6:
-
+			eRecaudacion_cambiarEstadoSaldar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO);
 			break;
 		case 7:
-
+			informe_ContribuyentesRecaudaciones (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO);
 			break;
 		case 8:
 

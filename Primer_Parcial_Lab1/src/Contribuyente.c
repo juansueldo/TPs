@@ -43,8 +43,10 @@ int eContribuyente_buscarId (eContribuyente arrayContribuyentes[],int tam,int id
 	int i;
 
 	if (arrayContribuyentes != NULL && tam > 0) {
-		for (i = 0; i < tam; i++) {
-			if (arrayContribuyentes[i].idContribuyente == id && arrayContribuyentes[i].isEmpty == 0) {
+		for (i = 0; i < tam; i++)
+		{
+			if (arrayContribuyentes[i].idContribuyente == id && arrayContribuyentes[i].isEmpty == 0)
+			{
 				rtn = i;
 				break;
 			}
@@ -53,7 +55,7 @@ int eContribuyente_buscarId (eContribuyente arrayContribuyentes[],int tam,int id
 
 	return rtn;
 }
-eContribuyente eContribuyente_cargarPantalla (void)
+eContribuyente eContribuyente_cargar (void)
 {
 	eContribuyente auxContribuyente;
 
@@ -81,7 +83,7 @@ int eContribuyente_alta (eContribuyente arrayContribuyentes[], int tam, int *pId
 
 	if (index != -1)
 	{
-		auxContribuyente = eContribuyente_cargarPantalla();
+		auxContribuyente = eContribuyente_cargar();
 
 		auxContribuyente.isEmpty = 0;
 		rtn = 0;

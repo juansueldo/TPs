@@ -1,86 +1,49 @@
 #include "utn.h"
 
-int utn_getTexto (char *pData)
+int utn_getTexto (char *pString)
 {
-	int rtn = 1;
-	int i;
-	if (strlen(pData) > 0)
+	int rtn = -1;
+
+	if (strlen(pString) > 0)
 	{
-		for (i = 0; i < strlen(pData); i++)
+		for (int i = 0; i < strlen(pString); i++)
 		{
-		if (isalpha(pData[i]) == 0)
-		{
-			rtn = 0;
-			break;
+			if (isalpha(pString[i]) == 0)
+			{
+				if (isspace(pString[i]) == 0)
+				{
+					rtn = 0;
+					break;
+				}
+			}
 		}
-		}
-	}
-	else
-	{
-		rtn = 1;
 	}
 
 	return rtn;
 }
-int utn_getChar(char* caracter,char* mensaje,char* errorMensaje,char min,char max,int intentos)
+
+int utn_getString(char array[],int max,char mensaje[],char errorMensaje[],char min,int intentos)
 {
-	int ret = -1;
-	char aux;
-	char buffer;
-	int i;
-	if(caracter != NULL &&  mensaje != NULL && errorMensaje != NULL &&  min <= max && intentos >= 0 )
-	{
-
-		printf("\n %s",mensaje);
-		fflush(stdin);
-		scanf("%c",&buffer);
-		for (i = 0; i < intentos; ++i)
-		{
-			aux = isdigit(buffer);
-			if(buffer >= min && buffer <= max && aux == 0)
-			{
-
-				*caracter = buffer;
-				ret = 0;
-				break;
-			}
-			else
-			{
-				printf("\n %s",errorMensaje);
-				fflush(stdin);
-				scanf("\n %c",&buffer);
-
-			}
-
-		}
-
-	}
-
-	return ret;
-
-}
-int utn_getString(char array[],int tamanio,char mensaje[],char errorMensaje[],char min,int intentos)
-{
-	int ret = -1;
+	int rtn = -1;
 	int aux;
-	char buffer[tamanio];
+	char bufferString[max];
 	int i;
-	if(array != NULL && tamanio > 0 &&  mensaje != NULL && errorMensaje != NULL &&  min <= tamanio && intentos >= 0 )
+	if(array != NULL && max > 0 &&  mensaje != NULL && errorMensaje != NULL &&  min <= max && intentos >= 0 )
 	{
 		printf("\n%s",mensaje);
 		fflush(stdin);
-		gets(buffer);
+		scanf("%s",bufferString);
 
 		for (i = 0; i < intentos; ++i)
 		{
-			if(utn_getTexto (buffer) != 0)
+			if(utn_getTexto (bufferString) != 0)
 			{
-			aux = strlen(buffer);
+			aux = strlen(bufferString);
 
-			if(aux >= min && aux <= tamanio)
+			if(aux >= min && aux <= max)
 			{
-				strcpy(array,buffer);
-				ret = 0;
+				strcpy(array,bufferString);
+				rtn = 0;
 				break;
 			}
 			}
@@ -88,140 +51,141 @@ int utn_getString(char array[],int tamanio,char mensaje[],char errorMensaje[],ch
 			{
 				printf("\n %s",errorMensaje);
 				fflush(stdin);
-				gets(buffer);
+				scanf("%s",bufferString);
 
 			}
 
 		}
 	}
-	return ret;
+	return rtn;
 }
-int utn_getIsInt(char* cadena)
+
+int myGets ( char * pCadena, int longitud)
 {
-	int i=0;
-	int ret = 1;
-	if(cadena != NULL && strlen(cadena) > 0)
+	int rtn=-1;
+	if (pCadena != NULL && longitud >0 && fgets (pCadena,longitud,stdin)==pCadena)
 	{
-		while(cadena[i] != '\0')
+		fflush (stdin);
+		if (pCadena[ strlen (pCadena)-1] == '\n' )
 		{
-			if(cadena[i] < '0' || cadena[i] > '9')
+			pCadena[ strlen (pCadena)-1] = '\0' ;
+		}
+		rtn=0;
+	}
+	return rtn;
+}
+
+int esNumerica(char* pNum)
+{
+	int i = 0;
+	int rtn = 0;
+	if(pNum != NULL && strlen(pNum) > 0)
+	{
+		while(pNum[i] != '\0')
+		{
+			if(pNum[i] < '0' || pNum[i] > '9')
 			{
-				ret = 0;
+				rtn = -1;
 				break;
 			}
 			i++;
 		}
 	}
-	return ret;
+	return rtn;
 }
-int utn_getIsFloat(char str[])
+
+int getInt ( int * pNum)
+{
+	int rtn=-1;
+	char buffer[64];
+	if (pNum != NULL)
+	{
+		if (myGets(buffer, sizeof (buffer))==0 && esNumerica(buffer)==0)
+		{
+			*pNum = atoi (buffer);
+			 rtn = 0;
+		}
+	}
+	return rtn;
+}
+
+int utn_getNumero(int* pNum,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
+{
+	int bufferInt;
+	int rtn = -1;
+	if(pNum != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0)
+	{
+		while(reintentos > 0)
+		{
+			reintentos--;
+			printf("%s",mensaje);
+			fflush(stdin);
+			if(getInt(&bufferInt) == 0)
+			{
+				if(bufferInt >= minimo && bufferInt <= maximo)
+				{
+					*pNum = bufferInt;
+					rtn = 0;
+					break;
+				}
+			}
+			printf("%s",mensajeError);
+		}
+	}
+	return rtn;
+}
+int esFloat (char pNum[])
 {
    int i=0;
+   int rtn = -1;
    int cantidadPuntos=0;
-   while(str[i] != '\0')
+   while(pNum[i] != '\0')
    {
-       if (str[i] == '.' && cantidadPuntos == 0)
+       if (pNum[i] == '.' && cantidadPuntos == 0)
        {
            cantidadPuntos++;
            i++;
            continue;
 
        }
-       if(str[i] < '0' || str[i] > '9')
-           return 0;
+       if(pNum[i] < '0' || pNum[i] > '9')
+    	   rtn = 0;
        i++;
    }
-   return 1;
+   return rtn;
 }
 
-int myGets(char* cadena,int longitud)
+int getNumFloat (float * pFloat)
 {
-	if(cadena != NULL && longitud > 0 && fgets(cadena,longitud,stdin) == cadena)
-	{
-		fflush(stdin);
-		if(cadena[strlen(cadena)-1] == '\n')
-		{
-			cadena[strlen(cadena)-1] = '\0';
-		}
-		return 0;
-	}
-	return -1;
-}
-
-
-int utn_getEntero(int *pResultado)
-{
-	int ret = -1;
+	int rtn = -1;
 	char buffer[64];
-	if(pResultado != NULL)
+	if(pFloat != NULL)
 	{
-		if(myGets(buffer,sizeof(buffer)) == 0 && utn_getIsInt(buffer))
+		if(myGets(buffer,sizeof(buffer)) == 0 && esFloat(buffer))
 		{
-			*pResultado = atoi(buffer);
-			ret = 0;
+			*pFloat = atof(buffer);
+			rtn = 0;
 		}
 	}
-	return ret;
+	return rtn;
 }
-int utn_getNumFloat(float *pResultado)
-{
-	int ret = -1;
-	char buffer[64];
-	if(pResultado != NULL)
-	{
-		if(myGets(buffer,sizeof(buffer)) == 0 && utn_getIsFloat(buffer))
-		{
-			*pResultado = atof(buffer);
-			ret = 0;
-		}
-	}
-	return ret;
-}
-int utn_getNumero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
-{
-	int bufferInt;
-	int ret = -1;
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0)
-	{
-		while(reintentos > 0)
-		{
-			reintentos--;
-			printf("\n %s",mensaje);
-			fflush(stdin);
-			if(utn_getEntero(&bufferInt) == 0)
-			{
-				if(bufferInt >= minimo && bufferInt <= maximo)
-				{
-					*pResultado = bufferInt;
-					ret = 0;
-					break;
-				}
-			}
-			printf("\n %s",mensajeError);
-		}
-	}
-
-
-	return ret;
-
-}
-int utn_getFloat(float* pResultado,char* mensaje,char* mensajeError,float minimo,float maximo,int reintentos)
+int utn_getFloat(float* pFloat,char* mensaje,char* mensajeError,float minimo,float maximo,int reintentos)
 {
 	float bufferFloat;
-	int ret = -1;
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0)
+	int rtn = -1;
+	if(pFloat != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0)
 	{
 		while(reintentos > 0)
 		{
 			reintentos--;
 			printf("\n %s",mensaje);
 			fflush(stdin);
-			if(utn_getNumFloat(&bufferFloat)==0)
+			if(getNumFloat(&bufferFloat)==0)
 			{
 				if(bufferFloat >= minimo && bufferFloat <= maximo)
 				{
-					*pResultado = bufferFloat;
-					ret = 0;
+					*pFloat = bufferFloat;
+					rtn = 0;
 					break;
 				}
 			}
@@ -229,27 +193,30 @@ int utn_getFloat(float* pResultado,char* mensaje,char* mensajeError,float minimo
 		}
 	}
 
-
-	return ret;
+	return rtn;
 
 }
-int utn_menu(int *opcion, char *mensaje, char *mensajeError, int min, int max,int salir)
+int utn_menu(int *pOpcion, char *mensaje, char *mensajeError, int min, int max)
 {
 
-	int retorno = -1;
+	int rtn = -1;
 	int bufferMenu;
-	if (mensaje != NULL && mensajeError != NULL && min <= max && salir != 0) {
+	if (mensaje != NULL && mensajeError != NULL && min <= max)
+	{
 		printf("%s", mensaje);
 		scanf("%d", &bufferMenu);
 
-		if (bufferMenu >= min && bufferMenu <= max) {
-			*opcion = bufferMenu;
-			retorno = 0;
-		} else {
+		if (bufferMenu >= min && bufferMenu <= max)
+		{
+			*pOpcion = bufferMenu;
+			rtn = 0;
+		}
+		else
+		{
 			printf("%s", mensajeError);
 		}
 	}
-	return retorno;
+	return rtn;
 }
 int utn_getLower(char* letra)
 {
@@ -263,24 +230,24 @@ int utn_getRespuesta (char* mensaje,char*mensajeError, int reintentos)
 	while(reintentos > 0)
 	{
 		reintentos--;
-	printf("%s",mensaje);
-	fflush(stdin);
-	scanf("%c",&respuesta);
-	utn_getLower (&respuesta);
-	while(respuesta != 's' && respuesta != 'n')
-	{
-		printf("%s",mensajeError);
-	}
-	if(respuesta == 's')
-	{
-		rtn = 0;
-		break;
-	}
-	else if(respuesta == 'n')
-	{
-		rtn = -1;
-		break;
-	}
+		printf("%s",mensaje);
+		fflush(stdin);
+		scanf("%c",&respuesta);
+		utn_getLower (&respuesta);
+		while(respuesta != 's' && respuesta != 'n')
+		{
+			printf("%s",mensajeError);
+		}
+		if(respuesta == 's')
+		{
+			rtn = 0;
+			break;
+		}
+		else if(respuesta == 'n')
+		{
+			rtn = -1;
+			break;
+		}
 	}
 	return rtn;
 }
@@ -293,6 +260,10 @@ int utn_getMayusMin (char name[], int tam)
 
    return 0;
 }
+
+
+
+
 int utn_getEsCuil(char* cadena)
 {
 	int ret;

@@ -150,7 +150,7 @@ int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id)
 
 	return rtn;
 }
-eRecaudacion eRecaudacion_cargarPantalla (eContribuyente arrayContribuyente[], int cant)
+eRecaudacion eRecaudacion_cargar (eContribuyente arrayContribuyente[], int cant)
 {
 	eRecaudacion auxiliar;
 	if(utn_getNumero(&auxiliar.idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE: ","\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1001,1051,3) != 0)
@@ -191,7 +191,7 @@ int eRecaudacion_alta (eRecaudacion arrayRecaudacion[], int tam, int *pIdContado
 	{
 		eContribuyente_mostrarTodos(arrayContribuyente, cant);
 
-		auxRecaudacion = eRecaudacion_cargarPantalla(arrayContribuyente,cant);
+		auxRecaudacion = eRecaudacion_cargar(arrayContribuyente,cant);
 
 		auxRecaudacion.isEmpty = 0;
 		rtn = 0;
@@ -289,14 +289,61 @@ int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContri
 	}
 	if(eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) != -1)
 	{
+		for (i = 0; i < tam; ++i)
+				{
+					if(arrayRecaudacion[i].idContribuyente == arrayContibuyente[i].idContribuyente)
+					{
+						eContribuyente_mostrarUno(arrayContibuyente,i);
+						rtn = 0;
+						break;
+					}
+				}
+					rtn = 0;
+					//break;
+				}
+
+	if(utn_getRespuesta ("\nDESE CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ","DESE CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ", 3)==0)
+	{
+		strcpy(arrayEstado.detalleEstado,"REFINANCIAR");
+		rtn = 0;
+	}
+	return rtn;
+}
+int eRecaudacion_cambiarEstadoSaldar (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo)
+{
+	int rtn = -1;
+	int flag = 0;
+
+	int idRecaudacion;
+	eEstado arrayEstado;
+
+	if (eRecaudacion_mostrarTodos (arrayRecaudacion,tam, arrayTipo, cantTipo) == 0)
+	{
+			flag = 1;
+	}
+
+	if (flag)
+	{
+		printf("\n*****************************************************************\n");
+		printf("INGRESE EL ID DE LA RECAUDACION: ");
+		scanf("%d",&idRecaudacion);
+
+		while (eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) == -1)
+		{
+			printf("NO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION:");
+			scanf("%d",&idRecaudacion);
+		}
+	}
+	if(eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) != -1)
+	{
 		if(eContribuyente_buscarId(arrayContibuyente, cant, arrayRecaudacion[tam].idContribuyente) != -1)
 		{
 			eContribuyente_mostrarTodos(arrayContibuyente, cant);
 		}
 	}
-	if(utn_getRespuesta ("\nDESE CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ","DESE CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ", 3)==0)
+	if(utn_getRespuesta ("\nDESE CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ","DESE CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ", 3)==0)
 	{
-		strcpy(arrayEstado.detalleEstado,"REFINANCIAR");
+		strcpy(arrayEstado.detalleEstado,"SALDADO");
 		rtn = 0;
 	}
 	return rtn;
