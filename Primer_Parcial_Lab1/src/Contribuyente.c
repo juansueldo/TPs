@@ -117,7 +117,7 @@ int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tamani
 		printf("\n*************************************************************\n");
 		printf("\n ID    NOMBRE           APELLIDO               CUIL       ");
 		printf("\n**************************************************************\n");
-		for (i = 0; i < tamanio; ++i)
+		for (i = 0; i < tamanio; i++)
 		{
 
 			if(arrayContribuyentes[i].isEmpty == 0)

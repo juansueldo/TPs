@@ -94,7 +94,7 @@ int esNumerica(char* pNum)
 	return rtn;
 }
 
-int getInt ( int * pNum)
+int getInt ( int* pNum)
 {
 	int rtn=-1;
 	char buffer[64];
@@ -204,12 +204,16 @@ int utn_menu(int *pOpcion, char *mensaje, char *mensajeError, int min, int max)
 	if (mensaje != NULL && mensajeError != NULL && min <= max)
 	{
 		printf("%s", mensaje);
+		fflush(stdin);
 		scanf("%d", &bufferMenu);
 
-		if (bufferMenu >= min && bufferMenu <= max)
+		if(isdigit(bufferMenu) == 0)
 		{
-			*pOpcion = bufferMenu;
-			rtn = 0;
+			if (bufferMenu >= min && bufferMenu <= max)
+			{
+				*pOpcion = bufferMenu;
+				rtn = 0;
+			}
 		}
 		else
 		{

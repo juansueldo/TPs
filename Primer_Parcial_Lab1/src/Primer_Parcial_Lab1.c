@@ -51,7 +51,7 @@ int main()
 
 	do
 	{
-		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n9. SALIR \nINGRESE:", "\nNO ES VALIDO\n", 1, 9);
+		utn_menu(&opcion, "\nMenu\n1. ALTA COTRIBUYENTE \n2. MODIFICAR CONTRIBUYENTE \n3. BAJA CONTRIBUYENTE \n4. ALTA RECAUDADACIONES \n5. REFINANCIAR RECAUDACION \n6. SALDAR RECAUDACION \n7. IMPRIMIR CONTRIBUYEBTES \n8. IMPRIMIR RECAUDACION \n9. SALIR \nINGRESE: ", "\nNO ES VALIDO\n", 1, 9);
 
 		switch (opcion)
 		{
@@ -118,7 +118,7 @@ int main()
 			{
 			if(eRecaudacion_estadoRefinanciar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
 			{
-				printf("\nSE REFINANCIO.");
+				printf("\nSE REFINANCIO.\n\n");
 			}
 			else
 			{
@@ -132,11 +132,11 @@ int main()
 			{
 				if(eRecaudacion_estadoSaldado (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
 				{
-					printf("\nSE REFINANCIO.\n\n");
+					printf("\nSE SALDO.\n\n");
 				}
 				else
 				{
-					printf("\nNO SE REFINANCIO.\n\n");
+					printf("\nNO SE SALDO.\n\n");
 				}
 				}
 			system("pause");

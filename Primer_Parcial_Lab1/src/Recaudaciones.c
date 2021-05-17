@@ -226,7 +226,7 @@ int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTip
 		printf("\n**********************************************************************\n");
 		printf("\n ID CONTRIBUYENTE    ID RECAUDACION        MES      IMPORTE      TIPO       ");
 		printf("\n***********************************************************************\n");
-		for (i = 0; i < tamanio; ++i)
+		for (i = 0; i < tamanio; i++)
 		{
 
 			if(arrayRecaudacion[i].isEmpty == 0)
