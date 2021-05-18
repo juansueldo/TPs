@@ -51,6 +51,7 @@ int eTipo_inicializar (eTipo arrayTipo[],int cant);
  * @param tipo id del tipo ingresado por el usuario
  * @return retorna cero en caso de exito
  */
+int eEstado_inicializar (eEstado arrayEstado[],int cant);
 int eRecaudacion_obtenerNombre (eTipo arrayTipo[],int cant,int tipo,char detalle[20]);
 /*
  * @brief recorre la estrucutra en busca de un campo libre

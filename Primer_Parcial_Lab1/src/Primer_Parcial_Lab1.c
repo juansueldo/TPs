@@ -33,6 +33,8 @@ int main()
 
     eContribuyente_inicializar(arrayContribuyentes, MAX);
     eRecaudacion_inicializar(arrayRecaudadores, CANT);
+    eTipo_inicializar (arrayTipo, CANT_TIPO);
+    eEstado_inicializar(arrayEstado, 2);
 
     strcpy(arrayTipo[0].descripcion,"ARBA");
    	arrayTipo[0].idTipo = ARBA;
@@ -167,7 +169,7 @@ int main()
 		case 7:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				informe_motrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+				mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
 			}
 			else
 			{
@@ -175,17 +177,23 @@ int main()
 			}
 			break;
 		case 8:
-			mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
+			{
+				mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+			}
+			else
+			{
+				printf("\nDEBEN INGRESAR TODOS LOS DATOS.\n\n");
+			}
 			break;
 		case 9:
-
+				printf("\nFIN.");
 			break;
 		}
 	} while (opcion != 9);
 
-	puts("\nFIN.");
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
