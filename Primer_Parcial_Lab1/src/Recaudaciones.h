@@ -2,13 +2,12 @@
 #ifndef RECAUDACIONES_H_
 #define RECAUDACIONES_H_
 
-#include "Contribuyente.h"
 #define ARBA 1
 #define IIBB 2
 #define GANANCIAS 3
-
 #define CANT 50
 #define CANT_TIPO 3
+#include "Contribuyente.h"
 
 
 typedef struct {
@@ -69,7 +68,7 @@ int eRecaudacion_buscarLibre (eRecaudacion arrayRecaudacion[],int tam);
  */
 int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id);
 /*
- * @brief pide al usuario el ingreso del id del contribuyente, si coincide con un id existente,
+ * @brief pide al usuario el ingreso del id de la recaudacion y compara si coincide con un id existente,
  * @param arrayContribuyentes estructura que incluye los contribuyentes
  * @param cant cantidad de elementos
  * @return auxiliar donde se cargaron los datos ingresados por el usuario
@@ -94,7 +93,7 @@ int eRecaudacion_alta (eRecaudacion arrayRecaudacion[], int tam, int *pIdContado
 int eRecaudacion_modificar (eRecaudacion arrayRecaudacion[], int tamanio);
 /*
  * @brief muestra un contribuyente y el tipo de recaudacion
- * @param arrayRecaudacion estructura que incluye los contribuyentes
+ * @param arrayRecaudacion estructura que incluye las recudaciones
  * @param tamanio cantidad de elementos
  * @param arrayTipo estructura que incluye el tipo de racudacion
  * @param cant cantidad de elementos
@@ -109,12 +108,13 @@ void eRecaudacion_mostrarUno (eRecaudacion arrayRecaudacion[],int tamanio, eTipo
  * @return retorna cero en caso de que hayan empleados a mostrar
  */
 int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTipo arrayTipo[], int cant);
+/*
+ * @brief compara el id ingresado con los id existentes
+ * @param arrayRecaudacion estructura que incluye las recudaciones
+ * @param tam cantidad de elementos
+ * @param id que se va a comprar
+ * @return retorna cero en caso de que la comparacion sea exitosa
+ */
+int eRecaudacion_buscarIdContribuyente (eRecaudacion arrayRecaudacion[],int tam,int id);
 
-//int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo);
-int eRecaudacion_cambiarEstadoSaldar (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo);
-/*Se pedirán los siguientes datos: ID
-de contribuyente, mes, tipo (1-ARBA, 2-IIBB, 3-GANANCIAS) e importe. Se generará
-automáticamente un identificador numérico (comenzando en 100) para la recaudación y se
-imprimirá en pantalla.
-*/
 #endif /* RECAUDACIONES_H_ */

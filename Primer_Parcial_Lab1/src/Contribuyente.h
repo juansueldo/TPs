@@ -1,5 +1,4 @@
 
-
 #ifndef CONTRIBUYENTE_H_
 #define CONTRIBUYENTE_H_
 

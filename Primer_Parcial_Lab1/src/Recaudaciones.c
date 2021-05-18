@@ -237,33 +237,22 @@ int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTip
 		rtn = 0;
 	}
 	return rtn;
-}/*
-int eRecaudacion_mostarCoincidencia (eContribuyente arrayContribuyente[],int cant,eRecaudacion arrayRecaudacion[], int tam)
+}
+int eRecaudacion_buscarIdContribuyente (eRecaudacion arrayRecaudacion[],int tam,int id)
 {
+	int rtn = -1;
 	int i;
-	int ret = -1;
-	float referencia;
 
-	if(arrayContribuyente != NULL && cant > 0 && arrayRecaudacion != NULL && tam > 0)
+	if (arrayRecaudacion != NULL && tam > 0)
 	{
-
-		printf("\n*****************************************************************************\n");
-		printf("\n ID    NOMBRE      APELLIDO         SUELDO        ID SECTOR        DETALLE ");
-		printf("\n*****************************************************************************\n");
-		for (i = 0; i < tamanio; ++i)
-		{
-			if(arrayEmpleados[i].isEmpty == 0 && arrayEmpleados[i].salary >= referencia)
+		for (i = 0; i < tam; i++) {
+			if (arrayRecaudacion[i].idContribuyente == id && arrayRecaudacion[i].isEmpty == 0)
 			{
-				mostrarEmpleado(arrayEmpleados,i,arraySector,cant);
-				ret = 0;
+				rtn = i;
+				break;
 			}
 		}
-
 	}
-	return ret;
-}*/
 
-
-/*Se pedirá el ID de la recaudación y se imprimirá la información
-del contribuyente al que pertenece, luego se pedirá confirmación para cambiarse de estado y
-se cambiará al estado "refinanciar".*/
+	return rtn;
+}

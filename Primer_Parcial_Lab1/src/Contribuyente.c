@@ -1,4 +1,5 @@
 #include "Contribuyente.h"
+#include "Recaudaciones.h"
 
 int eContribuyente_inicializar (eContribuyente arrayContribuyentes[],int tam)
 {
@@ -132,7 +133,8 @@ int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tamani
 eContribuyente eContribuyente_modificarUno (eContribuyente arrayContribuyentes, int campoModificar)
 {
 	eContribuyente auxContribuyente = arrayContribuyentes;
-			switch (campoModificar)
+
+		switch (campoModificar)
 			{
 				case 1:
 					if((utn_getString(auxContribuyente.nombre,30,"\nINGRESE EL NOMBRE DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL NOMBRE DEL CONTRIUBUYENTE: ",1,3)) != 0)
@@ -157,7 +159,6 @@ eContribuyente eContribuyente_modificarUno (eContribuyente arrayContribuyentes, 
 				default:
 					break;
 				}
-
 	return auxContribuyente;
 }
 int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
@@ -169,7 +170,7 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 		int auxMod;
 		eContribuyente auxContribuyente;
 
-		if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
+		if(eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
 		{
 			flag = 1;
 		}
@@ -198,45 +199,7 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 			arrayContribuyentes[index] = auxContribuyente;
 			rtn = 0;
 			}
-
 		}
 
 		return rtn;
-}
-int eContribuyente_baja (eContribuyente arrayContribuyentes[], int tamanio)
-{
-	int rtn = -1;
-	int idContribuyente;
-	int index;
-	int flag = 0;
-
-	if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
-	{
-		flag = 1;
-	}
-
-	if (flag) {
-		printf("\n*****************************************************************\n");
-		printf("\nINGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA: ");
-		scanf("%d",&idContribuyente);
-
-		while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
-		{
-			printf("NO EXISTE ID. INGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA:");
-			scanf("%d",&idContribuyente);
-		}
-		index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
-		if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
-		{
-			arrayContribuyentes[index].isEmpty = 1;
-			rtn = 0;
-		}
-		else
-		{
-			rtn = -1;
-		}
-
-	}
-
-	return rtn;
 }

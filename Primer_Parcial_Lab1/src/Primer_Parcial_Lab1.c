@@ -21,6 +21,7 @@ int main()
 	int opcion;
 	int flagAlta = 0;
 	int flagRecaudacion = 0;
+	int flagEstado = 0;
 	int contIdContribuyente = 1000;
 	int contIdRecaudaciones = 100;
 
@@ -80,50 +81,67 @@ int main()
 					printf("\nNO SE MODIFICO EL CONTRIBUYENTE.\n\n");
 				}
 			}
+			else
+			{
+				printf("\nDEBE INGRESAR UN CONTRIBUYENTE PARA MODIFICARLO.\n\n");
+			}
 			system("pause");
 			break;
 		case 3:
 			if(flagAlta == 1)
 			{
-			if(eContribuyente_baja(arrayContribuyentes, MAX) ==0)
-			{
-				printf("\nSE DIO LA BAJA DEL CONTRIBUYENTE.\n\n");
+
+				if(eInforme_baja(arrayContribuyentes, MAX, arrayRecaudadores, CANT) ==0)
+				{
+					printf("\nSE DIO LA BAJA DEL CONTRIBUYENTE.\n\n");
+				}
+				else
+				{
+					printf("\nNO SE DIO LA BAJA.\n\n");
+				}
 			}
 			else
 			{
-				printf("\nNO SE DIO LA BAJA.\n\n");
+				printf("\nDEBE INGRESAR UN CONTRIBUYENTE PARA DARLO DE BAJA.\n\n");
 			}
-		}
-
 			system("pause");
 			break;
 		case 4:
 			if(flagAlta == 1)
 			{
-			if (eRecaudacion_alta(arrayRecaudadores, CANT, &contIdRecaudaciones,arrayContribuyentes,MAX)==0)
-			{
-				printf("\nALTA EXITOSA.\n\n");
-				eRecaudacion_mostrarTodos (arrayRecaudadores,CANT, arrayTipo, CANT_TIPO);
-				flagRecaudacion = 1;
+				if (eRecaudacion_alta(arrayRecaudadores, CANT, &contIdRecaudaciones,arrayContribuyentes,MAX)==0)
+				{
+					printf("\nALTA EXITOSA.\n\n");
+					eRecaudacion_mostrarTodos (arrayRecaudadores,CANT, arrayTipo, CANT_TIPO);
+					flagRecaudacion = 1;
+				}
+				else
+				{
+					printf("\nERROR. SIN ESPACIO PARA ALMACENAR.\n\n");
+				}
 			}
 			else
 			{
-				printf("\nERROR. SIN ESPACIO PARA ALMACENAR.\n\n");
-			}
+				printf("\nDEBE INGRESAR UN CONTRIBUYENTE PARA AGREGAR RECAUDACIONES.\n\n");
 			}
 			system("pause");
 			break;
 		case 5:
 			if(flagAlta == 1 && flagRecaudacion == 1)
 			{
-			if(eRecaudacion_estadoRefinanciar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
-			{
-				printf("\nSE REFINANCIO.\n\n");
+				if(eRecaudacion_estadoRefinanciar (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
+				{
+					printf("\nSE REFINANCIO.\n\n");
+					flagEstado = 1;
+				}
+				else
+				{
+					printf("\nNO SE REFINANCIO.\n\n");
+				}
 			}
 			else
 			{
-				printf("\nNO SE REFINANCIO.\n\n");
-			}
+				printf("\nDEBE INGRESAR UN CONTRIBUYENTE Y RECAUDACION PARA CONTINUAR.\n\n");
 			}
 			system("pause");
 			 break;
@@ -133,19 +151,31 @@ int main()
 				if(eRecaudacion_estadoSaldado (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO)==0)
 				{
 					printf("\nSE SALDO.\n\n");
+					flagEstado = 1;
 				}
 				else
 				{
 					printf("\nNO SE SALDO.\n\n");
 				}
 				}
+			else
+			{
+				printf("\nDEBE INGRESAR UN CONTRIBUYENTE Y RECAUDACION PARA CONTINUAR.\n\n");
+			}
 			system("pause");
 			break;
 		case 7:
-			mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
+			{
+				informe_motrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+			}
+			else
+			{
+				printf("\nDEBEN INGRESAR TODOS LOS DATOS.\n\n");
+			}
 			break;
 		case 8:
-
+			mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
 			break;
 		case 9:
 
