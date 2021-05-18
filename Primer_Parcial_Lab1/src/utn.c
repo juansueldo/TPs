@@ -303,7 +303,9 @@ int utn_getEsCuil(char* cadena)
 	}
 	return ret;
 }
-
+/*
+ *
+ */
 int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos)
 {
 	int ret;

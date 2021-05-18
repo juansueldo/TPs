@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include "Contribuyente.h"
 #include "Recaudaciones.h"
-#include "Informes.h"
 
 int main()
 {

@@ -31,19 +31,26 @@ typedef struct {
 } eEstado;
 
 /*
- * @brief recibe una estructura y la inicializa
+ * @brief recibe una estructura y la inicializa en cero si el array es numerico y vacio/espacio si un caracter o candena de caracteres
  * @param arrayRecaudacion estructura que incluye las recaudaciones
  * @param tamanio cantidad de elementos
  * @return retorna cero en caso de exito
  */
 int eRecaudacion_inicializar (eRecaudacion arrayRecaudacion[],int tam);
 /*
- * @brief recibe una estructura y la inicializa
- * @param arrayTipo estructura que incluye el tipo de racudacion
+ * @brief recibe una estructura y la inicializa en cero si el array es numerico y vacio/espacio si un caracter o candena de caracteres
+ * @param arrayTipo estructura que incluye el tipo de recaudacion
  * @param tamanio cantidad de elementos
  * @return retorna cero en caso de exito
  */
 int eTipo_inicializar (eTipo arrayTipo[],int cant);
+/*
+ * @brief recibe una estructura y la inicializa en cero si el array es numerico y vacio/espacio si un caracter o candena de caracteres
+ * @param arrayEstado estructura que incluye el estado de la recaudacion
+ * @param tamanio cantidad de elementos
+ * @return retorna cero en caso de exito
+ */
+int eEstado_inicializar (eEstado arrayEstado[],int cant);
 /*
  * @brief Obtiene el tipo de recaudacion ingresada por el usuario
  * @param arrayTipo estructura que incluye el tipo de racudacion
@@ -51,7 +58,6 @@ int eTipo_inicializar (eTipo arrayTipo[],int cant);
  * @param tipo id del tipo ingresado por el usuario
  * @return retorna cero en caso de exito
  */
-int eEstado_inicializar (eEstado arrayEstado[],int cant);
 int eRecaudacion_obtenerNombre (eTipo arrayTipo[],int cant,int tipo,char detalle[20]);
 /*
  * @brief recorre la estrucutra en busca de un campo libre
@@ -117,5 +123,102 @@ int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTip
  * @return retorna cero en caso de que la comparacion sea exitosa
  */
 int eRecaudacion_buscarIdContribuyente (eRecaudacion arrayRecaudacion[],int tam,int id);
+/*
+ *@brief Muestra los datos del contribuyente que en caso que el id de contribuyente coincida con la reaudacion
+ *@param arrayRecaudacion estructura que incluye las recaudaciones
+ *@param tam cantidad de elementos
+ *@param arrayContribuyente estructura que incluye los contribuyentes
+ *@param cant cantidad de elementos
+ *@param *auxId puntero que recibe el id a comparar
+ *@return retorna cero si conicide el id y se muestra en pantalla los datos del contribuyente
+ */
+int eRecaudaciones_mostrarContribuyentes (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, int* auxId);
+/*
+ * @brief Pide al usuario el ingreso del idRecaudacion la cual se va a cambiar el estado, y obtiene el id a modificar
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param cant cantidad de elementos
+ * @param arrayTipo estructura que incluye los tipos de recaudaciones
+ * @param cantTipo cantidad de elementos
+ * @param *indexId puntero que recibe el id
+ * @return retorna cero en caso de que el id ingresado por el usuario sea valido
+ */
+int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo, int* indexId);
+/*
+ * @brief Pregunta al usuario si quiere cambiar el estado de la recaudacion, si ingresa 's' modifica el estado
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param cant cantidad de elementos
+ * @param arrayTipo estructura que incluye los tipos de recaudaciones
+ * @param cantTipo cantidad de elementos
+ * @return retorna cero en caso de que el estado se cambio a refinanciar
+ */
+int eRecaudacion_estadoRefinanciar (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo);
+/*
+ * @brief Pregunta al usuario si quiere cambiar el estado de la recaudacion, si ingresa 's' modifica el estado
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param cant cantidad de elementos
+ * @param arrayTipo estructura que incluye los tipos de recaudaciones
+ * @param cantTipo cantidad de elementos
+ * @return retorna cero en caso de que el estado se cambio a saldado
+ */
+int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo);
+/*
+ * @brief Obtiene el estado de recaudacion ingresada por el usuario
+ * @param arrayTipo estructura que incluye el tipo de racudacion
+ * @param cant cantidad de elementos
+ * @param estado id del estado ingresado por el usuario
+ * @param detalle cadena que guarda el estado
+ * @return retorna cero en caso de exito
+ */
+int eRecaudacion_obtenerNombreEstado (eEstado arrayEstado[],int cant,int estado,char detalle[20]);
+
+/*
+ * @brief Muestra al usuario los contribuyentes y pide el ingreso del ID del contribuyente a dar de baja, da la baja del contribuyente y sus recaudaciones
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param tamanio cantidad de elementos
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param cant cantidad de elementos
+ * return retorna cero si se dio la baja
+ */
+int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant);
+/*
+ * @brief Muestra las recaudaciones con el tipo de recaudacion y el estado de la misma
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayTipo estructura que incluye el tipo de recaudacion
+ * @param cantTipo cantidad de elementos
+ * @param arrayEstado estructura que incluye el estado de la recaudacion
+ * @param cantEstado cantidad de elementos
+ */
+void eRecaudacion_mostrarTipoEstado(eRecaudacion arrayRecaudacion[],int tam, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
+/*
+ * @brief Muestra los datos del contribuyente con todas las recaudaciones que posee, estado y tipo
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param cant cantidad de elementos
+ * @param cantTipo cantidad de elementos
+ * @param arrayEstado estructura que incluye el estado de la recaudacion
+ * @param cantEstado cantidad de elementos
+ * @return retorna cero si se mostraron los datos
+ */
+int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
+/*
+ * @brief Muestra los datos del contribuyente con todas las recaudaciones que posee, y tipo, si el estado es SALDADO
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param tam cantidad de elementos
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param cant cantidad de elementos
+ * @param cantTipo cantidad de elementos
+ * @param arrayEstado estructura que incluye el estado de la recaudacion
+ * @param cantEstado cantidad de elementos
+ * @return retorna cero si se mostraron los datos
+ */
+int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
 
 #endif /* RECAUDACIONES_H_ */
