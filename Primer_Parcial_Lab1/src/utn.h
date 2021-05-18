@@ -110,7 +110,20 @@ int utn_getMayusMin (char name[], int tam);
  * @return Retorna cero cuando se convierte el caracter
  */
 int utn_getLower(char* letra);
-int utn_getEsCuil(char* cadena);
+/*
+ * @brief solicita el ingreso de una cadena numerica compuesta por dos guiones y 11 caracteres
+ * @param cadena recibe el dato ingresado por el usuario
+ * @return retorna cero si la cadena es numerica y contiene dos guiones
+ */
+int utn_EsCuil(char* cadena);
+/*
+ *@brief solicita al usuario el ingreso de una cadena numerica la cual debe tener guiones en la poscion 2 y 11
+ *@param cadena recibe el dato ingresado por el usuario
+ *@param mensaje Es el mesaje a ser mostrado
+ *@param eMensaje Es el mesaje a ser mostrado en caso de error
+ *@param reintentos cantidad de reintentos en caso de error
+ *@return retorna cero en caso de que la cadena sea valida
+ */
 int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos);
 
 #endif /* UTN_H_ */

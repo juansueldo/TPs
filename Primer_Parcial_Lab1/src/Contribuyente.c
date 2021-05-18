@@ -1,4 +1,5 @@
 #include "Contribuyente.h"
+#include "Recaudaciones.h"
 
 int eContribuyente_inicializar (eContribuyente arrayContribuyentes[],int tam)
 {

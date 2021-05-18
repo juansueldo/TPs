@@ -209,7 +209,7 @@ void eRecaudacion_mostrarTipoEstado(eRecaudacion arrayRecaudacion[],int tam, eTi
  */
 int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
 /*
- * @brief Muestra los datos del contribuyente con todas las recaudaciones que posee, y tipo, si el estado es SALDADO
+ * @brief Muestra los datos del contribuyente con todas las recaudaciones que posee y el tipo solo si el estado es SALDADO
  * @param arrayRecaudacion estructura que incluye las recaudaciones
  * @param tam cantidad de elementos
  * @param arrayContribuyente estructura que incluye los contribuyentes

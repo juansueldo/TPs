@@ -178,7 +178,7 @@ int main()
 		case 8:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+				eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
 			}
 			else
 			{

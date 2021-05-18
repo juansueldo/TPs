@@ -153,7 +153,7 @@ int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id)
 eRecaudacion eRecaudacion_cargar (eContribuyente arrayContribuyente[], int cant)
 {
 	eRecaudacion auxiliar;
-	if(utn_getNumero(&auxiliar.idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE: ","\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1001,1051,3) != 0)
+	if(utn_getNumero(&auxiliar.idContribuyente,"\n\nINGRESE EL ID DEL CONTRIBUYENTE: ","\n\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1001,1051,3) != 0)
 	{
 		printf("\n ERROR NO SE INGRESO EL ID DEL CONTRIBUYENTE");
 	}
@@ -316,7 +316,7 @@ int eRecaudacion_estadoRefinanciar (eRecaudacion arrayRecaudacion[],int tam, eCo
 	int index;
 	if(eRecaudacion_cambiarEstado (arrayRecaudacion,tam,arrayContibuyente,cant,arrayTipo, cantTipo,&index)==0)
 	{
-		if(utn_getRespuesta ("\nDESEA CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ","DESEA CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ", 3)==0)
+		if(utn_getRespuesta ("\n\nDESEA CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ","\n\nDESEA CAMBIAR EL ESTADO A REFINANCIAR [S] SI [N]: ", 3)==0)
 		{
 			arrayRecaudacion[index].idEstado = 1;
 			rtn = 0;
@@ -330,7 +330,7 @@ int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContri
 	int index;
 	if(eRecaudacion_cambiarEstado (arrayRecaudacion,tam,arrayContibuyente,cant,arrayTipo, cantTipo,&index)==0)
 	{
-		if(utn_getRespuesta ("\nDESEA CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ","DESEA CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ", 3)==0)
+		if(utn_getRespuesta ("\n\nDESEA CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ","\n\nDESEA CAMBIAR EL ESTADO A SALDAR [S] SI [N]: ", 3)==0)
 		{
 			arrayRecaudacion[index].idEstado = 2;
 			rtn = 0;
@@ -421,7 +421,7 @@ void eRecaudacion_mostrarTipoEstado(eRecaudacion arrayRecaudacion[],int tam, eTi
 	eRecaudacion_obtenerNombre (arrayTipo,cantTipo,arrayRecaudacion[tam].idTipo,detalle);
 	eRecaudacion_obtenerNombreEstado (arrayEstado,cantEstado,arrayRecaudacion[tam].idEstado,detalleEstado);
 	printf("\n**********************************************************************************\n");
-	printf("\n ID RECAUDACION        MES      IMPORTE      TIPO     ESTADO  ");
+	printf(" ID RECAUDACION        MES      IMPORTE      TIPO     ESTADO  ");
 	printf("\n**********************************************************************************\n");
 	printf("%d    %15d   %10.2f     %15s   %15s\n"
 			,arrayRecaudacion[tam].idRecaudacion
@@ -443,8 +443,8 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
 		{
 			if(arrayContribuyente[i].isEmpty == 0)
 			{
-				printf("\n*************************************************************\n");
-				printf("\n ID    NOMBRE           APELLIDO               CUIL       ");
+				printf("\n\n*************************************************************\n");
+				printf(" ID    NOMBRE           APELLIDO               CUIL       ");
 				printf("\n**************************************************************\n");
 				eContribuyente_mostrarUno(arrayContribuyente,i);
 			}
@@ -478,9 +478,10 @@ int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eCont
 				if(arrayRecaudacion[i].idContribuyente == arrayContribuyente[j].idContribuyente && arrayContribuyente[j].isEmpty ==0)
 				{
 					printf("\n*************************************************************\n");
-					printf("\n ID    NOMBRE           APELLIDO               CUIL       ");
+					printf("  ID    NOMBRE           APELLIDO               CUIL       ");
 					printf("\n**************************************************************\n");
 					eContribuyente_mostrarUno(arrayContribuyente,j);
+					printf("\n\n");
 					rtn = 0;
 				}
 				}

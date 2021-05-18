@@ -265,12 +265,9 @@ int utn_getMayusMin (char name[], int tam)
    return 0;
 }
 
-
-
-
-int utn_getEsCuil(char* cadena)
+int utn_EsCuil(char* cadena)
 {
-	int ret;
+	int rtn;
 	int i;
 	int contadorDigito=0;
 	int contadorGuion=0;
@@ -291,24 +288,22 @@ int utn_getEsCuil(char* cadena)
 				}
 				else
 				{
-					ret=-1;
+					rtn=-1;
 					break;
 				}
 			}
 		}
 		if(contadorDigito==11 && contadorGuion==2)
 		{
-			ret=0;
+			rtn=0;
 		}
 	}
-	return ret;
+	return rtn;
 }
-/*
- *
- */
+
 int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos)
 {
-	int ret;
+	int rtn;
 	char buffer[14];
 	int i;
 	int aux;
@@ -320,13 +315,13 @@ int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos)
 				printf("\n %s",mensaje);
 				fflush(stdin);
 				fgets(buffer,14,stdin);
-				aux=utn_getEsCuil(buffer);
+				aux=utn_EsCuil(buffer);
 				if(aux==0)
 				{
 					if(buffer[2]=='-' && buffer[11]=='-')
 					{
 						strcpy(cadena,buffer);
-						ret=0;
+						rtn=0;
 						break;
 					}
 				}
@@ -338,9 +333,9 @@ int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos)
 		}
 		if(reintentos==0)
 		{
-			ret=-1;
+			rtn=-1;
 		}
-	return ret;
+	return rtn;
 }
 
 

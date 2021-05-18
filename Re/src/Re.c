@@ -3,34 +3,60 @@
 #include <string.h>
 #include <ctype.h>
 
-struct datosPersonales{
-char nombre[20];
-char apellido[20];
-char calle [20];
-int numero;
-};
+
+int esCuit(char* cadena);
+
 int main()
 {
 	setbuf(stdout, NULL);
-struct datosPersonales agenda;
-printf("Ingrese el Nombre ");
-gets(agenda.nombre);
-fflush(stdin);
-printf("\nIngrese el apellido ");
-gets(agenda.apellido);
-fflush(stdin);
-printf("\nIngrese calle ");
-gets(agenda.calle);
+    char i[11];
 
-fflush(stdin);
-printf("\nIngrese numero de calle ");
-scanf("%d",&agenda.numero);
-//Mostrar datos
-printf("\nDatos Personales");
-printf("\n%s", agenda.nombre);
-printf("\n%s", agenda.apellido);
-printf("\n%s", agenda.calle);
-printf("\n%d", agenda.numero);
+    printf("\nIngrese el cuil");
+    fflush(stdin);
+    scanf("%s",i);
+   if(esCuit(i) ==0)
+   {
+	   printf("\nEs valido");
+   }
+   else
+   {
+	   printf("\nNo es valido");
+   }
 
-return 0;
+    return 0;
+}
+int esCuit(char* cadena)
+{
+	int ret;
+	int i;
+	int contadorDigito=0;
+	int contadorGuion=0;
+
+	if(cadena!=NULL)
+	{
+		for(i=0;cadena[i]!='\0';i++)
+		{
+			if(isdigit(cadena[i])!=0)
+			{
+				contadorDigito++;
+			}
+			else
+			{
+				if(cadena[i]=='-')
+				{
+					contadorGuion++;
+				}
+				else
+				{
+					ret=-1;
+					break;
+				}
+			}
+		}
+		if(contadorDigito==11 && contadorGuion==2)
+		{
+			ret=0;
+		}
+	}
+	return ret;
 }
