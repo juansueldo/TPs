@@ -7,6 +7,9 @@
 #define GANANCIAS 3
 #define CANT 50
 #define CANT_TIPO 3
+#define CANT_ESTADO 2
+#define REFINANCIADO 1
+#define SALDADO 2
 #include "Contribuyente.h"
 
 

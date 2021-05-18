@@ -28,7 +28,7 @@ int main()
 	eContribuyente arrayContribuyentes[MAX];
 	eRecaudacion arrayRecaudadores [CANT];
 	eTipo arrayTipo[CANT_TIPO];
-	eEstado arrayEstado[2];
+	eEstado arrayEstado[CANT_ESTADO];
 
     eContribuyente_inicializar(arrayContribuyentes, MAX);
     eRecaudacion_inicializar(arrayRecaudadores, CANT);
@@ -45,10 +45,10 @@ int main()
    	arrayTipo[2].idTipo = GANANCIAS;
 
    	strcpy(arrayEstado[0].detalleEstado,"REFINANCIADO");
-   	arrayEstado[0].idEstado = 1;
+   	arrayEstado[0].idEstado = REFINANCIADO;
 
    	strcpy(arrayEstado[1].detalleEstado,"SALDADO");
-   	arrayEstado[1].idEstado = 2;
+   	arrayEstado[1].idEstado = SALDADO;
 
 
 	do
@@ -168,7 +168,7 @@ int main()
 		case 7:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+				mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO);
 			}
 			else
 			{
@@ -178,7 +178,7 @@ int main()
 		case 8:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, 2);
+				eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO);
 			}
 			else
 			{
