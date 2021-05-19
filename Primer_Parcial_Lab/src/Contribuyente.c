@@ -8,7 +8,7 @@ int eContribuyente_inicializar (eContribuyente arrayContribuyentes[],int tam)
 	if(arrayContribuyentes != NULL && tam >0)
 	{
 
-		for (i = 0; i < tam; i++)
+		for (i = 0; i < tam; ++i) // recorre los arrays inicializandolos
 		{
 			strcpy(arrayContribuyentes[i].nombre," ");
 			strcpy(arrayContribuyentes[i].apellido," ");
@@ -27,11 +27,11 @@ int eContribuyente_buscarLibre (eContribuyente arrayContribuyentes[],int tam)
 	rtn = -1;
 	if(arrayContribuyentes != NULL && tam > 0)
 	{
-		for (i = 0; i < tam; i++)
+		for (i = 0; i < tam; i++) //recorre el array en busqueda de si esta libre
 		{
 			if(arrayContribuyentes[i].isEmpty==1)
 			{
-				rtn = i;
+				rtn = i; //retorna la direccion el array i
 				break;
 			}
 		}
@@ -43,7 +43,8 @@ int eContribuyente_buscarId (eContribuyente arrayContribuyentes[],int tam,int id
 	int rtn = -1;
 	int i;
 
-	if (arrayContribuyentes != NULL && tam > 0) {
+	if (arrayContribuyentes != NULL && tam > 0)
+	{
 		for (i = 0; i < tam; i++)
 		{
 			if (arrayContribuyentes[i].idContribuyente == id && arrayContribuyentes[i].isEmpty == 0)
@@ -99,26 +100,26 @@ int eContribuyente_alta (eContribuyente arrayContribuyentes[], int tam, int *pId
 
 	return rtn;
 }
-void eContribuyente_mostrarUno (eContribuyente arrayContribuyentes[],int tamanio)
+void eContribuyente_mostrarUno (eContribuyente arrayContribuyentes[],int tam)
 {
-	utn_getMayusMin (arrayContribuyentes[tamanio].nombre, MAX_CHARS_CADENAS);
-	utn_getMayusMin (arrayContribuyentes[tamanio].apellido, MAX_CHARS_CADENAS);
+	utn_getMayusMin (arrayContribuyentes[tam].nombre, MAX_CHARS_CADENAS);
+	utn_getMayusMin (arrayContribuyentes[tam].apellido, MAX_CHARS_CADENAS);
 	printf("\n%5d %15s     %15s         %15s    "
-			,arrayContribuyentes[tamanio].idContribuyente
-			,arrayContribuyentes[tamanio].nombre
-			,arrayContribuyentes[tamanio].apellido
-			,arrayContribuyentes[tamanio].cuil);
+			,arrayContribuyentes[tam].idContribuyente
+			,arrayContribuyentes[tam].nombre
+			,arrayContribuyentes[tam].apellido
+			,arrayContribuyentes[tam].cuil);
 }
-int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tamanio)
+int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tam)
 {
 	int i;
 	int rtn = -1;
-	if(arrayContribuyentes != NULL && tamanio > 0)
+	if(arrayContribuyentes != NULL && tam > 0)
 	{
 		printf("\n*************************************************************\n");
 		printf("\n ID    NOMBRE           APELLIDO               CUIL       ");
 		printf("\n**************************************************************\n");
-		for (i = 0; i < tamanio; i++)
+		for (i = 0; i < tam; i++)
 		{
 
 			if(arrayContribuyentes[i].isEmpty == 0)
@@ -161,7 +162,7 @@ eContribuyente eContribuyente_modificarUno (eContribuyente arrayContribuyentes, 
 				}
 	return auxContribuyente;
 }
-int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
+int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tam)
 {
 		int rtn = -1;
 		int idContribuyente;
@@ -169,11 +170,9 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 		int flag = 0;
 		int auxMod;
 		eContribuyente auxContribuyente;
-		for(int i = 0; i < tamanio; i++)
-		{
-			if(arrayContribuyentes[i].isEmpty == 0)
+			if(eContribuyente_isEmpty (arrayContribuyentes, tam) == 0)
 			{
-				if(eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
+				if(eContribuyente_mostrarTodos(arrayContribuyentes, tam) == 0)
 				{
 					flag = 1;
 				}
@@ -184,14 +183,14 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 							printf("INGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ");
 							scanf("%d",&idContribuyente);
 
-							while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
+							while (eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente) == -1)
 							{
 								printf("NO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE:");
 								scanf("%d",&idContribuyente);
 							}
 
 
-							index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
+							index = eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente);
 							printf("\n*****************************************************************\n");
 							printf("INGRESE EL CAMPOR A MODIFICAR: \n1. NOMBRE \n2. APELLIDO \n3. CUIL \n");
 							printf("\n*****************************************************************\n");
@@ -208,9 +207,65 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 						{
 							rtn = -1;
 						}
-			}
+
 		}
 
 
 		return rtn;
 }
+
+int eContribuyente_isEmpty (eContribuyente arrayContribuyentes[], int tam)
+{
+	int rtn = -1;
+	for(int i = 0; i < tam; i++)
+	{
+		if(arrayContribuyentes[i].isEmpty == 0)
+		{
+			rtn = 0;
+		}
+
+	}
+	return rtn;
+}
+
+int eContribuyente_bajaContribuyente (eContribuyente arrayContribuyentes[], int tamanio, int*pIdContribuyente, int*index)
+{
+	int rtn = -1;
+		int auxIndex;
+		int flag = 0;
+
+		int aux;
+
+		if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
+		{
+			flag = 1;
+		}
+
+		if (flag) {
+			printf("\n*****************************************************************\n");
+			printf("\nINGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA: ");
+			scanf("%d",&aux);
+
+			while (eContribuyente_buscarId(arrayContribuyentes, tamanio, aux) == -1)
+			{
+				printf("NO EXISTE ID. INGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA:");
+				scanf("%d",&aux);
+			}
+			auxIndex = eContribuyente_buscarId(arrayContribuyentes, tamanio, aux);
+			*pIdContribuyente = aux;
+			if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
+			{
+				arrayContribuyentes[auxIndex].isEmpty = 1;
+				*index = auxIndex;
+				rtn = 0;
+			}
+
+			else
+			{
+				rtn = -1;
+			}
+
+		}
+
+		return rtn;
+	}
