@@ -226,6 +226,27 @@ int utn_getLower(char* letra)
 {
 	strlwr(letra);
 	return 0;
+}int utn_getChar (char *pData)
+{
+	int rtn = 1;
+	int i;
+	if (strlen(pData) > 0)
+	{
+		for (i = 0; i < strlen(pData); i++)
+		{
+		if (isalpha(pData[i]) == 0)
+		{
+			rtn = 0;
+			break;
+		}
+		}
+	}
+	else
+	{
+		rtn = 1;
+	}
+
+	return rtn;
 }
 int utn_getRespuesta (char* mensaje,char*mensajeError, int reintentos)
 {
@@ -237,10 +258,14 @@ int utn_getRespuesta (char* mensaje,char*mensajeError, int reintentos)
 		printf("%s",mensaje);
 		fflush(stdin);
 		scanf("%c",&respuesta);
+		if(utn_getChar(&respuesta) ==0)
+		{
 		utn_getLower (&respuesta);
 		while(respuesta != 's' && respuesta != 'n')
 		{
 			printf("%s",mensajeError);
+			fflush(stdin);
+			scanf("%c",&respuesta);
 		}
 		if(respuesta == 's')
 		{
@@ -252,7 +277,7 @@ int utn_getRespuesta (char* mensaje,char*mensajeError, int reintentos)
 			rtn = -1;
 			break;
 		}
-	}
+	}}
 	return rtn;
 }
 int utn_getMayusMin (char name[], int tam)
@@ -314,7 +339,7 @@ int utn_getCuil(char cadena[],char mensaje[],char eMensaje[],int reintentos)
 			{
 				printf("\n %s",mensaje);
 				fflush(stdin);
-				fgets(buffer,14,stdin);
+				gets(buffer);
 				aux=utn_EsCuil(buffer);
 				if(aux==0)
 				{

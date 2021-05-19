@@ -169,37 +169,48 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tamanio)
 		int flag = 0;
 		int auxMod;
 		eContribuyente auxContribuyente;
-
-		if(eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
+		for(int i = 0; i < tamanio; i++)
 		{
-			flag = 1;
+			if(arrayContribuyentes[i].isEmpty == 0)
+			{
+				if(eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
+				{
+					flag = 1;
+				}
+
+						if (flag)
+						{
+							printf("\n*****************************************************************\n");
+							printf("INGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ");
+							scanf("%d",&idContribuyente);
+
+							while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
+							{
+								printf("NO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE:");
+								scanf("%d",&idContribuyente);
+							}
+
+
+							index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
+							printf("\n*****************************************************************\n");
+							printf("INGRESE EL CAMPOR A MODIFICAR: \n1. NOMBRE \n2. APELLIDO \n3. CUIL \n");
+							printf("\n*****************************************************************\n");
+							printf("Ingrese:");
+							scanf("%d",&auxMod);
+							if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
+							{
+							auxContribuyente = eContribuyente_modificarUno(arrayContribuyentes[index],auxMod);
+							arrayContribuyentes[index] = auxContribuyente;
+							rtn = 0;
+							}
+						}
+						else
+						{
+							rtn = -1;
+						}
+			}
 		}
 
-		if (flag) {
-			printf("\n*****************************************************************\n");
-			printf("INGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ");
-			scanf("%d",&idContribuyente);
-
-			while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
-			{
-				printf("NO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE:");
-				scanf("%d",&idContribuyente);
-			}
-
-
-			index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
-			printf("\n*****************************************************************\n");
-			printf("INGRESE EL CAMPOR A MODIFICAR: \n1. NOMBRE \n2. APELLIDO \n3. CUIL \n");
-			printf("\n*****************************************************************\n");
-			printf("Ingrese:");
-			scanf("%d",&auxMod);
-			if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
-			{
-			auxContribuyente = eContribuyente_modificarUno(arrayContribuyentes[index],auxMod);
-			arrayContribuyentes[index] = auxContribuyente;
-			rtn = 0;
-			}
-		}
 
 		return rtn;
 }

@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "Contribuyente.h"
 #include "Recaudaciones.h"
-
+#include "Informes.h"
 int main()
 {
     setbuf(stdout, NULL);
@@ -168,21 +168,27 @@ int main()
 		case 7:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO);
+				if(mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) > 0)
+				{
+					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				}
 			}
 			else
 			{
-				printf("\nDEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 			}
 			break;
 		case 8:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO);
+				if(eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) > 0)
+				{
+					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				}
 			}
 			else
 			{
-				printf("\nDEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 			}
 			break;
 		case 9:
