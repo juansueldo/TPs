@@ -415,9 +415,9 @@ int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribu
 	indexRecaudacion = eRecaudacion_buscarIdContribuyente(arrayRecaudacion, tam, *pIdContribuyente);
 	for(i = 0; i < tam; i++)
 		{
-			if(indexRecaudacion == *index)
+			if(*pIdContribuyente == arrayRecaudacion[i].idRecaudacion)
 			{
-				arrayRecaudacion[i].isEmpty = 1;
+				arrayRecaudacion[indexRecaudacion].isEmpty = 1;
 				rtn = 0;
 			}
 		}

@@ -32,9 +32,9 @@ int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudaci
 			arrayContribuyentes[index].isEmpty = 1;
 			for(i = 0; i < cant; i++)
 			{
-				if(arrayContribuyentes[i].idContribuyente == arrayRecaudacion[i].idContribuyente)
+				if(idContribuyente == arrayRecaudacion[i].idContribuyente)
 				{
-					arrayRecaudacion[indexRecaudacion].isEmpty = 1;
+					arrayRecaudacion[i].isEmpty = 1;
 				}
 
 			}
