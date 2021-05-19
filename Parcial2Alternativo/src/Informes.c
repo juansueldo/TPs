@@ -5,7 +5,6 @@ int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudaci
 	int rtn = -1;
 	int idContribuyente;
 	int index;
-	int indexRecaudacion;
 	int flag = 0;
 	int i;
 	if(eContribuyente_isEmpty(arrayContribuyentes, tamanio)==0)
@@ -26,7 +25,6 @@ int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudaci
 			scanf("%d",&idContribuyente);
 		}
 		index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
-		indexRecaudacion = eRecaudacion_buscarIdContribuyente (arrayRecaudacion,cant,idContribuyente);
 		if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
 		{
 			arrayContribuyentes[index].isEmpty = 1;
@@ -90,6 +88,10 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
 				{
 					eRecaudacion_mostrarTipoEstado(arrayRecaudacion,j,arrayTipo,cantTipo,arrayEstado,cantEstado);
 					rtn =0;
+				}
+				else
+				{
+					rtn = -1;
 				}
 				}
 			}
