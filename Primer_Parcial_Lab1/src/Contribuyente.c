@@ -180,13 +180,10 @@ int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tam)
 						if (flag)
 						{
 							printf("\n*****************************************************************\n");
-							printf("INGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ");
-							scanf("%d",&idContribuyente);
-
+							utn_getNumero(&idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
 							while (eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente) == -1)
 							{
-								printf("NO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE:");
-								scanf("%d",&idContribuyente);
+								utn_getNumero(&idContribuyente,"\nNO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
 							}
 
 
