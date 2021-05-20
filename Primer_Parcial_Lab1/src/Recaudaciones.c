@@ -307,12 +307,10 @@ int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContri
 			if (flag)
 			{
 				printf("\n*****************************************************************\n");
-				printf("INGRESE EL ID DE LA RECAUDACION: ");
-				scanf("%d",&idRecaudacion);
+
 				utn_getNumero(&idRecaudacion,"INGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",101,200,3);
 				while (eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) == -1)
 				{
-					printf("NO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION: ");
 					utn_getNumero(&idRecaudacion,"\nNO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",101,200,3);
 				}
 				}

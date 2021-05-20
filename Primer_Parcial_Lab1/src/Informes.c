@@ -86,10 +86,7 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
 					eRecaudacion_mostrarTipoEstado(arrayRecaudacion,j,arrayTipo,cantTipo,arrayEstado,cantEstado);
 					rtn =0;
 				}
-				else
-				{
-					rtn = -1;
-				}
+
 				}
 			}
 		}
@@ -120,10 +117,6 @@ int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eCont
 					rtn = 0;
 				}
 				}
-			}
-			else
-			{
-				rtn = -1;
 			}
 		}
 
