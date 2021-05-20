@@ -1,50 +1,6 @@
 #include "Informes.h"
 
-int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant)
-{
-	int rtn = -1;
-	int idContribuyente;
-	int index;
-	int flag = 0;
-	int i;
-	if(eContribuyente_isEmpty(arrayContribuyentes, tamanio)==0)
-	{
-	if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
-	{
-		flag = 1;
-	}
 
-	if (flag) {
-		printf("\n*****************************************************************\n");
-		utn_getNumero(&idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
-		while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
-		{
-			utn_getNumero(&idContribuyente,"\nNO EXISTE ID. INGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA:","ERORR. NO ES UN ID VALIDO",1000,1999,3);
-		}
-		index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
-		if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
-		{
-			arrayContribuyentes[index].isEmpty = 1;
-			for(i = 0; i < cant; i++)
-			{
-				if(idContribuyente == arrayRecaudacion[i].idContribuyente)
-				{
-					arrayRecaudacion[i].isEmpty = 1;
-				}
-
-			}
-			rtn = 0;
-		}
-		}
-		else
-		{
-			rtn = -1;
-		}
-
-	}
-
-	return rtn;
-}
 void eRecaudacion_mostrarTipoEstado(eRecaudacion arrayRecaudacion[],int tam, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado)
 {
 	char detalle[30];
@@ -79,6 +35,7 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
 				printf("\n**************************************************************\n");
 				eContribuyente_mostrarUno(arrayContribuyente,i);
 			}
+
 			for(j = 0; j < tam; j++)
 			{
 				if(arrayContribuyente[i].idContribuyente == arrayRecaudacion[j].idContribuyente && arrayRecaudacion[j].isEmpty ==0)
@@ -105,21 +62,24 @@ int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eCont
 			{
 				eRecaudacion_mostrarTipoEstado(arrayRecaudacion,i,arrayTipo,cantTipo,arrayEstado,cantEstado);
 
-			for(j = 0; j < tam; j++)
-			{
-				if(arrayRecaudacion[i].idContribuyente == arrayContribuyente[j].idContribuyente && arrayContribuyente[j].isEmpty ==0)
+				for(j = 0; j < tam; j++)
 				{
+					if(arrayRecaudacion[i].idContribuyente == arrayContribuyente[j].idContribuyente && arrayContribuyente[j].isEmpty ==0)
+					{
 					printf("\n*************************************************************\n");
 					printf("  ID    NOMBRE           APELLIDO               CUIL       ");
 					printf("\n**************************************************************\n");
 					eContribuyente_mostrarUno(arrayContribuyente,j);
 					printf("\n\n");
 					rtn = 0;
-				}
+					}
 				}
 			}
+			else
+			{
+				rtn = -1;
+			}
 		}
-
 	}
 	return rtn;
 }
@@ -130,7 +90,8 @@ int baja_ContribuyenteRecaudaciones (eContribuyente arrayContribuyentes[], int t
 	int idContribuyente;
 	int index;
 	int flag = 0;
-
+	if(arrayContribuyentes != NULL && tamanio > 0 && arrayRecaudacion != NULL && cant > 0)
+	{
 	if(eContribuyente_isEmpty(arrayContribuyentes, tamanio)==0)
 	{
 		if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
@@ -160,10 +121,15 @@ int baja_ContribuyenteRecaudaciones (eContribuyente arrayContribuyentes[], int t
 					}
 				}
 			}
-			rtn = 0;
-		}
-		}
 
+		}
+		}
+		rtn = 0;
+	}
+	}
+	else
+	{
+		rtn = -1;
 	}
 	return rtn;
 }

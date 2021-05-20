@@ -3,15 +3,7 @@
 #define INFORMES_H_
 
 #include "Recaudaciones.h"
-/*
- * @brief Muestra al usuario los contribuyentes y pide el ingreso del ID del contribuyente a dar de baja, da la baja del contribuyente y sus recaudaciones
- * @param arrayContribuyente estructura que incluye los contribuyentes
- * @param tamanio cantidad de elementos
- * @param arrayRecaudacion estructura que incluye las recaudaciones
- * @param cant cantidad de elementos
- * return retorna cero si se dio la baja
- */
-int eInforme_baja (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant);
+
 /*
  * @brief Muestra las recaudaciones con el tipo de recaudacion y el estado de la misma
  * @param arrayRecaudacion estructura que incluye las recaudaciones

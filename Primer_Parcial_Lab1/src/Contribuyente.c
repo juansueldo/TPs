@@ -31,7 +31,7 @@ int eContribuyente_buscarLibre (eContribuyente arrayContribuyentes[],int tam)
 		{
 			if(arrayContribuyentes[i].isEmpty==1)
 			{
-				rtn = i; //retorna la direccion el array i
+				rtn = i;
 				break;
 			}
 		}
@@ -135,78 +135,76 @@ eContribuyente eContribuyente_modificarUno (eContribuyente arrayContribuyentes, 
 {
 	eContribuyente auxContribuyente = arrayContribuyentes;
 
-		switch (campoModificar)
+	switch (campoModificar)
+	{
+		case 1:
+			if((utn_getString(auxContribuyente.nombre,30,"\nINGRESE EL NOMBRE DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL NOMBRE DEL CONTRIUBUYENTE: ",1,3)) != 0)
 			{
-				case 1:
-					if((utn_getString(auxContribuyente.nombre,30,"\nINGRESE EL NOMBRE DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL NOMBRE DEL CONTRIUBUYENTE: ",1,3)) != 0)
-					{
-						printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE.");
-					}
-					fflush(stdin);
-					break;
-				case 2:
-					if((utn_getString(auxContribuyente.apellido,30,"\nINGRESE EL APELLIDO DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL APELLIDO DEL CONTRIUBUYENTE: ",1,3)) != 0)
-					{
-						printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE.");
-					}
-					fflush(stdin);
-					break;
-				case 3:
-					if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE: ","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE: ",3) != 0)
-					{
-						printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE.");
-					}
-					break;
-				default:
-					break;
-				}
+				printf("\nERROR. NO SE INGRESO EL NOMBRE DEL CONTRIBUYENTE.");
+			}
+			fflush(stdin);
+			break;
+		case 2:
+			if((utn_getString(auxContribuyente.apellido,30,"\nINGRESE EL APELLIDO DEL CONTRIUBUYENTE: ","\nERROR. INGRESE EL APELLIDO DEL CONTRIUBUYENTE: ",1,3)) != 0)
+			{
+				printf("\nERROR. NO SE INGRESO EL APELLIDO DEL CONTRIBUYENTE.");
+			}
+			fflush(stdin);
+			break;
+		case 3:
+			if(utn_getCuil(auxContribuyente.cuil,"\nINGRESE EL CUIL DEL CONTIBUYENTE: ","\nERROR. INGRESE EL CUIL DEL CONTIBUYENTE: ",3) != 0)
+			{
+				printf("\nERROR. NO SE INGRESO EL CUIL DEL CONTRIBUYENTE.");
+			}
+			break;
+		default:
+			break;
+	}
 	return auxContribuyente;
 }
 int eContribuyente_modificar (eContribuyente arrayContribuyentes[], int tam)
 {
-		int rtn = -1;
-		int idContribuyente;
-		int index;
-		int flag = 0;
-		int auxMod;
-		eContribuyente auxContribuyente;
-			if(eContribuyente_isEmpty (arrayContribuyentes, tam) == 0)
-			{
-				if(eContribuyente_mostrarTodos(arrayContribuyentes, tam) == 0)
-				{
-					flag = 1;
-				}
-
-						if (flag)
-						{
-							printf("\n*****************************************************************\n");
-							utn_getNumero(&idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
-							while (eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente) == -1)
-							{
-								utn_getNumero(&idContribuyente,"\nNO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
-							}
-
-
-							index = eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente);
-							printf("\n*****************************************************************\n");
-							printf("INGRESE EL CAMPOR A MODIFICAR: \n1. NOMBRE \n2. APELLIDO \n3. CUIL \n");
-							printf("\n*****************************************************************\n");
-							printf("Ingrese:");
-							scanf("%d",&auxMod);
-							if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
-							{
-							auxContribuyente = eContribuyente_modificarUno(arrayContribuyentes[index],auxMod);
-							arrayContribuyentes[index] = auxContribuyente;
-							rtn = 0;
-							}
-						}
-						else
-						{
-							rtn = -1;
-						}
-
+	int rtn = -1;
+	int idContribuyente;
+	int index;
+	int flag = 0;
+	int auxMod;
+	eContribuyente auxContribuyente;
+	if(eContribuyente_isEmpty (arrayContribuyentes, tam) == 0)
+	{
+		if(eContribuyente_mostrarTodos(arrayContribuyentes, tam) == 0)
+		{
+			flag = 1;
 		}
 
+		if (flag)
+		{
+			printf("\n*****************************************************************\n");
+			utn_getNumero(&idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE A MODIFICAR: ","ERORR. NO ES UN ID VALIDO",1000,1050,3);
+			while (eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente) == -1)
+			{
+				utn_getNumero(&idContribuyente,"\nNO EXISTE ID. REINGRESE EL ID DEL CONTRIBUYENTE: ","ERORR. NO ES UN ID VALIDO",1000,1050,3);
+			}
+
+			index = eContribuyente_buscarId(arrayContribuyentes, tam, idContribuyente);
+			printf("\n*****************************************************************\n");
+			printf("INGRESE EL CAMPOR A MODIFICAR: \n1. NOMBRE \n2. APELLIDO \n3. CUIL \n");
+			printf("\n*****************************************************************\n");
+			printf("Ingrese:");
+			scanf("%d",&auxMod);
+			if(utn_getRespuesta ("\nDESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ","\nERROR. DESEA MODIFICAR EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
+			{
+				auxContribuyente = eContribuyente_modificarUno(arrayContribuyentes[index],auxMod);
+				arrayContribuyentes[index] = auxContribuyente;
+				rtn = 0;
+			}
+			}
+			else
+			{
+				rtn = -1;
+			}
+
+		}
 
 		return rtn;
 }
@@ -243,6 +241,5 @@ int eContribuyente_bajaContribuyente (eContribuyente arrayContribuyentes[], int 
 		rtn = -1;
 	}
 
-
-		return rtn;
+	return rtn;
 }

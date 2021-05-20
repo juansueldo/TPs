@@ -153,13 +153,13 @@ int eRecaudacion_buscarId (eRecaudacion arrayRecaudacion[],int tam,int id)
 eRecaudacion eRecaudacion_cargar (eContribuyente arrayContribuyente[], int cant)
 {
 	eRecaudacion auxiliar;
-	if(utn_getNumero(&auxiliar.idContribuyente,"\n\nINGRESE EL ID DEL CONTRIBUYENTE: ","\n\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1001,1051,3) != 0)
+	if(utn_getNumero(&auxiliar.idContribuyente,"\n\nINGRESE EL ID DEL CONTRIBUYENTE: ","\n\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1000,1050,3) != 0)
 	{
 		printf("\n ERROR NO SE INGRESO EL ID DEL CONTRIBUYENTE");
 	}
 	while (eContribuyente_buscarId(arrayContribuyente, cant , auxiliar.idContribuyente) ==-1)
 	{
-		if(utn_getNumero(&auxiliar.idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE: ","\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1001,1051,3) != 0)
+		if(utn_getNumero(&auxiliar.idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE: ","\nERROR.INGRESE EL ID DEL CONTRIBUYENTE: ",1000,1050,3) != 0)
 		{
 			printf("\n ERROR NO SE INGRESO EL ID DEL CONTRIBUYENTE");
 		}
@@ -308,10 +308,10 @@ int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContri
 			{
 				printf("\n*****************************************************************\n");
 
-				utn_getNumero(&idRecaudacion,"INGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",101,200,3);
+				utn_getNumero(&idRecaudacion,"INGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",100,150,3);
 				while (eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) == -1)
 				{
-					utn_getNumero(&idRecaudacion,"\nNO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",101,200,3);
+					utn_getNumero(&idRecaudacion,"\nNO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION: ","\nERORR. NO ES UN ID VALIDO",100,150,3);
 				}
 				}
 				if(eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) != -1)
