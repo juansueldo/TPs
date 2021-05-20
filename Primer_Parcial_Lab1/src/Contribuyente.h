@@ -88,9 +88,23 @@ int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tamani
  * @param tamanio cantidad de elementos
  */
 void eContribuyente_mostrarUno (eContribuyente arrayContribuyentes[],int tamanio);
-
+/*
+ * @brief recibe un id compara si existe y pregunta si quiere dar de baja al contribuyente que pertence el id
+ * @param arrayContribuyentes estructura que incluye los contribuyentes
+ * @param tamanio cantidad de elementos
+ * @param pIdContribuyente puntero que recibe el id
+ * @param index puntero recibe la direccion del id a dar de baja
+ * @return retorna cero si se dio la baja
+ */
 
 int eContribuyente_bajaContribuyente (eContribuyente arrayContribuyentes[], int tamanio, int*pIdContribuyente, int*index);
+/*
+ * @brief Recorre el array isEmpty en busca de los que esten ocupados
+ * @param arrayContribuyentes estructura que incluye los contribuyentes
+ * @param tamanio cantidad de elementos
+ * @return retona cero si esta ocupado y 1 si esta vacio
+ */
 int eContribuyente_isEmpty (eContribuyente arrayContribuyentes[], int tam);
+
 
 #endif /* CONTRIBUYENTE_H_ */

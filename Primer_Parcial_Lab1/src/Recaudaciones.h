@@ -182,6 +182,13 @@ int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContri
 int eRecaudacion_obtenerNombreEstado (eEstado arrayEstado[],int cant,int estado,char detalle[20]);
 
 
-int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribuyente, int*index);
+int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribuyente);
+/*
+ * @brief Recorre el array isEmpty en busca de los que esten ocupados
+ * @param arrayContribuyentes estructura que incluye los contribuyentes
+ * @param tam cantidad de elementos
+ * @return retona cero si esta ocupado y 1 si esta vacio
+ */
 int eRecaudacion_isEmpty (eRecaudacion arrayRecaudacion[], int tam);
+
 #endif /* RECAUDACIONES_H_ */

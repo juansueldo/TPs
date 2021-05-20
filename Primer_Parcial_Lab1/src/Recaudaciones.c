@@ -404,21 +404,4 @@ int eRecaudacion_isEmpty (eRecaudacion arrayRecaudacion[], int tam)
 	}
 	return rtn;
 }
-int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribuyente, int*index)
-{
-	int rtn = -1;
-	int indexRecaudacion;
-	int i;
 
-	indexRecaudacion = eRecaudacion_buscarIdContribuyente(arrayRecaudacion, tam, *pIdContribuyente);
-	for(i = 0; i < tam; i++)
-		{
-			if(*pIdContribuyente == arrayRecaudacion[i].idRecaudacion)
-			{
-				arrayRecaudacion[indexRecaudacion].isEmpty = 1;
-				rtn = 0;
-			}
-		}
-
-		return rtn;
-	}

@@ -228,41 +228,21 @@ int eContribuyente_isEmpty (eContribuyente arrayContribuyentes[], int tam)
 int eContribuyente_bajaContribuyente (eContribuyente arrayContribuyentes[], int tamanio, int*pIdContribuyente, int*index)
 {
 	int rtn = -1;
-		int auxIndex;
-		int flag = 0;
+	int auxIndex;
 
-		int aux;
+	auxIndex = eContribuyente_buscarId(arrayContribuyentes, tamanio, *pIdContribuyente);
 
-		if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
-		{
-			flag = 1;
-		}
+	if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
+	{
+		arrayContribuyentes[auxIndex].isEmpty = 1;
+		*index = auxIndex;
+		rtn = 0;
+	}
+	else
+	{
+		rtn = -1;
+	}
 
-		if (flag) {
-			printf("\n*****************************************************************\n");
-			printf("\nINGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA: ");
-			scanf("%d",&aux);
-
-			while (eContribuyente_buscarId(arrayContribuyentes, tamanio, aux) == -1)
-			{
-				printf("NO EXISTE ID. INGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA:");
-				scanf("%d",&aux);
-			}
-			auxIndex = eContribuyente_buscarId(arrayContribuyentes, tamanio, aux);
-			*pIdContribuyente = aux;
-			if(utn_getRespuesta ("\nDESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO:  ","\nERROR. DESEA DAR DE BAJA EL CONTRIBUYENYE  [S] SI [N] NO: ", 3)==0)
-			{
-				arrayContribuyentes[auxIndex].isEmpty = 1;
-				*index = auxIndex;
-				rtn = 0;
-			}
-
-			else
-			{
-				rtn = -1;
-			}
-
-		}
 
 		return rtn;
-	}
+}

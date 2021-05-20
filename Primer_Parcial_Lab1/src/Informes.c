@@ -127,29 +127,44 @@ int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eCont
 int baja_ContribuyenteRecaudaciones (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant)
 {
 	int rtn = -1;
-	int id;
+	int idContribuyente;
 	int index;
-	int i;
-	for(i = 0; i < tamanio; i++)
+	int flag = 0;
+
+	if(eContribuyente_isEmpty(arrayContribuyentes, tamanio)==0)
 	{
-		if(arrayContribuyentes[i].isEmpty == 0)
+		if (eContribuyente_mostrarTodos(arrayContribuyentes, tamanio) == 0)
 		{
-			if(eContribuyente_bajaContribuyente (arrayContribuyentes, i, &id, &index)==0)
+			flag = 1;
+		}
+
+		if (flag == 1)
+		{
+		printf("\n*****************************************************************\n");
+		utn_getNumero(&idContribuyente,"\nINGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA: ","ERORR. NO ES UN ID VALIDO",1000,1999,3);
+		while (eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente) == -1)
+		{
+			utn_getNumero(&idContribuyente,"\nNO EXISTE ID. INGRESE EL ID DEL CONTRIBUYENTE A DAR DE BAJA:","ERORR. NO ES UN ID VALIDO",1000,1999,3);
+		}
+		index = eContribuyente_buscarId(arrayContribuyentes, tamanio, idContribuyente);
+		if(eContribuyente_isEmpty (arrayContribuyentes,tamanio) == 0)
+		{
+			if(eContribuyente_bajaContribuyente (arrayContribuyentes, tamanio, &idContribuyente, &index)==0)
 			{
-				for(int j = 0; j < cant; j++)
+				for(int i = 0; i < cant; i++)
 				{
-					if(arrayRecaudacion[j].isEmpty == 0)
+					if(idContribuyente == arrayRecaudacion[i].idContribuyente)
 					{
-					eRecaudacion_baja (arrayRecaudacion, j, &id, &index);
+						arrayRecaudacion[i].isEmpty = 1;
 
 					}
 				}
-
 			}
 			rtn = 0;
 		}
-	}
+		}
 
+	}
 	return rtn;
 }
 

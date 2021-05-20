@@ -46,7 +46,14 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
  * @return retorna cero si se mostraron los datos
  */
 int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
-
+/*
+ * @brief Muestra al usuario los contribuyentes y pide el ingreso del ID del contribuyente a dar de baja, da la baja del contribuyente y sus recaudaciones
+ * @param arrayContribuyente estructura que incluye los contribuyentes
+ * @param tamanio cantidad de elementos
+ * @param arrayRecaudacion estructura que incluye las recaudaciones
+ * @param cant cantidad de elementos
+ * return retorna cero si se dio la baja
+ */
 int baja_ContribuyenteRecaudaciones (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant);
 
 

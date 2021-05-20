@@ -92,7 +92,7 @@ int main()
 			if(flagAlta == 1)
 			{
 
-				if(eInforme_baja(arrayContribuyentes, MAX, arrayRecaudadores, CANT) ==0)
+				if(baja_ContribuyenteRecaudaciones(arrayContribuyentes, MAX, arrayRecaudadores, CANT) ==0)
 				{
 					printf("\nSE DIO LA BAJA DEL CONTRIBUYENTE.\n\n");
 				}
@@ -172,10 +172,7 @@ int main()
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
-				else
-				{
-					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
-				}
+
 			}
 			else
 			{
@@ -189,10 +186,7 @@ int main()
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
-				else
-				{
-					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
-				}
+
 			}
 			else
 			{
