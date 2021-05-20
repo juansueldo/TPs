@@ -1,5 +1,5 @@
 #include "Contribuyente.h"
-#include "Recaudaciones.h"
+
 
 int eContribuyente_inicializar (eContribuyente arrayContribuyentes[],int tam)
 {
@@ -8,7 +8,7 @@ int eContribuyente_inicializar (eContribuyente arrayContribuyentes[],int tam)
 	if(arrayContribuyentes != NULL && tam >0)
 	{
 
-		for (i = 0; i < tam; i++) // recorre los arrays inicializandolos
+		for (i = 0; i < tam; i++)
 		{
 			strcpy(arrayContribuyentes[i].nombre," ");
 			strcpy(arrayContribuyentes[i].apellido," ");
@@ -27,7 +27,7 @@ int eContribuyente_buscarLibre (eContribuyente arrayContribuyentes[],int tam)
 	rtn = -1;
 	if(arrayContribuyentes != NULL && tam > 0)
 	{
-		for (i = 0; i < tam; i++) //recorre el array en busqueda de si esta libre
+		for (i = 0; i < tam; i++)
 		{
 			if(arrayContribuyentes[i].isEmpty==1)
 			{

@@ -1,4 +1,7 @@
 
+#ifndef INFORMES_H_
+#define INFORMES_H_
+
 #include "Recaudaciones.h"
 /*
  * @brief Muestra al usuario los contribuyentes y pide el ingreso del ID del contribuyente a dar de baja, da la baja del contribuyente y sus recaudaciones
@@ -43,3 +46,10 @@ int mostrarTodos(eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayCo
  * @return retorna cero si se mostraron los datos
  */
 int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContribuyente[], int cant, eTipo arrayTipo[], int cantTipo, eEstado arrayEstado[], int cantEstado);
+
+int baja_ContribuyenteRecaudaciones (eContribuyente arrayContribuyentes[], int tamanio, eRecaudacion arrayRecaudacion[], int cant);
+
+
+
+
+#endif /* INFORMES_H_ */

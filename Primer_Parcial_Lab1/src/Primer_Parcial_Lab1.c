@@ -172,6 +172,10 @@ int main()
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
+				else
+				{
+					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				}
 			}
 			else
 			{
@@ -182,6 +186,10 @@ int main()
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
 				if(eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) > 0)
+				{
+					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
+				}
+				else
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
@@ -200,5 +208,8 @@ int main()
 
 	return EXIT_SUCCESS;
 }
+
+
+
 
 

@@ -7,7 +7,7 @@ int eRecaudacion_inicializar (eRecaudacion arrayRecaudacion[],int tam)
 	if(arrayRecaudacion != NULL && tam >0)
 	{
 
-		for (i = 0; i < tam; ++i)
+		for (i = 0; i < tam; i++)
 		{
 			arrayRecaudacion[i].mes = 0;
 			arrayRecaudacion[i].idTipo = 0;
@@ -27,7 +27,7 @@ int eTipo_inicializar (eTipo arrayTipo[],int cant)
 	if(arrayTipo != NULL && cant >0)
 	{
 
-		for (i = 0; i < cant; ++i)
+		for (i = 0; i < cant; i++)
 		{
 			arrayTipo[i].idTipo = 0;
 			strcpy(arrayTipo[i].descripcion," ");
@@ -43,7 +43,7 @@ int eEstado_inicializar (eEstado arrayEstado[],int cant)
 	if(arrayEstado != NULL && cant >0)
 	{
 
-		for (i = 0; i < cant; ++i)
+		for (i = 0; i < cant; i++)
 		{
 			arrayEstado[i].idEstado = 0;
 			strcpy(arrayEstado[i].detalleEstado," ");
@@ -123,7 +123,7 @@ int eRecaudacion_buscarLibre (eRecaudacion arrayRecaudacion[],int tam)
 	ret = -1;
 	if(arrayRecaudacion != NULL && tam > 0)
 	{
-		for (i = 0; i < tam; ++i)
+		for (i = 0; i < tam; i++)
 		{
 			if(arrayRecaudacion[i].isEmpty==1)
 			{
@@ -184,49 +184,61 @@ eRecaudacion eRecaudacion_cargar (eContribuyente arrayContribuyente[], int cant)
 int eRecaudacion_alta (eRecaudacion arrayRecaudacion[], int tam, int *pIdContador, eContribuyente arrayContribuyente[], int cant)
 {
 	int rtn = -1;
+	int i;
 	eRecaudacion auxRecaudacion;
 	int index = eRecaudacion_buscarLibre (arrayRecaudacion, tam);
 
-	if (index != -1)
+	if(arrayRecaudacion != NULL && tam > 0 && pIdContador != NULL && arrayContribuyente != NULL && cant >0)
 	{
-		eContribuyente_mostrarTodos(arrayContribuyente, cant);
+		for(i = 0; i < cant; i++)
+		{
+			if(arrayContribuyente[i].isEmpty == 0)
+			{
+				if (index != -1)
+				{
+					eContribuyente_mostrarTodos(arrayContribuyente, cant);
 
-		auxRecaudacion = eRecaudacion_cargar(arrayContribuyente,cant);
+					auxRecaudacion = eRecaudacion_cargar(arrayContribuyente,cant);
 
-		auxRecaudacion.isEmpty = 0;
-		rtn = 0;
-	}
-	if(rtn == 0)
-	{
-		(*pIdContador)++;
-		auxRecaudacion.idRecaudacion = *pIdContador;
-		arrayRecaudacion[index] = auxRecaudacion;
-	}
+					auxRecaudacion.isEmpty = 0;
+					rtn = 0;
+				}
+				if(rtn == 0)
+				{
+					(*pIdContador)++;
+					auxRecaudacion.idRecaudacion = *pIdContador;
+					arrayRecaudacion[index] = auxRecaudacion;
+					break;
+				}
+			}
+		}
+
+}
 
 
 	return rtn;
 }
-void eRecaudacion_mostrarUno (eRecaudacion arrayRecaudacion[],int tamanio, eTipo arrayTipo[], int cant)
+void eRecaudacion_mostrarUno (eRecaudacion arrayRecaudacion[],int tam, eTipo arrayTipo[], int cant)
 {
 	char detalle[30];
-	eRecaudacion_obtenerNombre (arrayTipo,cant,arrayRecaudacion[tamanio].idTipo,detalle);
+	eRecaudacion_obtenerNombre (arrayTipo,cant,arrayRecaudacion[tam].idTipo,detalle);
 	printf("\n%d   %15d      %15d   %10.2f     %15s\n"
-			,arrayRecaudacion[tamanio].idContribuyente
-			,arrayRecaudacion[tamanio].idRecaudacion
-			,arrayRecaudacion[tamanio].mes
-			,arrayRecaudacion[tamanio].importe
+			,arrayRecaudacion[tam].idContribuyente
+			,arrayRecaudacion[tam].idRecaudacion
+			,arrayRecaudacion[tam].mes
+			,arrayRecaudacion[tam].importe
 			,detalle);
 }
-int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tamanio, eTipo arrayTipo[], int cant)
+int eRecaudacion_mostrarTodos (eRecaudacion arrayRecaudacion[],int tam, eTipo arrayTipo[], int cant)
 {
 	int i;
 	int rtn = -1;
-	if(arrayRecaudacion != NULL && tamanio > 0 && arrayTipo != NULL && cant > 0)
+	if(arrayRecaudacion != NULL && tam > 0 && arrayTipo != NULL && cant > 0)
 	{
 		printf("\n**********************************************************************\n");
 		printf("\n ID CONTRIBUYENTE    ID RECAUDACION        MES      IMPORTE      TIPO       ");
 		printf("\n***********************************************************************\n");
-		for (i = 0; i < tamanio; i++)
+		for (i = 0; i < tam; i++)
 		{
 
 			if(arrayRecaudacion[i].isEmpty == 0)
@@ -285,29 +297,33 @@ int eRecaudacion_cambiarEstado (eRecaudacion arrayRecaudacion[],int tam, eContri
 	int flag = 0;
 	int idRecaudacion;
 
-	if (eRecaudacion_mostrarTodos (arrayRecaudacion,tam, arrayTipo, cantTipo) == 0)
-	{
-		flag = 1;
-	}
-
-	if (flag)
-	{
-		printf("\n*****************************************************************\n");
-		printf("INGRESE EL ID DE LA RECAUDACION: ");
-		scanf("%d",&idRecaudacion);
-
-		while (eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) == -1)
+		if(eRecaudacion_isEmpty(arrayRecaudacion, tam) == 0)
 		{
-			printf("NO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION:");
-			scanf("%d",&idRecaudacion);
+			if (eRecaudacion_mostrarTodos (arrayRecaudacion,tam, arrayTipo, cantTipo) == 0)
+			{
+				flag = 1;
+			}
+
+			if (flag)
+			{
+				printf("\n*****************************************************************\n");
+				printf("INGRESE EL ID DE LA RECAUDACION: ");
+				scanf("%d",&idRecaudacion);
+
+				while (eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) == -1)
+				{
+					printf("NO EXISTE ID. REINGRESE EL ID DE LA RECAUDACION:");
+					scanf("%d",&idRecaudacion);
+				}
+				}
+				if(eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) != -1)
+				{
+					*indexId = eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion);
+					eRecaudaciones_mostrarContribuyentes (arrayRecaudacion,tam, arrayContibuyente, cant, &idRecaudacion);
+					rtn = 0;
+				}
 		}
-	}
-	if(eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion) != -1)
-	{
-		*indexId = eRecaudacion_buscarId(arrayRecaudacion, tam, idRecaudacion);
-		eRecaudaciones_mostrarContribuyentes (arrayRecaudacion,tam, arrayContibuyente, cant, &idRecaudacion);
-		rtn = 0;
-	}
+
 	return rtn;
 }
 int eRecaudacion_estadoRefinanciar (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo)
@@ -322,6 +338,10 @@ int eRecaudacion_estadoRefinanciar (eRecaudacion arrayRecaudacion[],int tam, eCo
 			rtn = 0;
 		}
 	}
+	else
+	{
+		rtn = -1;
+	}
 	return rtn;
 }
 int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContribuyente arrayContibuyente[], int cant, eTipo arrayTipo[], int cantTipo)
@@ -335,6 +355,10 @@ int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContri
 			arrayRecaudacion[index].idEstado = 2;
 			rtn = 0;
 		}
+	}
+	else
+	{
+		rtn = -1;
 	}
 	return rtn;
 }
@@ -367,3 +391,36 @@ int eRecaudacion_obtenerNombreEstado (eEstado arrayEstado[],int cant,int estado,
 
 	return rtn;
 }
+
+
+int eRecaudacion_isEmpty (eRecaudacion arrayRecaudacion[], int tam)
+{
+	int rtn = -1;
+	for(int i = 0; i < tam; i++)
+	{
+		if(arrayRecaudacion[i].isEmpty == 0)
+		{
+			rtn = 0;
+		}
+
+	}
+	return rtn;
+}
+int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribuyente, int*index)
+{
+	int rtn = -1;
+	int indexRecaudacion;
+	int i;
+
+	indexRecaudacion = eRecaudacion_buscarIdContribuyente(arrayRecaudacion, tam, *pIdContribuyente);
+	for(i = 0; i < tam; i++)
+		{
+			if(*pIdContribuyente == arrayRecaudacion[i].idRecaudacion)
+			{
+				arrayRecaudacion[indexRecaudacion].isEmpty = 1;
+				rtn = 0;
+			}
+		}
+
+		return rtn;
+	}

@@ -1,4 +1,3 @@
-
 #ifndef CONTRIBUYENTE_H_
 #define CONTRIBUYENTE_H_
 
@@ -90,5 +89,8 @@ int eContribuyente_mostrarTodos (eContribuyente arrayContribuyentes[],int tamani
  */
 void eContribuyente_mostrarUno (eContribuyente arrayContribuyentes[],int tamanio);
 
+
+int eContribuyente_bajaContribuyente (eContribuyente arrayContribuyentes[], int tamanio, int*pIdContribuyente, int*index);
+int eContribuyente_isEmpty (eContribuyente arrayContribuyentes[], int tam);
 
 #endif /* CONTRIBUYENTE_H_ */

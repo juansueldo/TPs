@@ -1,4 +1,5 @@
 
+
 #ifndef RECAUDACIONES_H_
 #define RECAUDACIONES_H_
 
@@ -180,4 +181,7 @@ int eRecaudacion_estadoSaldado (eRecaudacion arrayRecaudacion[],int tam, eContri
  */
 int eRecaudacion_obtenerNombreEstado (eEstado arrayEstado[],int cant,int estado,char detalle[20]);
 
+
+int eRecaudacion_baja (eRecaudacion arrayRecaudacion[], int tam, int*pIdContribuyente, int*index);
+int eRecaudacion_isEmpty (eRecaudacion arrayRecaudacion[], int tam);
 #endif /* RECAUDACIONES_H_ */
