@@ -75,10 +75,6 @@ int eRecaudacion_mostrarSaldados (eRecaudacion arrayRecaudacion[],int tam, eCont
 					}
 				}
 			}
-			else
-			{
-				rtn = -1;
-			}
 		}
 	}
 	return rtn;

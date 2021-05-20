@@ -167,11 +167,7 @@ int main()
 		case 7:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				if(mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) == 0)
-				{
-					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
-				}
-				else
+				if(mostrarTodos (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) != 0)
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
@@ -185,15 +181,10 @@ int main()
 		case 8:
 			if(flagAlta == 1 && flagRecaudacion == 1 && flagEstado == 1)
 			{
-				if(eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) == 0)
+				if(eRecaudacion_mostrarSaldados (arrayRecaudadores,CANT, arrayContribuyentes, MAX, arrayTipo, CANT_TIPO,arrayEstado, CANT_ESTADO) != 0)
 				{
 					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
 				}
-				else
-				{
-					printf("\nSE DEBEN INGRESAR TODOS LOS DATOS.\n\n");
-				}
-
 			}
 			else
 			{
