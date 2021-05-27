@@ -33,47 +33,67 @@ int main(void) {
 	int opcion;
 	int auxiliar;
 	int (*pHacer)(int,int,int*);
+	int flag = 0;
 
-	utn_getNumero(&num1,"\nIngrese el primer numero[0 a 9999]: ","\nERROR.",0,9999,3);
-	utn_getNumero(&num2,"\nIngrese segundo numero[0 a 9999]: ","\nERROR.",0,9999,3);
-	printf("\n\n");
 	do
 	{
-		utn_menu(&opcion,"\nIngrese una opcion  1 [Maximo] 2 [Minimo] 3 [Salir]: ","\nERROR.",1,3);
+		utn_menu(&opcion,"\nMENU\n1 [Ingresar datos] \n2 [Maximo] \n3 [Minimo] \n4 [Salir]\nIngrese: ","\nERROR.",1,4);
 
 		switch(opcion)
 		{
 		case 1:
-			pHacer = fMaximo;
-			if(pHacer)
+			if(utn_getNumero(&num1,"\nIngrese el primer numero[0 a 9999]: ","\nERROR.",0,9999,3)== 0 && utn_getNumero(&num2,"\nIngrese segundo numero[0 a 9999]: ","\nERROR.",0,9999,3)==0)
 			{
-				auxiliar = calcular(num1,num2,pHacer);
-				printf("\nEl maximo es %d\n\n",auxiliar);
+				flag = 1;
 			}
-			else
-			{
-				printf("\nNo existe el maximo\n\n");
-			}
+			printf("\n\n");
 			system ("pause");
-		break;
+			break;
 		case 2:
-			pHacer = fMninimo;
-			if(pHacer)
+			if(flag != 0)
 			{
-				auxiliar = calcular(num1,num2,pHacer);
-				printf("\nEl minimo es %d\n\n",auxiliar);
+				pHacer = fMaximo;
+				if(pHacer)
+				{
+					auxiliar = calcular(num1,num2,pHacer);
+				printf("\nEl maximo es %d\n\n",auxiliar);
+				}
+				else
+				{
+					printf("\nNo existe el maximo\n\n");
+				}
 			}
 			else
 			{
-				printf("\nNo existe el minimo\n\n");
+				printf("\nDEBE INGRESAR LOS OPERADORES\n");
 			}
 			system ("pause");
 		break;
 		case 3:
+			if(flag != 0)
+			{
+				pHacer = fMninimo;
+				if(pHacer)
+				{
+					auxiliar = calcular(num1,num2,pHacer);
+					printf("\nEl minimo es %d\n\n",auxiliar);
+				}
+				else
+				{
+					printf("\nNo existe el minimo\n\n");
+				}
+			}
+			else
+			{
+				printf("\nDEBE INGRESAR LOS OPERADORES\n");
+			}
+			system ("pause");
+		break;
+		case 4:
 			printf("\nFin");
 		break;
 	}
-	}while(opcion != 3);
+	}while(opcion != 4);
 	return EXIT_SUCCESS;
 }
 int fMaximo (int num1, int num2, int *pMaximo)
