@@ -94,6 +94,7 @@ int main(void) {
 		 	break;
 		 }
 	}
+
 	for(int i=0; i<3; i++)
 	{
 		printf("\nEl nombre es: %s, la edad es: %d, el legajo es: %d", arrayEstudiante.nombre, arrayEstudiante.edad, arrayEstudiante.legajo);
@@ -103,7 +104,7 @@ int main(void) {
 	int rtn;
 	for(i = 0; i < 3; i++)
 		{
-			rtn = cuartaFuncion(&arrayEstudiantes);
+			rtn = cuartaFuncion(arrayEstudiantes+i);
 			 if(rtn == 0)
 			 {
 				 continue;
@@ -116,7 +117,7 @@ int main(void) {
 		}
 		for(int i=0; i<3; i++)
 		{
-			printf("\nEl nombre es: %s, la edad es: %d, el legajo es: %d", arrayEstudiante.nombre, arrayEstudiante.edad, arrayEstudiante.legajo);
+			printf("\nEl nombre es: %s, la edad es: %d, el legajo es: %d", (*(arrayEstudiantes+i)).nombre, (*(arrayEstudiantes+i)).edad, (*(arrayEstudiantes+i)).legajo);
 		}
 
 
@@ -165,25 +166,23 @@ int segundaFuncion(int arrayInt[], int*pPuntero)
 }
 eEstudiante terceraFuncion (int *pNum)
 {
-	*pNum = -1;
-	eEstudiante* arrayAux;
-	(*arrayAux).edad= 0;
-	(*arrayAux).legajo = 0;
-	strcpy((*arrayAux).nombre," ");
-	if(arrayAux != NULL && pNum != NULL)
+	eEstudiante estudiante;
+	*pNum=-1;
+	if(pNum!=NULL)
 	{
-	printf("\nIngrese el legajo: ");
-	scanf("%d",&(*arrayAux).legajo);
+		printf("\nIngrese nombre");
+		fflush(stdin);
+		gets(estudiante.nombre);
 
-	printf("\nIngrese el nombre: ");
-	fflush(stdin);
-	gets((*arrayAux).nombre);
+		printf("\nIngrese edad");
+		scanf("%d", &estudiante.edad);
 
-	printf("\nIngrese la edad: ");
-	scanf("%d",&(*arrayAux).edad);
-	*pNum = 0;
+		printf("\nIngrese legajo");
+		scanf("%d", &estudiante.legajo);
+
+		*pNum=0;
 	}
-	return *arrayAux;
+	return estudiante;
 }
 int cuartaFuncion (eEstudiante* arrayEstudiante)
 {
