@@ -30,17 +30,18 @@ int main(void) {
 	pFunc = compararPorMarca;
 
 	ordenador(arrayProductos, TAM, pFunc);
-
+    printf("\nORDENAR POR MARCA");
 	for(int i = 0;i < TAM; i++)
 	{
-		printf("\nId %d MARCA %s PRECIO %d", (*(arrayProductos+i)).idProducto, (*(arrayProductos+i)).marca, (*(arrayProductos+i)).precio);
+		printf("\nMARCA %s   ID %d   PRECIO $%d", (*(arrayProductos+i)).marca, (*(arrayProductos+i)).idProducto, (*(arrayProductos+i)).precio);
+
 	}
 	pFunc = compararPorPrecio;
 	ordenador(arrayProductos, TAM, pFunc);
-
+    printf("\n\nORDENAR POR PRECIO");
 		for(int i = 0;i < TAM; i++)
 		{
-			printf("\nId %d MARCA %s PRECIO %d", (*(arrayProductos+i)).idProducto, (*(arrayProductos+i)).marca, (*(arrayProductos+i)).precio);
+			printf("\nPRECIO $%d   ID %d   MARCA %s ", (*(arrayProductos+i)).precio, (*(arrayProductos+i)).idProducto, (*(arrayProductos+i)).marca);
 		}
 	return EXIT_SUCCESS;
 }
@@ -93,12 +94,12 @@ int ordenador(eProducto arrayProducto[], int tam, pFunc pFuncion)
 		{
 			if(pFuncion((arrayProducto+i), (arrayProducto+j)))
 			{
-				retorno =0; //printf("\nId %d MARCA %s PRECIO %d", (*(arrayProducto)).idProducto, (*(arrayProducto)).marca, (*(arrayProducto)).precio);
+				retorno =0;
 			}
 
 			if(pFuncion ((arrayProducto+i), (arrayProducto+j)))
 			{
-				retorno =0; //printf("\nId %d MARCA %s PRECIO %d", (*(arrayProducto)).idProducto, (*(arrayProducto)).marca, (*(arrayProducto)).precio);
+				retorno =0;
 			}
 
 		}
@@ -107,3 +108,4 @@ int ordenador(eProducto arrayProducto[], int tam, pFunc pFuncion)
 	}
 	return retorno;
 }
+
