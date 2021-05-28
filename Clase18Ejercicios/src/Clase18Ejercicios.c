@@ -95,10 +95,9 @@ int main(void) {
 		 }
 	}
 
-	for(int i=0; i<3; i++)
-	{
+
 		printf("\nEl nombre es: %s, la edad es: %d, el legajo es: %d", arrayEstudiante.nombre, arrayEstudiante.edad, arrayEstudiante.legajo);
-	}
+
 
 	eEstudiante arrayEstudiantes[3];
 	int rtn;
