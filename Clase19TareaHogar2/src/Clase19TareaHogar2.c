@@ -1,12 +1,10 @@
 /*
  ============================================================================
- Name        : Clase19MemoriaDinamica.c
+ Name        : Clase19TareaHogar2.c
  Author      : 
- Realizar una función que reciba como parámetro:
- un array de enteros, su tamaño y un entero.
- La función se encargará de buscar el valor
- y borrará la primera ocurrencia del mismo.
- El array deberá reestructurarse dinámicamente
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
  ============================================================================
  */
 
@@ -14,7 +12,7 @@
 #include <stdlib.h>
 #define TAM 5
 
-void fBuscar (int array[], int len, int entero);
+void fBuscar (int array[], int len, int entero, int index);
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -36,16 +34,16 @@ int main(void) {
 	    printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
 	}
 
-	fBuscar (vector, i, 2);
+	fBuscar (vector, i, 10, 2);
 
 	printf("\n\n");
 
-	vecAux = (int*)realloc(vector,sizeof(int)*TAM-1);
+	vecAux = (int*)realloc(vector,sizeof(int)*TAM+1);
 	if (vecAux!=NULL)
 	{
 		vector = vecAux;
 	}
-	for (i=0;i<TAM-1;i++)
+	for (i=0;i<TAM+1;i++)
 	{
 		printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
 	}
@@ -55,7 +53,7 @@ free(vecAux);
 
 	return EXIT_SUCCESS;
 }
-void fBuscar (int array[], int len, int entero)
+void fBuscar (int array[], int len, int entero, int index)
 {
 	int i;
 	int j;
@@ -64,16 +62,19 @@ void fBuscar (int array[], int len, int entero)
 		{
 			for(i=0; i<len-1; i++)
 			{
+				if(i == index)
+				{
+					*(array+index) = entero;
+				}
+
 				for(j= i+1; j < len; j++)
 				{
-				if(*(array+i) == entero)
-				{
-					aux = *(array+i);
+					 aux = *(array+i);
 					*(array+i) = *(array+j);
 					*(array+j) = aux;
 				}
 
 				}
 			}
-		}
+
 }
