@@ -33,16 +33,16 @@ int main(void) {
 	{
 	    printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
 	}
-
-	fBuscar (vector, i, 10, 2);
-
-	printf("\n\n");
-
 	vecAux = (int*)realloc(vector,sizeof(int)*TAM+1);
 	if (vecAux!=NULL)
 	{
 		vector = vecAux;
 	}
+
+	fBuscar (vector, TAM+1, 10, 2);
+
+	printf("\n\n");
+
 	for (i=0;i<TAM+1;i++)
 	{
 		printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
@@ -59,22 +59,22 @@ void fBuscar (int array[], int len, int entero, int index)
 	int j;
 	int aux;
 	if(array!=NULL && len>0)
+	{
+		for(i=0; i<len-1; i++)
 		{
-			for(i=0; i<len-1; i++)
+		for(j= i+1; j < len; j++)
+		{
+			if(i == index)
 			{
-				if(i == index)
-				{
-					*(array+index) = entero;
-				}
-
-				for(j= i+1; j < len; j++)
-				{
-					 aux = *(array+i);
-					*(array+i) = *(array+j);
-					*(array+j) = aux;
-				}
-
-				}
+				aux = *(array+i);
+				*(array+i) = *(array+j);
+				*(array+j) = aux;
+				*(array+index) = entero;
+				break;
 			}
 
+		}
+		}
+	}
 }
+

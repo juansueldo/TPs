@@ -36,7 +36,7 @@ int main(void) {
 	    printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
 	}
 
-	fBuscar (vector, i, 2);
+	fBuscar (vector, TAM, 2);
 
 	printf("\n\n");
 
