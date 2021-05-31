@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #define TAM 5
 
 void fBuscar (int array[], int len, int entero);
@@ -27,13 +28,13 @@ int main(void) {
 	 {
 	     for (i=0;i<TAM;i++)
 	     {
-	    	 printf("\nINGRESE EL %d NUMERO: ",i);
+	    	 printf("\nINGRESE EL NUMERO DE LA POSICION %d: ",i);
 	    	 scanf("%d",&(*(vector+i)));
 	     }
 	}
 	for (i=0;i<TAM;i++)
 	{
-	    printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
+	    printf("\nNUMERO INGRESADO: %d POSICION: %d", *(vector+i), i);
 	}
 
 	fBuscar (vector, TAM, 2);
@@ -47,7 +48,7 @@ int main(void) {
 	}
 	for (i=0;i<TAM-1;i++)
 	{
-		printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
+		printf("\nNUMERO INGRESADO: %d POSICION: %d", *(vector+i), i);
 	}
 
 free(vector);
@@ -60,6 +61,7 @@ void fBuscar (int array[], int len, int entero)
 	int i;
 	int j;
 	int aux;
+
 	if(array!=NULL && len>0)
 		{
 			for(i=0; i<len-1; i++)
@@ -71,6 +73,7 @@ void fBuscar (int array[], int len, int entero)
 					aux = *(array+i);
 					*(array+i) = *(array+j);
 					*(array+j) = aux;
+
 				}
 
 				}

@@ -1,16 +1,17 @@
 /*
  ============================================================================
  Name        : Clase19TareaHogar2.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Author      : Juan Sueldo
+ Realizar una función que reciba como parámetro
+ un array de enteros, su tamaño, un valor entero y un índice.
+ La función se engargará de insertar el valor entero en el índice especificado.
+ El array debera reestrucurarse dinámicamente
  ============================================================================
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 5
+#define TAM 4
 
 void fBuscar (int array[], int len, int entero, int index);
 
@@ -25,13 +26,13 @@ int main(void) {
 	 {
 	     for (i=0;i<TAM;i++)
 	     {
-	    	 printf("\nINGRESE EL %d NUMERO: ",i);
+	    	 printf("\nINGRESE EL NUMERO DE LA POSICION %d: ",i);
 	    	 scanf("%d",&(*(vector+i)));
 	     }
 	}
 	for (i=0;i<TAM;i++)
 	{
-	    printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
+	    printf("\nNUMERO INGRESADO: %d POSICION: %d", *(vector+i), i);
 	}
 	vecAux = (int*)realloc(vector,sizeof(int)*TAM+1);
 	if (vecAux!=NULL)
@@ -45,7 +46,14 @@ int main(void) {
 
 	for (i=0;i<TAM+1;i++)
 	{
-		printf("\nNUMERO INGRESADO %d POSICION %d", *(vector+i), i);
+	    if(i != 2)
+	    {
+		printf("\nNUMERO INGRESADO: %d POSICION: %d", *(vector+i), i);
+	    }
+	    else
+		{
+		    printf("\nNUMERO INSERTADO: %d POSICION: %d", *(vector+i), i);
+		}
 	}
 
 free(vector);
@@ -76,4 +84,3 @@ void fBuscar (int array[], int len, int entero, int index)
 		*(array+index) = entero;
 	}
 }
-
