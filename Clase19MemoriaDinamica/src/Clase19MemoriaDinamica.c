@@ -73,6 +73,7 @@ void fBuscar (int array[], int len, int entero)
 					aux = *(array+i);
 					*(array+i) = *(array+j);
 					*(array+j) = aux;
+					break;
 
 				}
 
