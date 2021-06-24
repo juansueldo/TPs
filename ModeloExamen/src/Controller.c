@@ -34,6 +34,7 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
 {
     int retorno = -1;
     int i;
+    int j;
     int id;
     int pantalla = 999;
     int respuesta;
@@ -44,16 +45,16 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
 	char detalleDia[MAX_NOMBRE];
 	int sala;
 	int cantidad;
-    eMovie* pAuxMovie = NULL;
+    eMovie* pAuxMovie = eMovie_new();
     eDias* arrayDias = NULL;
 
     if(pArrayListMovies != NULL)
     {
     	if(ll_len(pArrayListMovies)>0)
     	{
-        printf("|*******|**********************************|*******|*************|*******|**************|\n");
-        printf("|   ID  |               NOMBRE             |  DIA  |   HORARIO   |  SALA |   CANTIDAD   |\n");
-        printf("|*******|**********************************|*******|*************|*******|**************|\n");
+        printf("|*******|**************************************************************|************|************|*******|***********|\n");
+        printf("|   ID  |                        NOMBRE                                |    DIA     |   HORARIO  |  SALA |  CANTIDAD |\n");
+        printf("|*******|**************************************************************|************|************|*******|***********|\n");
         do
         {
         for(i = 0 ; i < ll_len(pArrayListMovies); i++)
@@ -62,14 +63,19 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
         	eMovie_getId(pAuxMovie, &id);
         	eMovie_getNombre(pAuxMovie, nombre);
         	eMovie_getDia(pAuxMovie, &dia);
-        	eMovie_getDays(arrayDias, &dia, pAuxMovie, detalleDia);
         	eMovie_getHora(pAuxMovie, horario);
         	eMovie_getSala(pAuxMovie, &sala);
         	eMovie_getCantidad(pAuxMovie, &cantidad);
+        	for(j=0; j < 7; j++)
+        	{
+        		arrayDias = (eDias*)ll_get(pArrayListMovies, j);
+        		eMovie_getDays(arrayDias, dia, detalleDia);
+        	}
 
             utn_getMayusMin(nombre,MAX_NOMBRE);
-            printf("| %5d | %50s | %10s | %10s | %10d | %10d|\n", id,nombre,detalleDia, horario,sala,cantidad);
-        	if(i == pantalla)
+            printf("| %5d | %60s | %10s | %10s | %5d | %10d|\n", id,nombre,detalleDia, horario,sala,cantidad);;
+
+            if(i == pantalla)
              {
         		do
         		{
@@ -90,45 +96,33 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
 int controller_getMontos (LinkedList* pArrayListMovies)
 {
 	int retorno = -1;
-	eMovie* pAuxMovie = NULL;
+	eMovie* pAuxMovie = eMovie_new();
+	int id;
 	int dia;
 	int cantidad;
+	char horario[MAX_NOMBRE];
+	char nombre[MAX_NOMBRE];
+	int sala;
 	float auxMonto;
-	float descuento;
 	int i;
-	if(pArrayListMovies != NULL)
-	{
-		if(pAuxMovie != NULL)
-		{
 		for(i = 0; i < ll_len(pArrayListMovies);i++)
 		{
 			pAuxMovie = (eMovie*)ll_get(pArrayListMovies, i);
 			eMovie_getDia(pAuxMovie, &dia);
 			eMovie_getCantidad(pAuxMovie, &cantidad);
+			eMovie_getId(pAuxMovie, &id);
+			eMovie_getNombre(pAuxMovie, nombre);
+			eMovie_getHora(pAuxMovie, horario);
+        	eMovie_getSala(pAuxMovie, &sala);
+			eMovie_getMontoGenrado (pAuxMovie, dia,cantidad, &auxMonto);
 
-			if(dia == 1 || dia == 2 || dia ==3)
+			pAuxMovie = eMovie_newParametrosInt(id,nombre,dia,horario,sala,cantidad,auxMonto);
+			printf("NOMBRE %s  MONTO %.2f\n",pAuxMovie->nombre_pelicula,pAuxMovie->monto);
+			if(pAuxMovie != NULL && ll_add(pArrayListMovies, (eMovie*)pAuxMovie) == 0)
 			{
-				auxMonto = 240;
-				printf("%.2f",auxMonto);
-				//eMovie_setMonto(pAuxMovie, auxMonto);
+				retorno = 0;
 			}
-			else
-			{
-				auxMonto = 350;
-				printf("%.2f",auxMonto);
-				//eMovie_setMonto(pAuxMovie, auxMonto);
-			}
-			if(cantidad > 3)
-			{
-				descuento = auxMonto * 0.1;
-				auxMonto = auxMonto - descuento;
-			}
-
-			printf("%.2f",auxMonto);
-			retorno = 0;
 		}
-		}
-	}
 	return retorno;
 }
 

@@ -14,14 +14,20 @@ eMovie* eMovie_new()
 
     return pAuxeMovie;
 }
+void eMovie_delete(eMovie *this)
+{
+
+    if(this != NULL)
+    {
+        free(this);
+    }
+}
 eMovie* eMovie_newParametros(char* idStr,char* nombreStr,char* diaStr, char* horarioStr, char* salaStr, char* cantidadStr)
 {
     eMovie* this = eMovie_new();
     void *retorno = NULL;
     if(this != NULL && idStr != NULL && nombreStr != NULL && horarioStr != NULL && salaStr != NULL &&cantidadStr != NULL)
     {
-
-
     	if(!eMovie_setId(this, atoi(idStr)) &&
     	!eMovie_setNombre(this, nombreStr) &&
     	!eMovie_setDia(this, atoi(diaStr)) &&
@@ -29,6 +35,11 @@ eMovie* eMovie_newParametros(char* idStr,char* nombreStr,char* diaStr, char* hor
     	!eMovie_setSala(this, atoi(salaStr)) &&
 		!eMovie_setCantidad(this,atoi(cantidadStr)))
     	{
+    		retorno = this;
+    	}
+    	else
+    	{
+    		eMovie_delete(this);
     		retorno = this;
     	}
 
@@ -166,44 +177,45 @@ int eMovie_getCantidad(eMovie* this,int* cantidad)
 	}
 	return retorno;
 }
-int eMovie_getDays (eDias* arrayDias,int *dia, eMovie* this,char* detalleDia)
+int eMovie_getDays (eDias* arrayDias,int dia,char* detalleDia)
 {
 	int retorno = -1;
 	if(arrayDias != NULL && detalleDia != NULL)
 	{
-		if(arrayDias->dia == *dia)
+		if(arrayDias->dia == dia)
 		{
-			switch(arrayDias->dia)
+			switch(dia)
 			{
 			case 0:
 				strcpy(detalleDia,"Domingo");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 1:
 				strcpy(detalleDia,"Lunes");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 2:
 				strcpy(detalleDia,"Martes");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 3:
 				strcpy(detalleDia,"Miercoles");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 4:
 				strcpy(detalleDia,"Jueves");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 5:
 				strcpy(detalleDia,"Viernes");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			case 6:
 				strcpy(detalleDia,"Sabado");
-				retorno = 0;
+				//retorno = 0;
 				break;
 			}
+			retorno = 0;
 		}
 	}
 
@@ -230,27 +242,56 @@ int eMovie_getMonto(eMovie* this,float* monto)
 	}
 	return retorno;
 }
-/*
-eMovie* eMovie_newParametrosInt(int id, char* nombre,int horasTrabajadas, int sueldo)
+int eMovie_getMontoGenrado (eMovie* this, int dia,int cantidad, float* monto)
+{
+	int retorno = -1;
+	float descuento;
+	if(this != NULL)
+	{
+		if(dia == 1 || dia == 2 || dia ==3)
+		{
+			*monto = 240 * cantidad;
+		}
+		else
+		{
+			*monto = 350 * cantidad;
+		}
+		if(cantidad > 3)
+		{
+			descuento = *monto *0.1;
+			*monto = *monto - descuento;
+		}
+		retorno = 0;
+	}
+	return retorno;
+}
+
+eMovie* eMovie_newParametrosInt(int id,char* nombre,int dia, char* horario, int sala, int cantidad, float monto)
 {
     void *retorno = NULL;
     eMovie* this = eMovie_new();
-    if( this!=NULL && id > 0 && nombre != NULL && horasTrabajadas > 0 && sueldo > 0)
+    if( this!=NULL && id > 0 && nombre != NULL && dia >= 0 && horario != NULL && sala > 0 && cantidad > 0 && monto > 0)
     {
-        if( !eMovie_setId(this, id) &&
-            !eMovie_setNombre(this,nombre) &&
-            !eMovie_setHorasTrabajadas(this,horasTrabajadas) &&
-            !eMovie_setSueldo(this,sueldo))
-        {
-            retorno = this;
-        }
-        else
-        {
-            eMovie_delete(this);
-        }
-    }
-    return retorno;
-}
+    	 if(!eMovie_setId(this, id) &&
+    	    !eMovie_setNombre(this, nombre) &&
+    	    !eMovie_setDia(this, dia) &&
+    		!eMovie_setHora(this,horario) &&
+    	    !eMovie_setSala(this, sala) &&
+    		!eMovie_setCantidad(this,cantidad)&&
+			!eMovie_setMonto(this,monto))
+    	   {
+    	    	retorno = this;
+    	   }
+    	   else
+    	    {
+    	    	eMovie_delete(this);
+    	    	retorno = this;
+    	    }
+
+    	    }
+    	    return retorno;
+    	}
+/*
 void eMovie_delete(eMovie *this)
 {
 

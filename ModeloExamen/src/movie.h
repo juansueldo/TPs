@@ -55,8 +55,9 @@ int eMovie_getHora(eMovie* this,char* horario);
 int eMovie_setCantidad(eMovie* this,int cantidad);
 
 int eMovie_getCantidad(eMovie* this,int* cantidad);
-int eMovie_getDays (eDias* arrayDias,int* dia,eMovie* this,char detalleDia[MAX_NOMBRE]);
+int eMovie_getDays (eDias* arrayDias,int dia,char* detalleDia);
 int eMovie_setMonto(eMovie* this,float monto);
 int eMovie_getMonto(eMovie* this,float* monto);
-
+int eMovie_getMontoGenrado (eMovie* this, int dia,int cantidad, float* monto);
+eMovie* eMovie_newParametrosInt(int id,char* nombre,int dia, char* horario, int sala, int cantidad, float monto);
 #endif /* MOVIE_H_ */

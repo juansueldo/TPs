@@ -43,6 +43,12 @@ int main(void) {
 	        	   break;
 	           case 3:
 	        	   controller_getMontos (listapeliculas);
+	        	   break;
+	           case 4:
+	        	   break;
+	           case 5:
+	        	   printf("\nFIN DEL PROGRAMA.");
+	        	   break;
 	        }
 	}while(option != 5);
 	return EXIT_SUCCESS;

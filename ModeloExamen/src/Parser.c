@@ -31,9 +31,7 @@ int parser_MovieFromText(FILE* pFile , LinkedList* pArrayListMovie)
 
                 if(pAuxMovie != NULL && ll_add(pArrayListMovie, (eMovie*)pAuxMovie) == 0)
                 {
-                	//printf("%d %s %d %d %d %s\n",pAuxMovie->id_venta,pAuxMovie->nombre_pelicula,pAuxMovie->dia,pAuxMovie->sala,pAuxMovie->cantidad_entradas,pAuxMovie->horario);
                     retorno = 0;
-
                 }
             }
         }while(!feof(pFile));
