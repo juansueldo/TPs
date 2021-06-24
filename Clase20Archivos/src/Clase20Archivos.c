@@ -32,6 +32,7 @@
 
 int main(void)
 {
+	setbuf(stdout, NULL);
 	Alumno* arrayPunterosAlumno[QTY_ALUMNOS];
 	int opcion;
 	int proximoId = 0;
