@@ -24,6 +24,10 @@ typedef struct{
 	float costo;
 }eSala;
 
+typedef struct{
+	int tipo;
+	char detalleTipo[MAX_NOMBRE];
+}eTipo;
 
 eSala* eSala_new();
 eSala* eSala_newParametros (char* idStr,char* fechaStr,char* tipoStr, char* cantidadStr, char* duracionStr);
@@ -44,6 +48,8 @@ int eSala_getCantidad(eSala* this,int* cantidad);
 
 int eSala_setDuracion(eSala* this,int duracion);
 int eSala_getDuracion(eSala* this,int* duracion);
+
+int eSala_getDetalleTipo (eTipo* arrayTipo,int tipo,char* detalleTipo);
 /*
 int eSala_setCantidad(eSala* this,int cantidad);
 

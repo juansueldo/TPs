@@ -151,42 +151,70 @@ int eSala_getDuracion(eSala* this,int* duracion)
 		*duracion = this->duracion;
 	}
 	return retorno;
-}/*
-int eSala_getDays (eDias* arrayDias,int dia,char* detalleDia)
+}
+int eSala_getDetalleTipo (eTipo* arrayTipo,int tipo,char* detalleTipo)
 {
 	int retorno = -1;
-	if(arrayDias != NULL && detalleDia != NULL)
+	if(arrayTipo != NULL && detalleTipo != NULL)
 	{
-		if(arrayDias->dia == dia)
+		if(arrayTipo->tipo == tipo)
+		{
+			switch(tipo)
+			{
+			case 0:
+				strcpy(detalleTipo,"Ping Pong");
+				break;
+			case 1:
+				strcpy(detalleTipo,"Pool");
+				break;
+			case 2:
+				strcpy(detalleTipo,"Metegol");
+				break;
+			case 3:
+				strcpy(detalleTipo,"Dardos");
+				break;
+			}
+			retorno = 0;
+		}
+	}
+
+	return retorno;
+}/*
+int eSala_getDays (eDias* arrayTipo,int dia,char* detalleTipo)
+{
+	int retorno = -1;
+	if(arrayTipo != NULL && detalleTipo != NULL)
+	{
+		if(arrayTipo->dia == dia)
 		{
 			switch(dia)
 			{
 			case 0:
-				strcpy(detalleDia,"Domingo");
+				strcpy(detalleTipo,"Domingo");
 				//retorno = 0;
 				break;
 			case 1:
-				strcpy(detalleDia,"Lunes");
+				strcpy(detalleTipo,"Lunes");
 				//retorno = 0;
 				break;
 			case 2:
-				strcpy(detalleDia,"Martes");
+				strcpy(detalleTipo,"Martes");
 				//retorno = 0;
 				break;
 			case 3:
-				strcpy(detalleDia,"Miercoles");
+				strcpy(detalleTipo,"Miercoles");
 				//retorno = 0;
 				break;
 			case 4:
-				strcpy(detalleDia,"Jueves");
+				strcpy(detalleTipo,"Jueves");
 				//retorno = 0;
 				break;
 			case 5:
-				strcpy(detalleDia,"Viernes");
+				strcpy(detalleTipo,"Viernes");
 				//retorno = 0;
 				break;
 			case 6:
-				strcpy(detalleDia,"Sabado");
+				strcpy(detalleTipo,"Sabado");
 				//retorno = 0;
 				break;
 			}

@@ -40,20 +40,21 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
     int respuesta;
     int respuesta2;
 	char fecha[MAX_NOMBRE];
+	char detalleTipo[MAX_NOMBRE];
 	int tipo;
 	int duracion;
-	int sala;
+	int j;
 	int cantidad;
     eSala* pAuxSala = eSala_new();
-   // eDias* arrayDias = NULL;
+    eTipo* pArrayTipo = NULL;
 
     if(pArrayListMovies != NULL)
     {
     	if(ll_len(pArrayListMovies)>0)
     	{
-        printf("|*******|**************************************************************|************|************|******************|\n");
-        printf("|   ID  |                        FECHA                                 |    TIPO    |   CANTIDAD |     DURACION     |\n");
-        printf("|*******|**************************************************************|************|************|******************|\n");
+        printf("|*******|************|************|************|************|\n");
+        printf("|   ID  |    FECHA   |    TIPO    |   CANTIDAD |  DURACION  |\n");
+        printf("|*******|************|************|************|************|\n");
         do
         {
         for(i = 0 ; i < ll_len(pArrayListMovies); i++)
@@ -65,8 +66,13 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
         	eSala_getTipo(pAuxSala, &tipo);
         	eSala_getCantidad(pAuxSala, &cantidad);
         	eSala_getDuracion(pAuxSala, &duracion);
-
-            printf("| %5d | %60s | %10d | %10d | %10d |\n", id,fecha,tipo, cantidad,duracion);
+        	for(j=0; j < 4; j++)
+        	{
+        		pArrayTipo = (eTipo*)ll_get(pArrayListMovies, j);
+        		eSala_getDetalleTipo(pArrayTipo, tipo, detalleTipo);
+        	}
+        	//utn_getMayusMin(detalleTipo,MAX_NOMBRE);
+            printf("| %5d | %10s | %10s | %10d | %10d |\n", id,fecha,detalleTipo, cantidad,duracion);
 
             if(i == pantalla)
              {

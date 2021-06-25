@@ -19,7 +19,7 @@ int parser_MovieFromText(FILE* pFile , LinkedList* pArrayListMovie)
         {
         	cantidad = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3],buffer[4]);
 
-        	if(cantidad < 6)
+        	if(cantidad < 5)
             {
         		printf("\nFIN");
         		break;
