@@ -42,9 +42,25 @@ int main(void) {
 	        	   }
 	        	   break;
 	           case 3:
-	        	   controller_getMontos (listapeliculas);
+	        	   if(ll_map(listapeliculas, calcularMonto)==0)
+	        	   {
+	        		   printf("\nSE OBTUVIERON LOS MONTOS");
+	        		   if(controller_saveAsText("archivos2.csv",listapeliculas)==0)
+	        		   {
+	        			   printf("\nSE GUARDARON LOS DATOS");
+	        		   }
+	        		   else
+	        		   {
+	        			   printf("\nNO SE GUARDARON LOS DATOS");
+	        		   }
+	        	   }
+	        	   else
+	        	   {
+	        		   printf("\nNO SE OBTUVIERON LOS MONTOS");
+	        	   }
 	        	   break;
 	           case 4:
+	        	   	   controller_ListBySala(listapeliculas);
 	        	   break;
 	           case 5:
 	        	   printf("\nFIN DEL PROGRAMA.");

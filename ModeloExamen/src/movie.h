@@ -60,4 +60,6 @@ int eMovie_setMonto(eMovie* this,float monto);
 int eMovie_getMonto(eMovie* this,float* monto);
 int eMovie_getMontoGenrado (eMovie* this, int dia,int cantidad, float* monto);
 eMovie* eMovie_newParametrosInt(int id,char* nombre,int dia, char* horario, int sala, int cantidad, float monto);
+void calcularMonto(void* this);
+int eMovie_compareBynombre(void* pThis1, void* pThis2);
 #endif /* MOVIE_H_ */

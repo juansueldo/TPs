@@ -13,4 +13,6 @@
 int controller_loadFromText(char* path , LinkedList* pArrayListMovies);
 int controller_ListMovies(LinkedList* pArrayListMovies);
 int controller_getMontos (LinkedList* pArrayListMovies);
+int controller_saveAsText(char* path , LinkedList* pArrayListMovies);
+int controller_ListBySala(LinkedList* pArrayListMovies);
 #endif /* CONTROLLER_H_ */

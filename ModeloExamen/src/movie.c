@@ -265,7 +265,36 @@ int eMovie_getMontoGenrado (eMovie* this, int dia,int cantidad, float* monto)
 	}
 	return retorno;
 }
+void calcularMonto(void* this)
+{
+	int dia;
+	int cantidad;
+	float monto;
+	int descuento;
+	if(this != NULL)
+	{
+		eMovie_getDia(this, &dia);
+		eMovie_getCantidad(this, &cantidad);
 
+		if(dia == 1 || dia == 2 || dia ==3)
+		{
+			monto = 240 * cantidad;
+			eMovie_setMonto(this, monto);
+		}
+		else
+		{
+			monto = 350 * cantidad;
+			eMovie_setMonto(this, monto);
+		}
+		if(cantidad > 3)
+		{
+			descuento = monto *0.1;
+			monto = monto - descuento;
+			eMovie_setMonto(this, monto);
+
+		}
+	}
+}
 eMovie* eMovie_newParametrosInt(int id,char* nombre,int dia, char* horario, int sala, int cantidad, float monto)
 {
     void *retorno = NULL;
@@ -290,7 +319,23 @@ eMovie* eMovie_newParametrosInt(int id,char* nombre,int dia, char* horario, int 
 
     	    }
     	    return retorno;
-    	}
+}
+int eMovie_compareBynombre(void* pThis1, void* pThis2)
+{
+    int comparar;
+    eMovie* pAuxeMovie1 = (eMovie*)pThis1;
+    eMovie* pAuxeMovie2 = (eMovie*)pThis2;
+
+    if(pAuxeMovie1 != NULL && pAuxeMovie2 != NULL)
+    {
+    	utn_getMayusMin(pAuxeMovie1->nombre_pelicula, MAX_NOMBRE);
+    	utn_getMayusMin(pAuxeMovie2->nombre_pelicula, MAX_NOMBRE);
+        comparar = strcmp(pAuxeMovie1->nombre_pelicula, pAuxeMovie2->nombre_pelicula);
+    }
+
+    return comparar;
+}
+
 /*
 void eMovie_delete(eMovie *this)
 {

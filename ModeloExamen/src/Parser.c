@@ -9,13 +9,12 @@ int parser_MovieFromText(FILE* pFile , LinkedList* pArrayListMovie)
 {
     int cantidad;
     int retorno = -1;
-    char buffer[6][128];
+    char buffer[6][200];
     eMovie* pAuxMovie = NULL;
 
     if(pFile != NULL && pArrayListMovie != NULL)
     {
     	fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3],buffer[4],buffer[5]);
-        //printf("%s",buffer[0]);
     	do
         {
         	cantidad = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3],buffer[4],buffer[5]);

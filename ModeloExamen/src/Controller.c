@@ -73,7 +73,7 @@ int controller_ListMovies(LinkedList* pArrayListMovies)
         	}
 
             utn_getMayusMin(nombre,MAX_NOMBRE);
-            printf("| %5d | %60s | %10s | %10s | %5d | %10d|\n", id,nombre,detalleDia, horario,sala,cantidad);;
+            printf("| %5d | %60s | %10s | %10s | %5d | %10d| %10.2f\n", id,nombre,detalleDia, horario,sala,cantidad,pAuxMovie->monto);
 
             if(i == pantalla)
              {
@@ -105,9 +105,13 @@ int controller_getMontos (LinkedList* pArrayListMovies)
 	int sala;
 	float auxMonto;
 	int i;
+
+	if(pArrayListMovies != NULL)
+	{
 		for(i = 0; i < ll_len(pArrayListMovies);i++)
 		{
 			pAuxMovie = (eMovie*)ll_get(pArrayListMovies, i);
+
 			eMovie_getDia(pAuxMovie, &dia);
 			eMovie_getCantidad(pAuxMovie, &cantidad);
 			eMovie_getId(pAuxMovie, &id);
@@ -115,14 +119,104 @@ int controller_getMontos (LinkedList* pArrayListMovies)
 			eMovie_getHora(pAuxMovie, horario);
         	eMovie_getSala(pAuxMovie, &sala);
 			eMovie_getMontoGenrado (pAuxMovie, dia,cantidad, &auxMonto);
-
+			eMovie_setMonto(pAuxMovie, auxMonto);
 			pAuxMovie = eMovie_newParametrosInt(id,nombre,dia,horario,sala,cantidad,auxMonto);
-			printf("NOMBRE %s  MONTO %.2f\n",pAuxMovie->nombre_pelicula,pAuxMovie->monto);
+
+		}
 			if(pAuxMovie != NULL && ll_add(pArrayListMovies, (eMovie*)pAuxMovie) == 0)
 			{
 				retorno = 0;
 			}
-		}
+	}
+
 	return retorno;
 }
+int controller_saveAsText(char* path , LinkedList* pArrayListMovies)
+{
+    FILE* file = NULL;
+    int retorno = -1;
+    int eMovieQTY;
+    int i;
+    eMovie* pAuxMovie;
 
+    if(pArrayListMovies != NULL)
+    {
+        eMovieQTY = ll_len(pArrayListMovies);
+
+        file = fopen(path, "w");
+
+        if(file != NULL
+           && eMovieQTY > 0 && eMovieQTY <= 700
+           && fprintf(file, "id_venta,nombre_pelicula,dia,horario,sala,cantidad_entradas,monto\n") != -1)
+        {
+            for(i = 0; i < eMovieQTY; i++)
+            {
+            	pAuxMovie = (eMovie*)ll_get(pArrayListMovies, i);
+                if(fprintf(file, "%d,%s,%d,%s,%d,%d,%.2f\n",
+                		pAuxMovie->id_venta,
+						pAuxMovie->nombre_pelicula,
+						pAuxMovie->dia,
+						pAuxMovie->horario,
+						pAuxMovie->sala,
+						pAuxMovie->cantidad_entradas,
+						pAuxMovie->monto) == -1)
+                {
+                    break;
+                }
+
+            }
+        }
+
+        if(i > 0 && i == eMovieQTY)
+        {
+        	//printf("\nMONTOS %.2f",pAuxeMovie->monto);
+        	retorno = 0;
+        }
+    }
+
+    fclose(file);
+    free(pAuxMovie);
+    return retorno;
+}
+
+int controller_ListBySala(LinkedList* pArrayListMovies)
+{
+	int retorno = -1;
+	eMovie* pAuxMovie = eMovie_new();
+	int sala;
+	int auxSala;
+	int i;
+	int cantidad;
+	float monto;
+	char nombre[MAX_NOMBRE];
+	char auxNombre[MAX_NOMBRE];
+	int flag = 1;
+	if(pArrayListMovies != NULL && ll_isEmpty(pArrayListMovies)==0)
+	{
+		utn_getNumero(&auxSala, "\nINGRESE LA SALA A IMPRIMIR: ", "\nERROR", 1, 5, 3);
+		printf("|*********|********|**************|**************************************************************|\n");
+		printf("|   SALA  |CANTIDAD|    MONTO     |                      NOMBRE                                  |\n");
+		printf("|*********|********|**************|**************************************************************|\n");
+		ll_sort(pArrayListMovies,eMovie_compareBynombre,1);
+		for(i = 0; i < ll_len(pArrayListMovies); i++)
+		{
+			pAuxMovie = ll_get(pArrayListMovies, i);
+			eMovie_getSala(pAuxMovie, &sala);
+			if(auxSala == sala)
+			{
+				eMovie_getCantidad(pAuxMovie, &cantidad);
+				eMovie_getMonto(pAuxMovie, &monto);
+				eMovie_getNombre(pAuxMovie, nombre);
+				if(flag ==1 || strcmp(auxNombre,nombre) !=0)
+				{
+					strcpy(auxNombre,nombre);
+					retorno = 0;
+
+				}
+				printf("|  %5d  |  %5d |   %5.2f  |   %60s|\n",sala,cantidad,monto,nombre);
+			}
+		}
+		retorno = 0;
+	}
+	return retorno;
+}
