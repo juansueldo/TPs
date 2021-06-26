@@ -61,14 +61,6 @@ int main(void) {
 	        	  if(ll_map(listaLibros, calcularMonto)==0)
 	        	  {
 	        		  printf("\nSE APLICARON LOS DESCUENTOS CORRESPONDIENTES");
-	        		  if(controller_saveAsText("mapeado.csv",listaLibros)==0)
-	        		  {
-	        			  printf("\nSE GUARDARON LOS DATOS EN [mapeado.csv] ");
-	        		  }
-	        		  else
-	        		  {
-	        			  printf("\nNO SE GUARDARON LOS DATOS");
-	        		  }
 	        	  }
 	        	  else
 	        	  {
@@ -76,9 +68,19 @@ int main(void) {
 	        	  }
 	        	   break;
 	           case 5:
+	        	   if(controller_saveAsText("mapeado.csv",listaLibros)==0)
+	        	   {
+	        		   printf("\nSE GUARDARON LOS DATOS EN [mapeado.csv] ");
+	        	   }
+	        	   else
+	        	   {
+	        		   printf("\nNO SE GUARDARON LOS DATOS");
+	        	   }
+	        	   break;
+	           case 6:
 	        	   printf("\nFIN DEL PROGRAMA.");
 	        	   break;
 	        }
-	}while(option != 5);
+	}while(option != 6);
 	return EXIT_SUCCESS;
 }
